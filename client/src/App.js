@@ -15,14 +15,15 @@ function App() {
 
     return (
       <div className="App">
+        <div>Hello</div>
         <Widget
           handleNewUserMessage={handleNewUserMessage}
           // profileAvatar={logo}
           title="My new awesome title"
           subtitle="And my cool subtitle"
           showTimeStamp="true"
-          fullScreenMode="true"
-          showCloseButton="true"
+          // fullScreenMode="true"
+          // showCloseButton="true"
         />
       </div>
     );
