@@ -11,7 +11,7 @@ const ProfilePage = () => {
 
   function loadUser() {
     // Add code here to get all books from the database and store them using setBooks
-    API.getUsers(1).then(res =>
+    API.getUsers().then(res =>
       console.log(res.data)
     ).catch(err => console.error(err))
   }

@@ -3,42 +3,32 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-        db.user.findAll({}).then(function(dbUser) {
+        db.User.find({}).then(function(dbUser) {
             res.json(dbUser);
         });
     },
   findById: function(req, res) {
-        db.user.findOne({
-        where: {
-            id: req.params.id
-        }
-        }).then(function(dbUser) {
-        res.json(dbUser);
-        });
+        db.User
+        .findById(req.params.id)
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     },
   create: function(req, res) {
-    db.user.create(req.body).then(function(dbUser) {
-        res.json(dbUser);
-    });
-  },
+    db.User
+    .create(req.body)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    },
   update: function(req, res) {
-    db.user.update(
-        req.body,
-        {
-        where: {
-            id: req.body.id
-        }
-        }).then(function(dbUser) {
-        res.json(dbUser);
-    });
+    db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
 },
   remove: function(req, res) {
-    db.user.destroy({
-        where: {
-        id: req.params.id
-        }
-    }).then(function(dbUser) {
-        res.json(dbUser);
-    });
-}
+    db.User
+    .findById({ _id: req.params.id })
+    .then(dbModel => dbModel.remove())
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    }
 };
