@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
 import {auth} from "../utils/firebase";
 import API from "../utils/API";
 
 const ProfilePage = () => {
+
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     loadUser();
@@ -12,14 +14,18 @@ const ProfilePage = () => {
   function loadUser() {
     // Add code here to get all books from the database and store them using setBooks
     API.getUsers().then(res =>
-      console.log(res.data)
+      setUsers(res.data)
     ).catch(err => console.error(err))
+  }
+
+  if (users.length > 1) {
+    console.log(users);
   }
 
   
 
   const user = useContext(UserContext);
-  const {photoURL, displayName, email} = user;
+  const {photoURL, displayName, email, uid} = user;
 
   return (
     <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
@@ -36,6 +42,7 @@ const ProfilePage = () => {
         <div className = "md:pl-4">
         <h2 className = "text-2xl font-semibold">{displayName}</h2>
         <h3 className = "italic">{email}</h3>
+        <h3 className = "italic">{uid}</h3>
         </div>
       </div>
       <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
