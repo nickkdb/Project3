@@ -1,20 +1,32 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import UserContext from "../utils/UserContext";
 
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-
 import ProfilePage from "./ProfilePage";
 import PasswordReset from "./PasswordReset";
+
+import Search from "./Search";
 
 function Application() {
   const user = useContext(UserContext);
 
   return (
         user ?
-        <ProfilePage />
+        <Router>
+        <Switch>
+          <Route exact path="/">
+                <ProfilePage />
+          </Route>
+          <Route exact path="/search">
+                <Search />
+          </Route>
+          <Route exact path="/dashboard">
+                <Search />
+          </Route>
+        </Switch>
+      </Router>
       :
       <Router>
         <Switch>
