@@ -16,17 +16,7 @@ const SignUp = () => {
       generateUserDocument(user, {displayName});
       API.createUser({
         displayName: displayName,
-        email: email,
-        products: [ {
-          name: "pika",
-          description: "test",
-          category: "Pokemon",
-          price: 11,
-          attributes: {
-            strength: 10,
-            power: "Electric"
-          }
-        }]
+        email: email
       }).then(res => {console.log(res.data)});
     }
     catch(error){
