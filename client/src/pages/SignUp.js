@@ -1,30 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 import { auth, signInWithGoogle, generateUserDocument } from "../utils/firebase";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [id, setId] = useState("");
   const [error, setError] = useState(null);
-
-  const createRandomId = () => {
-    const num = Math.floor(Math.random() * 10000) + 1  
-    setId(num);
-  }
 
   const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
     event.preventDefault();
-    createRandomId();
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName}, {id});
+      generateUserDocument(user, {displayName});
+      API.createUser({
+        displayName: displayName,
+        email: email,
+        products: [ {
+          name: "pika",
+          description: "test",
+          category: "Pokemon",
+          price: 11,
+          attributes: {
+            strength: 10,
+            power: "Electric"
+          }
+        }]
+      }).then(res => {console.log(res.data)});
     }
     catch(error){
       setError('Error Signing up with email and password');
     }
-      
+    
     setEmail("");
     setPassword("");
     setDisplayName("");

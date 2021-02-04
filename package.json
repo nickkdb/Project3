@@ -37,6 +37,7 @@
     "mongojs": "^3.1.0",
     "mongoose": "^5.11.12",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.2"
   }
 }

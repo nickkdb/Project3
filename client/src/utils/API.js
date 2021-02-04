@@ -14,7 +14,7 @@ export default {
     return axios.delete("/api/users/" + id);
   },
   // Saves a book to the database
-  createUser: function(bookData) {
-    return axios.post("/api/users", bookData);
+  createUser: function(user) {
+    return axios.post("/api/users", user);
   }
 };
