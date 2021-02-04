@@ -1,32 +1,14 @@
-import React, { useEffect } from 'react';
-import { Widget, addResponseMessage } from 'react-chat-widget';
-
-import 'react-chat-widget/lib/styles.css';
+import React from "react";
+import Application from "./pages/Application";
+import UserProvider from "./components/UserProvider";
 
 function App() {
-  useEffect(() => {
-    addResponseMessage('Welcome to this awesome chat!');
-  }, []);
-
-  const handleNewUserMessage = (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
-  };
-
-    return (
-      <div className="App">
-        <div>Hello</div>
-        <Widget
-          handleNewUserMessage={handleNewUserMessage}
-          // profileAvatar={logo}
-          title="My new awesome title"
-          subtitle="And my cool subtitle"
-          showTimeStamp="true"
-          // fullScreenMode="true"
-          // showCloseButton="true"
-        />
-      </div>
-    );
+  
+  return (
+    <UserProvider>
+      <Application />
+    </UserProvider>
+  );
 }
 
 export default App;
