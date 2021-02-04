@@ -8,6 +8,7 @@ import ProfilePage from "./ProfilePage";
 import PasswordReset from "./PasswordReset";
 
 import Search from "./Search";
+import Dashboard from "./Dashboard"
 
 function Application() {
   const user = useContext(UserContext);
@@ -23,7 +24,7 @@ function Application() {
                 <Search />
           </Route>
           <Route exact path="/dashboard">
-                <Search />
+                <Dashboard />
           </Route>
         </Switch>
       </Router>
