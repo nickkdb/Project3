@@ -1,12 +1,14 @@
 {
-  "name": "project3",
+  "name": "mern",
   "version": "0.1.0",
-  "proxy": "http://localhost:3000",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
     "firebase": "^8.2.5",
     "react": "^17.0.1",
     "react-chat-widget": "^3.0.5",
