@@ -34,6 +34,15 @@ const userSchema = new Schema({
         required: true,
         default: true
       },
+      productDescription: {
+        type: String,
+        required: false
+      },
+      image: {
+        type: String,
+        required: false
+      },
+      tags: [],
       attributes: {}
     }
   ]
