@@ -2,17 +2,30 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
+import API from "../utils/API";
 
 function Search() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("Dark Magician");
   const [cards, setCards] = useState([]);
   const [searchType, setSearchType] = useState("Yugioh!");
+  const [mongoUser, setMongoUser] = useState({});
 
+  useEffect(() => {
+    API.getUser(user.email).then(res =>
+      setMongoUser(res.data[0])
+    ).catch(err => console.error(err))
+  }, []);
 
+  if (mongoUser) {
+    console.log(mongoUser);
+  }
+ 
+  
   const handleInputChange = (event) => {
     setSearch(event.target.value);
   };
+  
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -52,6 +65,12 @@ function Search() {
 
 
   };
+
+  const addCard = (event) =>{
+    let x = event.target.attributes[0].value;
+    let data = JSON.parse(x)
+    API.addCard(mongoUser._id, data).then(res => console.log(res));
+  }
 
 
   return (
@@ -108,7 +127,26 @@ function Search() {
                 attribute={card.attribute}
                 image={card.card_images[0].image_url_small}
                 sets={card.card_sets}
-                // imageList={card.card_images}
+                addCard={addCard}
+                searchType={searchType}
+                cardData={JSON.stringify({
+                  id: card.id,
+                  name: card.name,
+                  description: "",
+                  category: searchType,
+                  price: 10,
+                  available: true,
+                  image: card.card_images[0].image_url_small,
+                  attributes: {
+                    attack: card.attack,
+                    type: card.type,
+                    defense: card.defense,
+                    level: card.level,
+                    race: card.race,
+                    attribute: card.attribute
+                  }
+                  
+                })}
               >
               </YugiohCard>
             

@@ -48,6 +48,11 @@ function YugiohCard(props) {
             </select>
           </li>
         </ul>
+        <button onClick={props.addCard} 
+        cardData={props.cardData}
+        type="button" class="btn btn-primary">
+                Add
+        </button>
       </div>
     </div>
   );

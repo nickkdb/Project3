@@ -1,4 +1,6 @@
 const db = require("../models");
+const moongoose = require("mongoose");
+const mongojs = require("mongojs");
 
 module.exports = {
 
@@ -8,15 +10,15 @@ module.exports = {
         });
     },
 
-    create: function ({ params, body }) {
-        db.User.findByIdAndUpdate(
-            params.id,
+    create: function (req, res) {
+        db.User.updateOne(
+            {_id: mongojs.ObjectID(req.params.id)},
             {
-                $push: { products: body }
+                $push: { products: req.body }
             }
-                .then(dbModel => { res.json(dbModel) })
-                .catch(err => { res.status(422).json(err) })
         )
+        .then(dbModel => { res.json(dbModel) })
+        .catch(err => { res.status(422).json(err) })
     },
 
     findOne: function (req, res) {
