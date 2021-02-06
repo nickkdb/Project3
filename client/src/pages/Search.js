@@ -2,17 +2,26 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
+import API from "../utils/API";
 
 function Search() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("Dark Magician");
   const [cards, setCards] = useState([]);
   const [searchType, setSearchType] = useState("Yugioh!");
+  console.log(user);
 
+//   const mongoUser = () => {
+//       API.getUser(user.email, {email: user.email}).then(md => console.log(md.data))
+//   }
+
+//   mongoUser();
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
   };
+
+API.getUsers().then(res => console.log(res))
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -52,6 +61,10 @@ function Search() {
 
 
   };
+
+//   const addCard = (event) =>{
+//     API.addCard()
+//   }
 
 
   return (
