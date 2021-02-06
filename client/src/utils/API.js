@@ -6,12 +6,12 @@ export default {
     return axios.get("/api/users");
   },
   // Gets the user with the given id
-  getUser: function(email) {
-    return axios.get("/api/users" + email);
+  getUser: function(id) {
+    return axios.get("/api/users/" + id);
   },
 //update the user model
   addCard: function(id) {
-    return axios.put("/api/cards/" + id)
+    return axios.post("/api/cards/" + id)
   },
   // Deletes the user with the given id
   deleteUser: function(id) {

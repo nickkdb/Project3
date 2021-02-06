@@ -19,7 +19,7 @@ const userSchema = new Schema({
       },
       description: {
         type: String, 
-        required: true
+        required: false
       },
       category: {
         type: String,
@@ -33,6 +33,10 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         default: true
+      },
+      image: {
+        type: String,
+        required: false
       },
       attributes: {}
     }

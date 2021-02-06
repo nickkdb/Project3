@@ -9,19 +9,23 @@ function Search() {
   const [search, setSearch] = useState("Dark Magician");
   const [cards, setCards] = useState([]);
   const [searchType, setSearchType] = useState("Yugioh!");
-  console.log(user);
+  const [mongoUser, setMongoUser] = useState({});
 
-//   const mongoUser = () => {
-//       API.getUser(user.email, {email: user.email}).then(md => console.log(md.data))
-//   }
+  useEffect(() => {
+    API.getUser(user.email).then(res =>
+      setMongoUser(res.data[0])
+    ).catch(err => console.error(err))
+  }, []);
 
-//   mongoUser();
-
+  if (mongoUser) {
+    console.log(mongoUser);
+  }
+ 
+  
   const handleInputChange = (event) => {
     setSearch(event.target.value);
   };
-
-API.getUsers().then(res => console.log(res))
+  
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -62,9 +66,11 @@ API.getUsers().then(res => console.log(res))
 
   };
 
-//   const addCard = (event) =>{
-//     API.addCard()
-//   }
+  const addCard = (event) =>{
+    let x = event.target.attributes[0].value;
+    let data = JSON.parse(x)
+    API.addCard(mongoUser._id, data).then(res => console.log(res));
+  }
 
 
   return (
@@ -121,7 +127,26 @@ API.getUsers().then(res => console.log(res))
                 attribute={card.attribute}
                 image={card.card_images[0].image_url_small}
                 sets={card.card_sets}
-                // imageList={card.card_images}
+                addCard={addCard}
+                searchType={searchType}
+                cardData={JSON.stringify({
+                  id: card.id,
+                  name: card.name,
+                  description: "",
+                  category: searchType,
+                  price: 10,
+                  available: true,
+                  image: card.card_images[0].image_url_small,
+                  attributes: {
+                    attack: card.attack,
+                    type: card.type,
+                    defense: card.defense,
+                    level: card.level,
+                    race: card.race,
+                    attribute: card.attribute
+                  }
+                  
+                })}
               >
               </YugiohCard>
             
