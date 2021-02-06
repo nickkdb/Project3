@@ -10,8 +10,8 @@ export default {
     return axios.get("/api/users/" + id);
   },
 //update the user model
-  addCard: function(id) {
-    return axios.post("/api/cards/" + id)
+  addCard: function(id, body) {
+    return axios.post("/api/cards/" + id, body)
   },
   // Deletes the user with the given id
   deleteUser: function(id) {
