@@ -24,33 +24,4 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-  update: function ({params, body}) {
-    db.User.findByIdAndUpdate (
-      params.uuid,
-      {
-        $push: {products: body}
-      }
-      .then(dbModel => {res.json(dbModel)})
-      .catch(err => {res.status(422).json(err)})
-    )
-  },
-
-  //   remove: function(req, res) {
-  //     db.User
-  //     .findById({ _id: req.params.id })
-  //     .then(dbModel => dbModel.remove())
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  //     }
-  // };
-
-  remove: function (req, res) {
-    db.User.findOneAndDelete(
-      params.uuid,
-      {
-        uuid: req.params.uuid
-      }
-      .then(dbModel => {res.json(dbModel)})
-      .catch(err => {res.status(422).json(err)})
-    )
-  }
+}
