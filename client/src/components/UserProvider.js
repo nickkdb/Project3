@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { auth, generateUserDocument } from "../utils/firebase";
-
+import API from "../utils/API";
 import UserContext from "../utils/UserContext";
 
 class UserProvider extends Component {
@@ -11,9 +11,12 @@ class UserProvider extends Component {
   componentDidMount = async () => {
     auth.onAuthStateChanged(async userAuth => {
       const user = await generateUserDocument(userAuth);
+      const mongoUser = await API.getUser(user.email);
+      user.mongo = mongoUser.data[0];
       this.setState({ user });
     });
   };
+
 
   render() {
     const { user } = this.state;
