@@ -1,4 +1,4 @@
-module.exports = {
+imodule.exports = {
     User: require("./user")
-  };
+  }; 
   
