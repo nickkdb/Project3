@@ -2,13 +2,15 @@ import React, { useContext, useState, useEffect, useReducer } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
+import PokemonCard from "../components/PokemonCard";
 import API from "../utils/API";
 
 function Search() {
   const user = useContext(UserContext);
-  const [search, setSearch] = useState("Dark Magician");
+  const [search, setSearch] = useState("Charizard");
   const [cards, setCards] = useState([]);
-  const [searchType, setSearchType] = useState("Yugioh!");
+  const [pCards, setPCards] = useState([]);
+  const [searchType, setSearchType] = useState("Pokemon");
 
   // const [mongoUser, setMongoUser] = useState({});
  
@@ -39,25 +41,27 @@ function Search() {
           });
       }
 
+      //pokemon
       if (searchType === "Pokemon") {
         axios
-        .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
+        .get(`https://api.pokemontcg.io/v2/cards?q=name:${search}`)
         .then((res) => {
-          setCards(res.data.data);
-            console.log(res.data.data);
+         setPCards(res.data.data);
+           console.log(res.data.data);
+           
         });
     }
+    // console.log(pCards);
 
     // mtg
-
-    if (searchType === "MTG") {
-        axios
-        .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
-        .then((res) => {
-          setCards(res.data.data);
-            console.log(res.data.data);
-        });
-    }
+    // if (searchType === "MTG") {
+    //     axios
+    //     .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
+    //     .then((res) => {
+    //       setCards(res.data.data);
+    //         console.log(res.data.data);
+    //     });
+    // }
 
 
   };
@@ -142,12 +146,39 @@ function Search() {
                     race: card.race,
                     attribute: card.attribute
                   }
-                  
                 })}
               >
               </YugiohCard>
-            
             );
+          })}
+
+          {pCards && 
+          pCards.map((pCard) => {
+            return (
+              <PokemonCard
+              key={pCard.id}
+              name={pCard.name}
+              types={pCard.types}
+              subtypes={pCard.subtypes}
+              supertype={pCard.supertype}
+              hp={pCard.hp}
+              rarity={pCard.rarity}
+         
+              damage={JSON.stringify({
+                damage: pCard.attacks})}
+              // damage={pCard.attacks.damage}
+              weaknesses={JSON.stringify({
+                weakness: pCard.weaknesses
+              }
+            
+            )}
+           
+            // weaknesses={pCard.toString().weaknesses.type}
+              image={pCard.images.small}
+      
+              >
+              </PokemonCard>
+            )
           })}
       </div>
     </div>
