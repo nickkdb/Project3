@@ -92,7 +92,9 @@ const SignUp = () => {
               createUserWithEmailAndPasswordHandler(event, email, password);
             }}
           >
+            <Link to="/">
             Sign up
+            </Link>
           </button>
         </form>
         <p className="text-center my-3">or</p>
