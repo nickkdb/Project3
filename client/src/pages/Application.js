@@ -33,12 +33,11 @@ function Application() {
         </Switch>
         <Footer />
       </Router>
-      : 
+      :
       <Router>
-       <Nav />
-      <Route exact path="/">
-            <Home />
-          </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
         <Switch>
           <Route exact path="/signUp">
             <SignUp />
@@ -50,7 +49,6 @@ function Application() {
             <PasswordReset />
           </Route>
         </Switch>
-        <Footer />
       </Router>
   );
 }
