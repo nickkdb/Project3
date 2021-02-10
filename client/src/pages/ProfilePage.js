@@ -5,21 +5,21 @@ import API from "../utils/API";
 
 const ProfilePage = () => {
 
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    loadUser();
-  }, []);
+  // useEffect(() => {
+  //   loadUser();
+  // }, []);
 
-  function loadUser() {
-    API.getUsers().then(res =>
-      setUsers(res.data)
-    ).catch(err => console.error(err))
-  }
+  // function loadUser() {
+  //   API.getUsers().then(res =>
+  //     setUsers(res.data)
+  //   ).catch(err => console.error(err))
+  // }
 
-  if (users.length > 1) {
-    console.log(users);
-  }
+  // if (users.length > 1) {
+  //   console.log(users);
+  // }
 
   
 
