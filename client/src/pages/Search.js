@@ -73,6 +73,8 @@ function Search() {
     API.addCard(user.mongo._id, data).then(res => console.log(res));
   }
 
+  console.log(user);
+
 
   return (
     <div>
@@ -167,19 +169,29 @@ function Search() {
               supertype={pCard.supertype}
               hp={pCard.hp}
               rarity={pCard.rarity}
-         
-              damage={JSON.stringify({
-                damage: pCard.attacks})}
-              // damage={pCard.attacks.damage}
-              weaknesses={JSON.stringify({
-                weakness: pCard.weaknesses
-              }
-            
-            )}
-           
-            // weaknesses={pCard.toString().weaknesses.type}
+              damage={pCard.attacks}
+              weakness={pCard.weaknesses}
               image={pCard.images.small}
-      
+              addCard={addCard}
+              searchType={searchType}
+              cardData={JSON.stringify({
+                id: pCard.id,
+                name: pCard.name,
+                description: "",
+                category: searchType,
+                price: 10,
+                available: true,
+                image: pCard.images.small,
+                attributes: {
+                  types: pCard.types,
+                  subtypes: pCard.subtypes,
+                  supertype: pCard.supertype,
+                  hp: pCard.hp,
+                  rarity: pCard.rarity,
+                  damage: pCard.attacks,
+                  weakness: pCard.weaknesses
+                }
+              })}
               >
               </PokemonCard>
               </div>

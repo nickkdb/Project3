@@ -36,14 +36,36 @@ function PokemonCard(props) {
         
   
           <li>
-            <strong>Damage:</strong> {props.damage}
+            <strong>Attacks:</strong> {props.damage &&
+                  props.damage.map((attk) => {
+                    return (
+                      <div>
+                      <div>
+                         Name: {attk.name}
+                      </div>
+                      <div>
+                        Damage: {(attk.damage.length) < 1 ? "N/A" : (attk.damage) }
+                      </div>
+                      </div>
+                    );
+                  })}
           </li>
           <li>
               <strong>Rarity: </strong>{props.rarity}
           </li>
          
           <li>
-            <strong>Weaknesses:</strong> {props.weaknesses}
+            <strong>Weakness:</strong> {props.weakness &&
+                  props.weakness.map((weak) => {
+                    return (
+                  
+                      <>
+                        {/* Damage: {(attk.weakness.length) < 1 ? "N/A" : (attk.damage) } */}
+                        {weak.type}
+                      </>
+                   
+                    );
+                  })}
           </li>
           {/* <li>
             <strong>Set:</strong> */}
