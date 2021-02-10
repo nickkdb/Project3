@@ -138,8 +138,10 @@ function Search() {
                 race={card.race}
                 attribute={card.attribute}
                 image={card.card_images[0].image_url_small}
+                initImage={card.card_images[0].id}
                 imageSet={card.card_images}
                 sets={card.card_sets}
+                initSet={`${card.card_sets[0].set_name} | ${card.card_sets[0].set_rarity}`}
                 addCard={addCard}
                 searchType={searchType}
                 cardData={JSON.stringify({

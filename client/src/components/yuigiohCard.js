@@ -3,8 +3,8 @@ import Carousel from "react-bootstrap/Carousel";
 
 function YugiohCard(props) {
 
-  const [image, setImage] = useState("");
-  const [set, setSet] = useState("");
+  const [image, setImage] = useState(props.initImage);
+  const [set, setSet] = useState(props.initSet);
 
   return (
     <div key={props.id}>
