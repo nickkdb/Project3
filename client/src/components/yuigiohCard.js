@@ -1,10 +1,14 @@
-import React from "react";
+import {React, useState} from "react";
 import Carousel from "react-bootstrap/Carousel";
 
 function YugiohCard(props) {
+
+  const [image, setImage] = useState("");
+  const [set, setSet] = useState("");
+
   return (
     <div key={props.id}>
-      <div>
+      <div className="row">
         <Carousel controls={true} interval={10000}>
           {props.imageSet &&
             props.imageSet.map((image) => {
@@ -15,14 +19,14 @@ function YugiohCard(props) {
                     src={image.image_url_small}
                     alt={image.id}
                   />
-                  {/* <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                  </Carousel.Caption> */}
+                  <Carousel.Caption>
+                    <h5 style={{color: "black", backgroundColor: "white"}}>ID: {image.id}</h5>
+                  </Carousel.Caption>
                 </Carousel.Item>
               );
             })}
         </Carousel>
+      
       </div>
       <div className="card">
         {/* <div className="img-container">
@@ -30,14 +34,22 @@ function YugiohCard(props) {
       </div> */}
         <div className="content">
           <ul>
-            {/* <li>
-            <strong>Images:</strong>
-            <select>
-            {props.sets.map && props.sets.map(set => {
-              return (<option>{set.set_name} | {set.set_rarity}</option>)
-            })}
-            </select>
-          </li> */}
+          <li>
+          <strong>Choose Image:</strong>
+              <select
+                value={image}  
+                onChange={(event) => setImage(event.target.value)}
+              >
+                {props.imageSet &&
+                  props.imageSet.map((image) => {
+                    return (
+                      <option>
+                        {image.id}
+                      </option>
+                    );
+                  })}
+              </select>
+          </li>
             <li>
               <strong>Name:</strong> {props.name}
             </li>
@@ -62,19 +74,15 @@ function YugiohCard(props) {
             </li>
             <li>
               <strong>Set:</strong>
-              <select>
+              <select
+                value={set}  
+                onChange={(event) => setSet(event.target.value)}
+              >
                 {props.sets &&
                   props.sets.map((set) => {
                     return (
                       <option>
-                        <ul>
-                          <li>
-                            Name: {set.set_name}
-                          </li>
-                          <li>
-                            Rarity: {set.set_rarity}
-                          </li>
-                        </ul> 
+                        Name: {set.set_name} | Rarity: {set.set_rarity}
                       </option>
                     );
                   })}
@@ -84,6 +92,8 @@ function YugiohCard(props) {
           <button
             onClick={props.addCard}
             cardData={props.cardData}
+            imageUrl={`https://storage.googleapis.com/ygoprodeck.com/pics_small/${image}.jpg`}
+            cardSet={set}
             type="button"
             class="btn btn-primary"
           >
