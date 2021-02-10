@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useReducer } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
@@ -11,6 +11,7 @@ function Search() {
   const [cards, setCards] = useState([]);
   const [pCards, setPCards] = useState([]);
   const [searchType, setSearchType] = useState("Pokemon");
+  // console.log(user)
 
   // const [mongoUser, setMongoUser] = useState({});
  
@@ -24,9 +25,9 @@ function Search() {
     setSearch(event.target.value);
   };
   
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
+ 
     if (!search) {
         return;
       }
@@ -112,7 +113,7 @@ function Search() {
             </div>
           </div>
         </form>
-
+        <div className="renderCards container">
         {cards &&
           cards.map((card) => {
             return (
@@ -127,6 +128,7 @@ function Search() {
                 race={card.race}
                 attribute={card.attribute}
                 image={card.card_images[0].image_url_small}
+                imageSet={card.card_images}
                 sets={card.card_sets}
                 addCard={addCard}
                 searchType={searchType}
@@ -152,9 +154,11 @@ function Search() {
             );
           })}
 
+          <div className="row align-items-center poke">
           {pCards && 
           pCards.map((pCard) => {
             return (
+              <div className="col-6">
               <PokemonCard
               key={pCard.id}
               name={pCard.name}
@@ -178,8 +182,11 @@ function Search() {
       
               >
               </PokemonCard>
+              </div>
             )
           })}
+          </div>
+          </div>
       </div>
     </div>
   );

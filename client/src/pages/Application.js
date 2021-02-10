@@ -34,8 +34,8 @@ function Application() {
       :
       <Router>
       <Route exact path="/">
-            <Home />
-          </Route>
+         <SignIn />
+      </Route>
         <Switch>
           <Route exact path="/signUp">
             <SignUp />
