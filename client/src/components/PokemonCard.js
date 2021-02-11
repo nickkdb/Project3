@@ -3,7 +3,7 @@ import React from "react";
 
 function PokemonCard(props) {
   return (
-    <div key="props.id" className="card">
+    <div key={props.id} className="card">
       <div className="img-container">
         <img alt={props.name} src={props.image} />
       </div>
@@ -36,14 +36,36 @@ function PokemonCard(props) {
         
   
           <li>
-            <strong>Damage:</strong> {props.damage}
+            <strong>Attacks:</strong> {props.damage &&
+                  props.damage.map((attk) => {
+                    return (
+                      <div>
+                      <div>
+                         Name: {attk.name}
+                      </div>
+                      <div>
+                        Damage: {(attk.damage.length) < 1 ? "N/A" : (attk.damage) }
+                      </div>
+                      </div>
+                    );
+                  })}
           </li>
           <li>
               <strong>Rarity: </strong>{props.rarity}
           </li>
          
           <li>
-            <strong>Weaknesses:</strong> {props.weaknesses}
+            <strong>Weakness:</strong> {props.weakness &&
+                  props.weakness.map((weak) => {
+                    return (
+                  
+                      <>
+                        {/* Damage: {(attk.weakness.length) < 1 ? "N/A" : (attk.damage) } */}
+                        {weak.type}
+                      </>
+                   
+                    );
+                  })}
           </li>
           {/* <li>
             <strong>Set:</strong> */}
@@ -54,7 +76,11 @@ function PokemonCard(props) {
             </select> */}
           {/* </li> */}
         </ul>
-        <button onClick={props.addCard} 
+        <button 
+          onClick={() => {
+          props.openModal()
+          props.postData(props.cardData);
+        }} 
         cardData={props.cardData}
         type="button" className="btn btn-primary">
                 Add
