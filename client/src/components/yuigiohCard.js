@@ -90,7 +90,7 @@ function YugiohCard(props) {
             </li>
           </ul>
           <button
-            onClick={props.addCard}
+            onClick={props.openModal}
             cardData={props.cardData}
             imageUrl={`https://storage.googleapis.com/ygoprodeck.com/pics_small/${image}.jpg`}
             cardSet={set}
