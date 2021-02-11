@@ -1,16 +1,19 @@
-import React, { useContext, useState, useEffect, useReducer } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
 import PokemonCard from "../components/PokemonCard";
+import MtgCard from "../components/mtgCard";
 import API from "../utils/API";
 
 function Search() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("Charizard");
-  const [cards, setCards] = useState([]);
+  const [yCards, setYCards] = useState([]);
   const [pCards, setPCards] = useState([]);
+  const [mCards, setMCards] = useState([]);
   const [searchType, setSearchType] = useState("Pokemon");
+  // console.log(user)
 
   // const [mongoUser, setMongoUser] = useState({});
  
@@ -24,9 +27,9 @@ function Search() {
     setSearch(event.target.value);
   };
   
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
+ 
     if (!search) {
         return;
       }
@@ -36,7 +39,7 @@ function Search() {
           axios
           .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
           .then((res) => {
-            setCards(res.data.data);
+            setYCards(res.data.data);
               console.log(res.data.data);
           });
       }
@@ -53,26 +56,32 @@ function Search() {
     }
     // console.log(pCards);
 
-    // mtg
-    // if (searchType === "MTG") {
-    //     axios
-    //     .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
-    //     .then((res) => {
-    //       setCards(res.data.data);
-    //         console.log(res.data.data);
-    //     });
-    // }
+    //mtg
+    if (searchType === "MTG") {
+        axios
+        .get(`https://api.magicthegathering.io/v1/cards?name=${search}`)
+        .then((res) => {
+          setMCards(res.data.cards);
+            console.log(res.data.cards);
+        });
+    }
 
 
   };
 
   const addCard = (event) =>{
+    console.log(event);
     let x = event.target.attributes[0].value;
+    let img = event.target.attributes[1].value;
+    let set = event.target.attributes[2].value;
     let data = JSON.parse(x)
+    if (data.category === "Yugioh!") {
+      data.image = img;
+      data.attributes.set = set;
+    }
+    console.log(data)
     API.addCard(user.mongo._id, data).then(res => console.log(res));
   }
-
-  console.log(user);
 
 
   return (
@@ -89,7 +98,7 @@ function Search() {
               }>
                 <option name="Yugioh">Yugioh!</option>
                 <option name="Pokemon" >Pokemon</option>
-                <option name="MTG">Magic the Gather</option>
+                <option name="MTG">MTG</option>
               </select>
             </div>
             <div className="col">
@@ -114,9 +123,9 @@ function Search() {
             </div>
           </div>
         </form>
-
-        {cards &&
-          cards.map((card) => {
+        <div className="renderCards container">
+        {yCards &&
+          yCards.map((card) => {
             return (
               <YugiohCard
                 key={card.id}
@@ -129,7 +138,10 @@ function Search() {
                 race={card.race}
                 attribute={card.attribute}
                 image={card.card_images[0].image_url_small}
+                initImage={card.card_images[0].id}
+                imageSet={card.card_images}
                 sets={card.card_sets}
+                initSet={`${card.card_sets[0].set_name} | ${card.card_sets[0].set_rarity}`}
                 addCard={addCard}
                 searchType={searchType}
                 cardData={JSON.stringify({
@@ -139,7 +151,7 @@ function Search() {
                   category: searchType,
                   price: 10,
                   available: true,
-                  image: card.card_images[0].image_url_small,
+                  // image: card.card_images[0].image_url_small,
                   attributes: {
                     attack: card.attack,
                     type: card.type,
@@ -154,9 +166,11 @@ function Search() {
             );
           })}
 
+          <div className="row align-items-center">
           {pCards && 
           pCards.map((pCard) => {
             return (
+              <div key={pCard.id} className="col-6">
               <PokemonCard
               key={pCard.id}
               name={pCard.name}
@@ -190,8 +204,56 @@ function Search() {
               })}
               >
               </PokemonCard>
+              </div>
             )
           })}
+          </div>
+
+          <div className="row align-items-center">
+          {mCards && 
+          mCards.map((mCard) => {
+            return (
+              <div className="col-6">
+              <MtgCard
+              key={mCard.id}
+              name={mCard.name}
+              image={mCard.imageUrl}
+              colors={mCard.colors}
+              subtypes={mCard.subtypes}
+              supertype={mCard.supertypes}
+              set={mCard.set}
+              manna={mCard.manaCost}
+              rarity={mCard.rarity}
+              text={mCard.text}
+              addCard={addCard}
+              searchType={searchType}
+              cardData={JSON.stringify({
+                id: mCard.id,
+                name: mCard.name,
+                description: mCard.text,
+                category: searchType,
+                price: 10,
+                available: true,
+                image: mCard.imageUrl,
+                attributes: {
+                  colors: mCard.colors,
+                  subtypes: mCard.subtypes,
+                  supertype: mCard.supertypes,
+                  set: mCard.set,
+                  manna: mCard.manaCost,
+                  rarity: mCard.rarity
+                }
+              })}
+              >
+              </MtgCard>
+              </div>
+            )
+          })}
+          </div>
+
+
+
+          </div>
       </div>
     </div>
   );

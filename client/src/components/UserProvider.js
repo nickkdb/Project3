@@ -11,11 +11,11 @@ class UserProvider extends Component {
   componentDidMount = async () => {
     auth.onAuthStateChanged(async userAuth => {
       const user = await generateUserDocument(userAuth);
-      console.log(user)
-      if (user != null) { 
+      if (user) { 
         const mongoUser = await API.getUser(user.email);
         user.mongo = mongoUser.data[0];
-        this.setState({ user }) ; }
+      }
+      this.setState({ user });
      
     });
   };
