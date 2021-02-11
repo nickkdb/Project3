@@ -76,7 +76,11 @@ function PokemonCard(props) {
             </select> */}
           {/* </li> */}
         </ul>
-        <button onClick={props.openModal} 
+        <button 
+          onClick={() => {
+          props.openModal()
+          props.postData(props.cardData);
+        }} 
         cardData={props.cardData}
         type="button" className="btn btn-primary">
                 Add

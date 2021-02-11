@@ -17,8 +17,10 @@ function Search() {
   const [show, setShow] = useState(false);
   const [price, setPrice] = useState("");
   const [descr, setDescr] = useState("");
-  const [avail, setAvail] = useState(false);
+  const [avail, setAvail] = useState("Yes");
   const [postData, setPostData] = useState("");
+  const [yImage, setYImage] = useState("");
+  const [ySet, setYSet] = useState("");
   
   // console.log(user)
 
@@ -77,11 +79,13 @@ function Search() {
   };
 
   const addCard = (event) => {
-    console.log(event);
-    let x = event.target.attributes[0].value;
-    let img = event.target.attributes[1].value;
-    let set = event.target.attributes[2].value;
-    let data = JSON.parse(x)
+    // let x = event.target.attributes[0].value;
+    // let img = event.target.attributes[1].value;
+    // let set = event.target.attributes[2].value;
+    // let data = JSON.parse(x);
+    handleClose();
+    let data = JSON.parse(postData);
+    
     if (avail === "Yes") {
       data.available = true
     }
@@ -90,17 +94,18 @@ function Search() {
     }
     data.price = price;
     data.description = descr;
+    
     if (data.category === "Yugioh!") {
-      data.image = img;
-      data.attributes.set = set;
+      data.image = yImage;
+      data.attributes.set = ySet;
     }
+
     console.log(data)
     API.addCard(user.mongo._id, data).then(res => console.log(res));
   }
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
 
   return (
@@ -160,18 +165,17 @@ function Search() {
                   initImage={card.card_images[0].id}
                   imageSet={card.card_images}
                   sets={card.card_sets}
+                  setYSet={setYSet}
+                  setYImage={setYImage}
                   initSet={`${card.card_sets[0].set_name} | ${card.card_sets[0].set_rarity}`}
                   openModal={handleShow}
                   addCard={addCard}
+                  postData={setPostData}
                   searchType={searchType}
                   cardData={JSON.stringify({
                     id: card.id,
-                    name: card.name,
-                 
+                    name: card.name,              
                     category: searchType,
-                 
-                 
-                    // image: card.card_images[0].image_url_small,
                     attributes: {
                       attack: card.attack,
                       type: card.type,
@@ -204,6 +208,7 @@ function Search() {
                       image={pCard.images.small}
                       openModal={handleShow}
                       addCard={addCard}
+                      postData={setPostData}
                       searchType={searchType}
                       cardData={JSON.stringify({
                         id: pCard.id,
@@ -245,14 +250,12 @@ function Search() {
                       text={mCard.text}
                       openModal={handleShow}
                       addCard={addCard}
+                      postData={setPostData}
                       searchType={searchType}
                       cardData={JSON.stringify({
                         id: mCard.id,
                         name: mCard.name,
-                   
                         category: searchType,
-                 
-                   
                         image: mCard.imageUrl,
                         attributes: {
                           colors: mCard.colors,
@@ -260,7 +263,8 @@ function Search() {
                           supertype: mCard.supertypes,
                           set: mCard.set,
                           manna: mCard.manaCost,
-                          rarity: mCard.rarity
+                          rarity: mCard.rarity,
+                          text: mCard.text,
                         }
                       })}
                     >
@@ -271,9 +275,9 @@ function Search() {
           </div>
         </div>
       </div>
-      <Button variant="primary" onClick={handleShow}>
+      {/* <Button variant="primary" onClick={handleShow}>
         Launch static backdrop modal
-      </Button>
+      </Button> */}
 
       <Modal
         show={show}
@@ -305,7 +309,7 @@ function Search() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Save</Button>
+          <Button variant="primary" onClick={addCard}>Save</Button>
         </Modal.Footer>
       </Modal>
     </div>

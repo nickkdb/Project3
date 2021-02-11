@@ -31,11 +31,12 @@ module.exports = {
    
 
     update: function (req, res) {
-        db.User.findOneAndUpdate({ 'products.uuid': params.uuid }, {
+        db.User.updateOne(
+        {_id: mongojs.ObjectID(req.params.id), 'products.uuid': req.body.uuid }, {
             '$set': {
                 'products.$.price': req.body.price,
-                'products.$.notes': req.body.notes,
-                'products.$.isAvailable': req.body.isAvailable
+                'products.$.description': req.body.notes,
+                'products.$.available': req.body.isAvailable
             }
         })
             .then(dbModel => res.json(dbModel))

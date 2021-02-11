@@ -58,7 +58,11 @@ function mtgCard(props) {
           </li>
         </ul>
         <button
-          onClick={props.openModal}
+          // onClick={props.openModal}
+          onClick={() => {
+            props.openModal()
+            props.postData(props.cardData);
+          }}
           cardData={props.cardData}
           type="button"
           className="btn btn-primary"
