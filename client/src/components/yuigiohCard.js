@@ -1,10 +1,10 @@
-import {React, useState} from "react";
+import {React} from "react";
 import Carousel from "react-bootstrap/Carousel";
 
 function YugiohCard(props) {
 
-  const [image, setImage] = useState(props.initImage);
-  const [set, setSet] = useState(props.initSet);
+  props.setYImage(`https://storage.googleapis.com/ygoprodeck.com/pics_small/${props.initImage}.jpg`);
+  props.setYSet(props.initSet);
 
   return (
     <div key={props.id}>
@@ -36,9 +36,8 @@ function YugiohCard(props) {
           <ul>
           <li>
           <strong>Choose Image:</strong>
-              <select
-                value={image}  
-                onChange={(event) => setImage(event.target.value)}
+              <select 
+                onChange={(event) => props.setYImage(`https://storage.googleapis.com/ygoprodeck.com/pics_small/${event.target.value}.jpg`)}
               >
                 {props.imageSet &&
                   props.imageSet.map((image) => {
@@ -75,8 +74,7 @@ function YugiohCard(props) {
             <li>
               <strong>Set:</strong>
               <select
-                value={set}  
-                onChange={(event) => setSet(event.target.value)}
+                onChange={(event) => props.setYSet(event.target.value)}
               >
                 {props.sets &&
                   props.sets.map((set) => {
@@ -90,10 +88,11 @@ function YugiohCard(props) {
             </li>
           </ul>
           <button
-            onClick={props.openModal}
+            onClick={() => {
+              props.openModal()
+              props.postData(props.cardData);
+            }} 
             cardData={props.cardData}
-            imageUrl={`https://storage.googleapis.com/ygoprodeck.com/pics_small/${image}.jpg`}
-            cardSet={set}
             type="button"
             class="btn btn-primary"
           >
