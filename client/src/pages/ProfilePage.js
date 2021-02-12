@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
 import {auth} from "../utils/firebase";
 import API from "../utils/API";
+import MyCard from "../components/MyCard";
+
 
 const ProfilePage = () => {
 
@@ -24,6 +26,7 @@ const ProfilePage = () => {
   
 
   const user = useContext(UserContext);
+  console.log(user);
   const {photoURL, displayName, email, uid} = user;
 
   return (
@@ -45,8 +48,24 @@ const ProfilePage = () => {
         </div>
       </div>
       <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
+      {user && user.mongo.products.map(card => {
+        return(
+              <div key={card.uuiid} className="col-6">
+              <MyCard
+                key={card.uuid}
+                name={card.name}
+                category={card.category}
+                description={card.description}
+                image={card.image}
+                price={card.price}
+                attributes={card.attributes}
+              >
+              </MyCard>
+              </div>
+      )})}
     </div>
-  ) 
+  )
+  
 };
 
 export default ProfilePage;
