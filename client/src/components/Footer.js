@@ -1,6 +1,11 @@
 import React from "react";
 import Cropped from "../images/cropped.png";
-import Logo from "../images/logo.png"
+
+//==================Images====================
+import logo from "../images/logo74KBblack.png"
+//============================================
+
+
 
 function Footer() {
     return (
@@ -11,7 +16,7 @@ function Footer() {
                 <div class="row">
 
                     <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <h5 class="text-uppercase"><img src={Logo} style={{height:"3em", width:"auto"}} /></h5>
+                        <h5 class="text-uppercase"><img src={logo} className="logo-small" /></h5>
 
                         <p>
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis

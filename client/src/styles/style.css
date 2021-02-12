@@ -15,9 +15,21 @@ h1 {
   background-size: cover;
 }
 .logo {
-  max-width: 800px;
+  max-width: 600px;
   height:auto;
 }
+.logo-small {
+  max-width: 150px;
+  height:auto;
+}
+.card{
+  margin-top: 30px;
+}
+.tradingCard-margin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 /* .row {
     position:relative;
 }

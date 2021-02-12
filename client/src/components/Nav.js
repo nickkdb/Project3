@@ -1,33 +1,43 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { NavLink } from "react-router-dom";
 
-function Nav() {
+
+//==================Images====================
+import logo from "../images/logo74KBblack.png"
+//============================================
+
+
+function NavTabs() {
+
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-  )
+      <Navbar bg="#2f4f4f" expand="lg">
+        <Navbar.Brand><img src={logo} alt="ner herred logo" className="logo-small"/></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto">
+            <NavItem>
+              <NavLink className="nav-link" to="/">Home</NavLink>
+            </NavItem>
 
+            <NavItem>
+              <NavLink className="nav-link" to="#">Search</NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink className="nav-link" to="#">Dashboard</NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink to="" target="_blank" rel="noreferrer"><button type="button" className="view-btn">Sign Up</button></NavLink>
+            </NavItem>
+
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
 }
 
-export default Nav;
+export default NavTabs;
