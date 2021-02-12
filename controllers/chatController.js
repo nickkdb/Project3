@@ -1,12 +1,12 @@
 const mongojs= require('mongojs');
 
-const databaseUrl = "chatdb";
-const collections = ["chatdata"];
+// const databaseUrl = "chatdb";
+// const collections = ["chatdata"];
 
-const db = mongojs(databaseUrl, collections);
-db.on("error", error => {
-  console.log("Database Error:", error);
-});
+// const db = mongojs(databaseUrl, collections);
+// db.on("error", error => {
+//   console.log("Database Error:", error);
+// });
 
 module.exports= {
     checkForRoom: (room, cb) => {
