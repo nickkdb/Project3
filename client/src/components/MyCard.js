@@ -71,6 +71,23 @@ function MyCard(props) {
                           )
                         })}
                         </div>
+                      case 'colors':
+                        return <div><p>Colors: </p> {value.map(item => {
+                          return (
+                            <p><strong>Color: </strong>{item}</p>
+                          )
+                        })}
+                        </div>
+                         case 'set':
+                          return <p><strong>Set: </strong>{value}</p>
+                          case 'type':
+                            return <p><strong> Type: </strong>{value}</p>
+                            case 'level':
+                              return <p><strong>Level: </strong>{value}</p>
+                            case 'race':
+                              return <p><strong>Race: </strong>{value}</p>
+                              case 'attribute':
+                                return <p><strong>Attribute: </strong>{value}</p>
                     default:
                       return null;
                   }
