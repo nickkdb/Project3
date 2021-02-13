@@ -23,15 +23,15 @@ function NavTabs() {
             </NavItem>
 
             <NavItem>
-              <NavLink className="nav-link" to="#">Search</NavLink>
+              <NavLink className="nav-link" to="/search">Search</NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink className="nav-link" to="#">Dashboard</NavLink>
+              <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink to="" target="_blank"><Button className="">Sign Up</Button></NavLink>
+              <NavLink to="/signup" target="_blank"><Button className="">Sign Up</Button></NavLink>
             </NavItem>
 
           </Nav>
