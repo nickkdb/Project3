@@ -22,6 +22,9 @@ function Application() {
         <Nav />
         <Switch>
           <Route exact path="/">
+            <Dashboard />
+          </Route>
+          <Route exact path="/profile">
             <ProfilePage />
           </Route>
           <Route exact path="/search">
