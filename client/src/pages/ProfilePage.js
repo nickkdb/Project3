@@ -50,12 +50,13 @@ const ProfilePage = () => {
       <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
       {user && user.mongo.products.map(card => {
         return(
-              <div key={card.uuiid} className="col-6">
+              <div key={card.uuid} className="col-6">
               <MyCard
                 key={card.uuid}
                 name={card.name}
                 category={card.category}
                 description={card.description}
+                available={card.available}
                 image={card.image}
                 price={card.price}
                 attributes={card.attributes}

@@ -44,7 +44,7 @@ function PokemonCard(props) {
                          Name: {attk.name}
                       </div>
                       <div>
-                        Damage: {(attk.damage.length) < 1 ? "N/A" : (attk.damage) }
+                        Damage: {attk.damage && (attk.damage.length) < 1 ? "N/A" : (attk.damage) }
                       </div>
                       </div>
                     );
