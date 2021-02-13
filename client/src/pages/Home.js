@@ -6,8 +6,8 @@ import Section1 from "../components/Section1";
 import Section2 from "../components/Section2";
 
 // =================Images=================
-import mtg from "../images/mtg.jpg"
-import poke from "../images/poke.jpg"
+import mtg from "../images/mtg.png"
+import poke from "../images/poke.png"
 import yugi from "../images/yugioh2.png"
 // ========================================
 

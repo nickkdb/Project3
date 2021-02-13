@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 
 //==================Images====================
@@ -30,7 +31,7 @@ function NavTabs() {
             </NavItem>
 
             <NavItem>
-              <NavLink to="" target="_blank" rel="noreferrer"><button type="button" className="view-btn">Sign Up</button></NavLink>
+              <NavLink to="" target="_blank"><Button className="">Sign Up</Button></NavLink>
             </NavItem>
 
           </Nav>

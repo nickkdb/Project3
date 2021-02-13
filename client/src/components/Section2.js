@@ -10,13 +10,13 @@ function Section2(props) {
     <div>
       <div className="container">
         <div className="row tradingCard-margin">
-          <div className="col-md-6">
-            <h3>{tradingCard.series}</h3>
+          <div className="col-md-10">
+            <h2>{tradingCard.series}</h2>
             <p>{tradingCard.description}</p>
             <p><Link to={tradingCard.link}>Read more on Wikipedia</Link></p>
           </div>
-          <div className="col-md-3">
-            <img src={tradingCard.image} className="img-fluid" alt={tradingCard.alt} />
+          <div className="col-md-2">
+            <img src={tradingCard.image} className="img-fluid tradingCard shadow" alt={tradingCard.alt} />
           </div>
         </div>
       </div>
