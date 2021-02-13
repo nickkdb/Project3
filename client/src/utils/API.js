@@ -9,6 +9,9 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
+  getProfile: function(id) {
+    return axios.get("/api/users/profile/" + id);
+  },
 //update the user model
   addCard: function(id, body) {
     return axios.post("/api/cards/" + id, body)
