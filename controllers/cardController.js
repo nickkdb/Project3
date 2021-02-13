@@ -35,8 +35,8 @@ module.exports = {
         {_id: mongojs.ObjectID(req.params.id), 'products.uuid': req.body.uuid }, {
             '$set': {
                 'products.$.price': req.body.price,
-                'products.$.description': req.body.notes,
-                'products.$.available': req.body.isAvailable
+                'products.$.description': req.body.description,
+                'products.$.available': req.body.available
             }
         })
             .then(dbModel => res.json(dbModel))

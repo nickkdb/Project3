@@ -2,9 +2,9 @@ import React from "react";
 
 
 function MyCard(props) {
-  console.log(Object.entries(props.attributes))
-  console.log(props);
-
+  // console.log(Object.entries(props.attributes))
+  // console.log(props);
+  
   return (
     <div key={props.id} className="card">
       <div className="img-container">
@@ -95,15 +95,28 @@ function MyCard(props) {
             }
           </li>
         </ul>
-        <button 
+        
+        {props.profileType ? 
+          <button 
           onClick={() => {
           props.openModal()
           // props.postData(props.cardData);
         }} 
         // cardData={props.cardData}
         type="button" className="btn btn-primary">
+                Trade
+        </button>
+        :
+        <button 
+          onClick={() => {
+          props.openModal()
+          props.setuuid(props.uuid);
+        }} 
+        // cardData={props.cardData}
+        type="button" className="btn btn-primary">
                 Update
         </button>
+        }
       </div>
     </div>
   );

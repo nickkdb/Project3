@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
-import {auth} from "../utils/firebase";
+// import {auth} from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
 import {useLocation} from "react-router-dom"
@@ -57,6 +57,7 @@ const ProfilePage = () => {
               <div key={card.uuid} className="col-6">
               <MyCard
                 key={card.uuid}
+                profileType={location.pathname}
                 name={card.name}
                 category={card.category}
                 description={card.description}

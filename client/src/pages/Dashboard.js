@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const user = useContext(UserContext);
@@ -76,7 +77,8 @@ function Dashboard() {
             </button>
             {searchList &&
               searchList.map((item) => {
-                return <p>{item.displayName}</p>;
+                let link = `profile/${item.displayName}`
+                return <p><Link to={link}>{item.displayName}</Link></p>;
               })}
           </form>
         </div>

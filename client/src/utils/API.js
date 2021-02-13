@@ -16,6 +16,9 @@ export default {
   addCard: function(id, body) {
     return axios.post("/api/cards/" + id, body)
   },
+  updateCard: function(id, body) {
+    return axios.put("/api/cards/" + id, body)
+  },
   // Deletes the user with the given id
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);

@@ -1,5 +1,6 @@
 module.exports = {
     User: require("./user"),
-    Chat: require("./chat")
+    Chat: require("./chat"),
+    Trade: require("./trade")
   }; 
   
