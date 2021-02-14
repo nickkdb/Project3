@@ -12,6 +12,7 @@ import PasswordReset from "./PasswordReset";
 import Search from "./Search";
 import Dashboard from "./Dashboard"
 import Home from "./Home"
+import OtherProfile from "./OtherProfile";
 
 function Application() {
   const user = useContext(UserContext);
@@ -26,6 +27,9 @@ function Application() {
           </Route>
           <Route exact path="/profile">
             <ProfilePage />
+          </Route>
+          <Route exact path="/profile/:id">
+            <OtherProfile />
           </Route>
           <Route exact path="/search">
             <Search />
