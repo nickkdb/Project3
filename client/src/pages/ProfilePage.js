@@ -155,7 +155,8 @@ const ProfilePage = () => {
           }}
           className="border border-blue-300"
         ></div>
-        <img src={croppedImage}></img>
+        {/* <img src={croppedImage}></img> */}
+        <a href={croppedImage} download="proposed_file_name">Download</a>
         <button onClick={generateImg}>BLOB</button>
         <div className="md:pl-4">
           <h2 className="text-2xl font-semibold">{displayName}</h2>
