@@ -23,7 +23,7 @@ module.exports = {
 
     findOne: function (req, res) {
         db.User.findOne(
-            {'cards': {$elemMatch: {uuid: params.id}}}
+            {'products': {$elemMatch: {uuid: params.id}}}
         )
         .then(dbModel => {res.json(dbModel)})
         .catch(err => { res.status(422).json(err)})

@@ -65,7 +65,7 @@ function Dashboard() {
                 id="term"
               />
               <small id="passwordHelpBlock" className="form-text text-muted">
-                * Search by displayName, card name, card type, anything
+                * Search by displayName, card name, or card type. Results include the username. Click to view profile and cards.
               </small>
             </div>
             <button
