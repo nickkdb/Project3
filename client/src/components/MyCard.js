@@ -109,7 +109,8 @@ function MyCard(props) {
         :
         <button 
           onClick={() => {
-          props.openModal()
+          props.openModal();
+          props.setModalSource("card");
           props.setuuid(props.uuid);
         }} 
         // cardData={props.cardData}

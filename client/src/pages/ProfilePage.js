@@ -7,8 +7,8 @@ import { Modal, Button, Form } from "react-bootstrap";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 import Cropper from "react-easy-crop";
-import getCroppedImg from '../utils/cropper'
-import Base64 from "base64-img"
+import getCroppedImg from "../utils/cropper";
+import Base64 from "base64-img";
 
 const ProfilePage = () => {
   // updating products
@@ -17,6 +17,7 @@ const ProfilePage = () => {
   const [descr, setDescr] = useState("");
   const [avail, setAvail] = useState("Yes");
   const [uuid, setuuid] = useState("");
+  const [modalSource, setModalSource] = useState("");
 
   // cropping an iamge
   const [tempImg, setTempImg] = useState({});
@@ -28,6 +29,7 @@ const ProfilePage = () => {
 
   //uploading image to FB
   const [imageAsFile, setImageAsFile] = useState("");
+  const [finalImage, setFinalImage] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
   const [profilePic, setProfilePic] = useState("");
 
@@ -37,49 +39,42 @@ const ProfilePage = () => {
   const handleFile = (e) => {
     // console.log(e);
     const img = e.target.files[0];
-    console.log(img)
+    console.log(img);
     setTempImg(URL.createObjectURL(img));
     setImageAsFile(img);
   };
 
-  // if (tempImg) {
-  //   console.log(tempImg);
-  // }
+  const handleFile2 = (e) => {
+    const img = e.target.files[0];
+    console.log(img);
+    setFinalImage(img);
+  };
+
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
 
- const generateImg = async() => { 
-   try {
-    const a = await getCroppedImg(
-      tempImg,
-      croppedAreaPixels,
-      rotation
-    )
-    console.log('donee', a)
-    // let x = Base64.img(a, '', user.uid, function(err, filepath) {})
-    // console.log(x);
-    setCroppedImage(a)
-  } catch (e) {
-    console.error(e)
-  }
-}
-
-  if (croppedImage){
-  var test = new File([croppedImage], user.uid);
-  console.log(test)
-  // console.log(croppedImage)
-  }
+  const generateImg = async () => {
+    try {
+      const a = await getCroppedImg(tempImg, croppedAreaPixels, rotation);
+      const tempFile = new File([a], 'uhhh', {type: "image/jpeg"})
+      setCroppedImage(a);
+      console.log(tempFile)
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
 
   const handleFireBaseUpload = (e) => {
     e.preventDefault();
+    handleClose();
     console.log("start of upload");
 
-    const uploadTask = storage.ref(`/images/${user.uid}`).put({croppedImage});
-    
+    const uploadTask = storage.ref(`/images/${uid}`).put( finalImage );
+
     //initiates the firebase side uploading
     uploadTask.on(
       "state_changed",
@@ -96,7 +91,7 @@ const ProfilePage = () => {
         // gets the download url then sets the image from firebase as the value for the imgUrl key:
         storage
           .ref("images")
-          .child(user.uid)
+          .child(uid)
           .getDownloadURL()
           .then((fireBaseUrl) => {
             setImageAsUrl((prevObject) => ({
@@ -114,7 +109,7 @@ const ProfilePage = () => {
       .child(user.uid)
       .getDownloadURL()
       .then((fireBaseUrl) => {
-        console.log(fireBaseUrl)
+        console.log(fireBaseUrl);
         setProfilePic(fireBaseUrl);
       });
   }, [user.uid]);
@@ -146,58 +141,35 @@ const ProfilePage = () => {
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        <div
-          style={{
-            background: `url(${profilePic})  no-repeat center center`,
-            backgroundSize: "cover",
-            height: "300px",
-            width: "300px",
-          }}
-          className="border border-blue-300"
-        ></div>
+        {profilePic ? (
+          <div
+            style={{
+              background: `url(${profilePic})  no-repeat center center`,
+              backgroundSize: "cover",
+              height: "300px",
+              width: "300px",
+            }}
+            className="border border-blue-300"
+          ></div>
+        ) : (
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              handleShow();
+              setModalSource("profilePic");
+            }}
+          >
+            Set Profile Pic
+          </button>
+        )}
         {/* <img src={croppedImage}></img> */}
-        <a href={croppedImage} download="proposed_file_name">Download</a>
-        <button onClick={generateImg}>BLOB</button>
+
         <div className="md:pl-4">
-          <h2 className="text-2xl font-semibold">{displayName}</h2>
-          <h3 className="italic">{email}</h3>
-          <h3 className="italic">{uid}</h3>
-        </div>
-        <div className="container">
-          <div style={tempImg.length > 1 ? {height: "500px"} : {}} className="row">
-          <form className="col" onSubmit={handleFireBaseUpload}>
-            <div>
-              <input type="file" onChange={handleFile}></input>
-            </div>
-            <div>
-              <button className="btn btn-primary" formAction="submit">
-                Upload
-              </button>
-            </div>
-          </form>
-          <div style={tempImg.length > 1 ? {display: "block"} : {display: 'none'}} className="col">
-          <Cropper
-            image={tempImg}
-            crop={crop}
-            rotation={rotation}
-            zoom={zoom}
-            aspect={3 / 3}
-            onCropChange={setCrop}
-            onRotationChange={setRotation}
-            onCropComplete={onCropComplete}
-            onZoomChange={setZoom}
-          />
-          <RangeSlider
-            value={zoom}
-            label="Zoom"
-            min={1}
-            max={3}
-            step={0.1}
-            aria-labelledby="Zoom"
-            onChange={(changeEvent) => setZoom(changeEvent.target.value)}
-          />
-        </div>
-          </div>
+          <h2 className="text-2xl font-semibold">
+            Display Name: {displayName}
+          </h2>
+          <h3 className="italic">Email: {email}</h3>
+          <h3 className="italic">UID: {uid}</h3>
         </div>
       </div>
       <button
@@ -225,6 +197,7 @@ const ProfilePage = () => {
                 openModal={handleShow}
                 addCard={updateCard}
                 setuuid={setuuid}
+                setModalSource={setModalSource}
               ></MyCard>
             </div>
           );
@@ -235,48 +208,124 @@ const ProfilePage = () => {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        size="lg"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              rows={2}
-            />
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={descr}
-              onChange={(e) => setDescr(e.target.value)}
-              rows={2}
-            />
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Available?</Form.Label>
-            <Form.Control
-              onChange={(e) => setAvail(e.target.value)}
-              as="select"
-            >
-              <option>Yes</option>
-              <option>No</option>
-            </Form.Control>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={updateCard}>
-            Save
-          </Button>
-        </Modal.Footer>
+        <div>
+          {modalSource === "card" ? (
+            <div>
+              <Modal.Header closeButton>
+                <Modal.Title>Update Card</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    rows={2}
+                  />
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    value={descr}
+                    onChange={(e) => setDescr(e.target.value)}
+                    rows={2}
+                  />
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Available?</Form.Label>
+                  <Form.Control
+                    onChange={(e) => setAvail(e.target.value)}
+                    as="select"
+                  >
+                    <option>Yes</option>
+                    <option>No</option>
+                  </Form.Control>
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={updateCard}>
+                  Save
+                </Button>
+              </Modal.Footer>
+            </div>
+          ) : (
+            <div>
+              <Modal.Header closeButton>
+                <Modal.Title>Set Profile Pic</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div>
+                    <div className="m-3">
+                    <div className="mb-2">
+                      <h5>Choose the Image</h5>
+                        <input type="file" onChange={handleFile}></input>
+                      </div>
+                      <div className="mb-2">
+                        <h5>Once you're done cropping, click "Crop Image", then "Download".</h5>
+                      <button className="btn btn-primary" onClick={generateImg}>Crop Image</button>
+                      <span className="ml-2"><a href={croppedImage} download="nerherdprofile.jpeg">
+                        Download
+                      </a></span>
+                      </div>
+                    </div>
+                    <div
+                      style={
+                        tempImg.length > 1
+                          ? { display: "block", height: "25rem", margin: "2rem"}
+                          : { display: "none" }
+                      }
+                    >
+                      <Cropper
+                        image={tempImg}
+                        crop={crop}
+                        rotation={rotation}
+                        zoom={zoom}
+                        aspect={3 / 3}
+                        onCropChange={setCrop}
+                        onRotationChange={setRotation}
+                        onCropComplete={onCropComplete}
+                        onZoomChange={setZoom}
+                        showGrid={true}
+                        style={{containerStyle: {margin: "12rem 3rem 5rem 3rem"}}}
+                      />
+                      <RangeSlider
+                        value={zoom}
+                        label="Zoom"
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        aria-labelledby="Zoom"
+                        onChange={(changeEvent) =>
+                          setZoom(changeEvent.target.value)
+                        }
+                      />
+                    </div>
+                </div>
+                <div>
+                <div>
+                <h5>Drag your downloaded image over here, and click "Save".</h5>
+                    <input type="file" onChange={handleFile2}></input>
+                </div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleFireBaseUpload}>
+                  Save
+                </Button>
+              </Modal.Footer>
+            </div>
+          )}
+        </div>
       </Modal>
     </div>
   );
