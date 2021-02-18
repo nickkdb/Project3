@@ -9,7 +9,6 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const [firebaseImage, setFirebaseImage] = useState("");
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change

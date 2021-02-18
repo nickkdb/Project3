@@ -33,7 +33,7 @@ const ProfilePage = () => {
   const [profilePic, setProfilePic] = useState("");
 
   const user = useContext(UserContext);
-  const { photoURL, displayName, email, uid } = user;
+  const { displayName, email, uid } = user;
 
   const handleFile = (e) => {
     // console.log(e);
