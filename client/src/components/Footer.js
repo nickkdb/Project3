@@ -1,6 +1,10 @@
 import React from "react";
-import Cropped from "../images/cropped.png";
-import Logo from "../images/logo.png"
+
+//==================Images====================
+import logo from "../images/logo74KBblack.png"
+//============================================
+
+
 
 function Footer() {
     return (
@@ -11,13 +15,11 @@ function Footer() {
                 <div class="row">
 
                     <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <h5 class="text-uppercase"><img src={Logo} style={{height:"3em", width:"auto"}} /></h5>
-
+                        <img src={logo} className="logo-small" />
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-                            voluptatem veniam, est atque cumque eum delectus sint!
-        </p>
+                            Your place to meet and trade with other nerds.
+                            Currently supporting trades for Pokémon Trading Card Game, Magic: The Gathering, and Yu-Gi-Oh! Trading Card Game. More card series coming soon!
+                        </p>
                     </div>
 
 
@@ -64,7 +66,7 @@ function Footer() {
             </div>
 
 
-            <div class="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+            <div class="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
                 © 2021 Copyright:
     <a class="text-dark" href="">Group 5</a>
             </div>

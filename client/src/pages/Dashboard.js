@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 
+import Banner from "../components/Banner";
+
 function Dashboard() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("");
@@ -23,14 +25,13 @@ function Dashboard() {
   //     //   console.log(typeof(list))
   //   }
 
+
   function filterSearch() {
     let lowerSearch = search.toLocaleLowerCase();
     if (search && list) {
       let c = list.map((x) => JSON.stringify(x));
       let temp = c
-        .filter(
-          (user) => user.toLocaleLowerCase().includes(lowerSearch) === true
-        )
+        .filter((user) => user.toLocaleLowerCase().includes(lowerSearch) === true)
         .map((x) => JSON.parse(x));
       setSearchList(temp);
     }
@@ -86,13 +87,13 @@ function Dashboard() {
                 * Search by displayName, card name, or card type. Results
                 include the username. Click to view profile and cards.
               </small>
-            </div>
-            <button
-              type="button"
-              onClick={filterSearch}
-              className="btn btn-primary ml-2 mb-4 mt-2"
-            >
-              Search
+              </div>
+              <button
+                type="button"
+                onClick={filterSearch}
+                className="btn btn-primary ml-2 mb-4 mt-2"
+              >
+                Search
             </button>
             {searchList &&
               searchList.map((item) => {

@@ -3,6 +3,7 @@ import UserContext from "../utils/UserContext";
 import { auth, storage } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
+import Banner from "../components/Banner";
 import { Modal, Button, Form } from "react-bootstrap";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
@@ -31,6 +32,8 @@ const ProfilePage = () => {
   const [finalImage, setFinalImage] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
   const [profilePic, setProfilePic] = useState("");
+  // const [reRender, setReRender] = useState(false);
+
 
   const user = useContext(UserContext);
   const { displayName, email, uid } = user;
@@ -141,6 +144,14 @@ const ProfilePage = () => {
     API.updateCard(user.mongo._id, data).then((res) => console.log(res));
   };
 
+
+
+  function deleteCard(id, uuid) {
+    console.log(id, uuid)
+    API.deleteCard(id, uuid)
+    .then((res) => console.log(res));
+  }
+
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
@@ -209,10 +220,15 @@ const ProfilePage = () => {
                 price={card.price}
                 attributes={card.attributes}
                 openModal={handleShow}
-                addCard={updateCard}
+                // addCard={updateCard}
                 setuuid={setuuid}
                 setModalSource={setModalSource}
+              // deleteCard={deleteCard}
               ></MyCard>
+              <button
+          type="button" className="btn btn-primary" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
+            Delete
+        </button>
             </div>
           );
         })}

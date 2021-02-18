@@ -1,8 +1,24 @@
-h1 {
+h1, h3, h5 {
   color: #fff;
 }
-
-.hero {
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: 'Reem Kufi', sans-serif;
+}
+h2{
+  font-family: 'Freckle Face', cursive;
+  color: #ffe300;
+  -webkit-text-stroke: 1px black;
+  letter-spacing: 1px;
+}
+a {
+  color: #242582!important;
+  font-size: 12px;
+}
+a:hover {
+  color: #b5072d!important;
+  text-decoration: none!important;
+}
+.hero, .banner {
   min-height: 700px;
   background-image: linear-gradient(
       to bottom,
@@ -14,10 +30,41 @@ h1 {
   background-position: center;
   background-size: cover;
 }
+.banner {
+  min-height: 300px;
+}
 .logo {
-  max-width: 800px;
+  margin-top: 125px;
+  max-width: 600px;
   height:auto;
 }
+.logo-small {
+  max-width: 150px;
+  height:auto;
+}
+.btn-primary {
+  background-color:#ffe300!important;
+  border-color: black!important;
+  color: black!important;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+.card{
+  margin-top: 95px;
+}
+.tradingCard {
+  max-height: 250px;
+  border-radius: .75rem;
+}
+.tradingCard-margin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+cite {
+  font-size: 9px;
+  color: #636363;
+}
+
 /* .row {
     position:relative;
 }
