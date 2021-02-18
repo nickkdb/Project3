@@ -6,6 +6,7 @@ import PokemonCard from "../components/PokemonCard";
 import MtgCard from "../components/mtgCard";
 import API from "../utils/API";
 import { Modal, Button, Form } from 'react-bootstrap';
+import Banner from "../components/Banner";
 
 function Search() {
   const user = useContext(UserContext);
@@ -97,6 +98,7 @@ function Search() {
 
   return (
     <div>
+      <Banner pageTitle="Search" />
       <div className="container">
         <h1 className="text-center">Search For Your Cards</h1>
 

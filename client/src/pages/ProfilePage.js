@@ -3,6 +3,7 @@ import UserContext from "../utils/UserContext";
 import { auth } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
+import Banner from "../components/Banner";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const ProfilePage = () => {
