@@ -11,6 +11,8 @@ router.route("/:id")
   .post(cardController.create)
   .get(cardController.findOne)
   .put(cardController.update)
+
+router.route("/:id/:uuid")
   .delete(cardController.remove);
 
 module.exports = router;
