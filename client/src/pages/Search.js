@@ -46,6 +46,7 @@ function Search() {
         });
     }
 
+
     //pokemon
     if (searchType === "Pokemon") {
       axios
