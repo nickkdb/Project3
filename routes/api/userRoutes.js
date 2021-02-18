@@ -13,7 +13,9 @@ router.route("/:id")
   // .put(userController.update)
   // .delete(userController.remove);
 
-// router.route("/email")
-// .get(userController.findByEmail);
+// Matches with "/api/profile/books/:id"
+router.route("/profile/:id")
+.get(userController.findById);
+
 
 module.exports = router;

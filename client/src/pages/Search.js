@@ -6,6 +6,7 @@ import PokemonCard from "../components/PokemonCard";
 import MtgCard from "../components/mtgCard";
 import API from "../utils/API";
 import { Modal, Button, Form } from 'react-bootstrap';
+import Banner from "../components/Banner";
 
 function Search() {
   const user = useContext(UserContext);
@@ -22,15 +23,6 @@ function Search() {
   const [yImage, setYImage] = useState("");
   const [ySet, setYSet] = useState("");
   
-  // console.log(user)
-
-  // const [mongoUser, setMongoUser] = useState({});
-
-  // useEffect(() => {
-  //   API.getUser(user.email).then(res =>
-  //     setMongoUser(res.data[0])
-  //   ).catch(err => console.error(err))
-  // }, []);
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
@@ -49,6 +41,8 @@ function Search() {
         .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
         .then((res) => {
           setYCards(res.data.data);
+          setPCards(null);
+          setMCards(null)
           console.log(res.data.data);
         });
     }
@@ -59,6 +53,8 @@ function Search() {
         .get(`https://api.pokemontcg.io/v2/cards?q=name:${search}`)
         .then((res) => {
           setPCards(res.data.data);
+          setMCards(null)
+          setYCards(null)
           console.log(res.data.data);
 
         });
@@ -71,6 +67,8 @@ function Search() {
         .get(`https://api.magicthegathering.io/v1/cards?name=${search}`)
         .then((res) => {
           setMCards(res.data.cards);
+          setPCards(null)
+          setYCards(null)
           console.log(res.data.cards);
         });
     }
@@ -79,10 +77,6 @@ function Search() {
   };
 
   const addCard = (event) => {
-    // let x = event.target.attributes[0].value;
-    // let img = event.target.attributes[1].value;
-    // let set = event.target.attributes[2].value;
-    // let data = JSON.parse(x);
     handleClose();
     let data = JSON.parse(postData);
     
@@ -110,6 +104,7 @@ function Search() {
 
   return (
     <div>
+      <Banner pageTitle="Search" />
       <div className="container">
         <h1 className="text-center">Search For Your Cards</h1>
 
