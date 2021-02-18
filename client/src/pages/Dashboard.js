@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
+
 import Banner from "../components/Banner";
 
 function Dashboard() {
@@ -77,12 +78,12 @@ function Dashboard() {
               >
                 Search
             </button>
-              {searchList &&
-                searchList.map((item) => {
-                  return <p>{item.displayName}</p>;
-                })}
-            </form>
-          </div>
+            {searchList &&
+              searchList.map((item) => {
+                let link = `profile/${item.displayName}`
+                return <p><Link to={link}>{item.displayName}</Link></p>;
+              })}
+          </form>
         </div>
       </div>
     </div>

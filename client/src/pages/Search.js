@@ -23,15 +23,6 @@ function Search() {
   const [yImage, setYImage] = useState("");
   const [ySet, setYSet] = useState("");
   
-  // console.log(user)
-
-  // const [mongoUser, setMongoUser] = useState({});
-
-  // useEffect(() => {
-  //   API.getUser(user.email).then(res =>
-  //     setMongoUser(res.data[0])
-  //   ).catch(err => console.error(err))
-  // }, []);
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
@@ -80,10 +71,6 @@ function Search() {
   };
 
   const addCard = (event) => {
-    // let x = event.target.attributes[0].value;
-    // let img = event.target.attributes[1].value;
-    // let set = event.target.attributes[2].value;
-    // let data = JSON.parse(x);
     handleClose();
     let data = JSON.parse(postData);
     
