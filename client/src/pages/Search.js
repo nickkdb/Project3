@@ -40,6 +40,8 @@ function Search() {
         .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
         .then((res) => {
           setYCards(res.data.data);
+          setPCards(null);
+          setMCards(null)
           console.log(res.data.data);
         });
     }
@@ -50,6 +52,8 @@ function Search() {
         .get(`https://api.pokemontcg.io/v2/cards?q=name:${search}`)
         .then((res) => {
           setPCards(res.data.data);
+          setMCards(null)
+          setYCards(null)
           console.log(res.data.data);
 
         });
@@ -62,6 +66,8 @@ function Search() {
         .get(`https://api.magicthegathering.io/v1/cards?name=${search}`)
         .then((res) => {
           setMCards(res.data.cards);
+          setPCards(null)
+          setYCards(null)
           console.log(res.data.cards);
         });
     }

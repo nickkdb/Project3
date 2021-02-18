@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const [descr, setDescr] = useState("");
   const [avail, setAvail] = useState("Yes");
   const [uuid, setuuid] = useState("");
-  const [reRender, setReRender] = useState(false);
+  // const [reRender, setReRender] = useState(false);
 
 
   const user = useContext(UserContext);
