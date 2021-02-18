@@ -8,7 +8,6 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropper";
-import Base64 from "base64-img";
 
 const ProfilePage = () => {
   // updating products
@@ -73,7 +72,7 @@ const ProfilePage = () => {
     handleClose();
     console.log("start of upload");
 
-    const uploadTask = storage.ref(`/images/${uid}`).put( finalImage );
+    const uploadTask = storage.ref(`/images/${user.mongo._id}`).put( finalImage );
 
     //initiates the firebase side uploading
     uploadTask.on(
@@ -91,7 +90,7 @@ const ProfilePage = () => {
         // gets the download url then sets the image from firebase as the value for the imgUrl key:
         storage
           .ref("images")
-          .child(uid)
+          .child(user.mongo._id)
           .getDownloadURL()
           .then((fireBaseUrl) => {
             setImageAsUrl((prevObject) => ({
@@ -103,16 +102,20 @@ const ProfilePage = () => {
     );
   };
 
+  // YOU NEED TO STORE THE IMAGE AS THE ACTUAL FILENAME W/ THEIR ID ATTACHED
+  // WHEN STORING, SEND THE SAME INFO TO MONGO
+  // SO WHEN CALLED, YOU CAN USE MONGO TO INFER TO ROUTE FOR THE IMAGE 
+
   useEffect(() => {
     storage
       .ref("images")
-      .child(user.uid)
+      .child(user.mongo._id)
       .getDownloadURL()
       .then((fireBaseUrl) => {
         console.log(fireBaseUrl);
         setProfilePic(fireBaseUrl);
       });
-  }, [user.uid]);
+  }, [user.mongo._id]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -142,6 +145,7 @@ const ProfilePage = () => {
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
         {profilePic ? (
+          <div>
           <div
             style={{
               background: `url(${profilePic})  no-repeat center center`,
@@ -151,6 +155,16 @@ const ProfilePage = () => {
             }}
             className="border border-blue-300"
           ></div>
+          <button
+          className="btn btn-primary mt-3"
+          onClick={() => {
+            handleShow();
+            setModalSource("profilePic");
+          }}
+        >
+          Update Profile Pic
+        </button>
+        </div>
         ) : (
           <button
             className="btn btn-primary"
@@ -310,8 +324,14 @@ const ProfilePage = () => {
                 </div>
                 <div>
                 <div>
-                <h5>Drag your downloaded image over here, and click "Save".</h5>
+                  {croppedImage ?
+                  <div>
+                    <h5>Drag your downloaded image over here, and click "Save".</h5>
                     <input type="file" onChange={handleFile2}></input>
+                    </div>
+                    :
+                    ""
+                  }
                 </div>
                 </div>
               </Modal.Body>

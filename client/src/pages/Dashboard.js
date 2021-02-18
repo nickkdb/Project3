@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
+import { storage } from "../utils/firebase";
 
 function Dashboard() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
+  const [firebaseImage, setFirebaseImage] = useState("");
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -15,23 +17,24 @@ function Dashboard() {
     setSearch(value);
   }
 
-//   let x = 0;
-//   if(list && x === 0) {
-//       console.log(list)
-//       x = 1
-//     //   console.log(typeof(list))
-//   }
-
+  //   let x = 0;
+  //   if(list && x === 0) {
+  //       console.log(list)
+  //       x = 1
+  //     //   console.log(typeof(list))
+  //   }
 
   function filterSearch() {
     let lowerSearch = search.toLocaleLowerCase();
     if (search && list) {
-        let c = list.map((x) => JSON.stringify(x));
-        let temp = c
-          .filter((user) => user.toLocaleLowerCase().includes(lowerSearch) === true)
-          .map((x) => JSON.parse(x));
-        setSearchList(temp);
-      }
+      let c = list.map((x) => JSON.stringify(x));
+      let temp = c
+        .filter(
+          (user) => user.toLocaleLowerCase().includes(lowerSearch) === true
+        )
+        .map((x) => JSON.parse(x));
+      setSearchList(temp);
+    }
   }
 
   useEffect(() => {
@@ -42,8 +45,24 @@ function Dashboard() {
     API.getUsers()
       .then((res) => {
         setList(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
+    getFirebaseImages();
+  }
+
+  function getFirebaseImages() {
+    list.map((user) => {
+      storage
+        .ref("images")
+        .child(user._id)
+        .getDownloadURL()
+        .then((fireBaseUrl) => {
+          user.image = fireBaseUrl;
+        });
+      return 0;
+    });
+    console.log(list);
   }
 
   return (
@@ -65,7 +84,8 @@ function Dashboard() {
                 id="term"
               />
               <small id="passwordHelpBlock" className="form-text text-muted">
-                * Search by displayName, card name, or card type. Results include the username. Click to view profile and cards.
+                * Search by displayName, card name, or card type. Results
+                include the username. Click to view profile and cards.
               </small>
             </div>
             <button
@@ -77,8 +97,23 @@ function Dashboard() {
             </button>
             {searchList &&
               searchList.map((item) => {
-                let link = `profile/${item.displayName}`
-                return <p><Link to={link}>{item.displayName}</Link></p>;
+                let link = `profile/${item.displayName}`;
+                return (
+                  <div className="row border">
+                    <div className="col">
+                      <img
+                        src={item.image}
+                        alt={item.displayName + "Image"}
+                        style={{ width: "50%" }}
+                      ></img>
+                    </div>
+                    <div className="col">
+                      <p>
+                        <Link to={link}>{item.displayName}</Link>
+                      </p>
+                    </div>
+                  </div>
+                );
               })}
           </form>
         </div>
