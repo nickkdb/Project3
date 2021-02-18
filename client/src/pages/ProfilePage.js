@@ -12,6 +12,8 @@ const ProfilePage = () => {
   const [descr, setDescr] = useState("");
   const [avail, setAvail] = useState("Yes");
   const [uuid, setuuid] = useState("");
+  // const [reRender, setReRender] = useState(false);
+
 
   const user = useContext(UserContext);
   const { photoURL, displayName, email, uid } = user;
@@ -43,15 +45,22 @@ const ProfilePage = () => {
     API.updateCard(user.mongo._id, data).then((res) => console.log(res));
   };
 
+
+
+  function deleteCard(id, uuid) {
+    console.log(id, uuid)
+    API.deleteCard(id, uuid)
+    .then((res) => console.log(res));
+  }
+
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
         <div
           style={{
-            background: `url(${
-              photoURL ||
+            background: `url(${photoURL ||
               "https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png"
-            })  no-repeat center center`,
+              })  no-repeat center center`,
             backgroundSize: "cover",
             height: "200px",
             width: "200px",
@@ -87,9 +96,14 @@ const ProfilePage = () => {
                 price={card.price}
                 attributes={card.attributes}
                 openModal={handleShow}
-                addCard={updateCard}
+                // addCard={updateCard}
                 setuuid={setuuid}
+              // deleteCard={deleteCard}
               ></MyCard>
+              <button
+          type="button" className="btn btn-primary" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
+            Delete
+        </button>
             </div>
           );
         })}

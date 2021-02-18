@@ -19,10 +19,13 @@ export default {
   updateCard: function(id, body) {
     return axios.put("/api/cards/" + id, body)
   },
-  // Deletes the user with the given id
-  deleteUser: function(id) {
-    return axios.delete("/api/users/" + id);
+  deleteCard: function(id, uuid) {
+    return axios.delete("/api/cards/" + id + "/" + uuid);
   },
+  // Deletes the user with the given id
+  // deleteUser: function(id) {
+  //   return axios.delete("/api/users/" + id);
+  // },
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
