@@ -15,7 +15,7 @@ function Footer() {
                 <div class="row">
 
                     <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img src={logo} className="logo-small" />
+                        <img src={logo} alt="" className="logo-small" />
                         <p>
                             Your place to meet and trade with other nerds.
                             Currently supporting trades for Pokémon Trading Card Game, Magic: The Gathering, and Yu-Gi-Oh! Trading Card Game. More card series coming soon!
