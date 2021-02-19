@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
-
+import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
 
 function Dashboard() {
@@ -47,6 +47,7 @@ function Dashboard() {
             .catch((err) => console.log(err));
     }
 
+
     return (
         <div>
             <Banner pageTitle={user.displayName} />
@@ -65,17 +66,15 @@ function Dashboard() {
                                     type="text"
                                     className="form-control"
                                     placeholder="What are you looking for?"
-                                    id="term"
-                                />
+                                    id="term"/>
                                 <small id="passwordHelpBlock" className="form-text text-muted">
                                     * Search by displayName, card name, card type, anything
                                 </small>
                             </div>
-                                <button
+                            <button
                                 type="button"
                                 onClick={filterSearch}
-                                className="btn btn-primary ml-2 mb-4 mt-2"
-                            
+                                className="btn btn-primary ml-2 mb-4 mt-2">
                                 Search
                             </button>
                             {searchList &&
@@ -85,6 +84,7 @@ function Dashboard() {
                                 })}
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
