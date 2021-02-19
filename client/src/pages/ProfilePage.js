@@ -55,13 +55,13 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <ProfileBanner pageTitle={displayName} profileImg="https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png" email={email} userId={uid}/>
+      <ProfileBanner pageTitle={displayName} profileImg="https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png" email={email} userId={uid} />
       <div className="container">
         <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
           {user &&
             user.mongo.products.map((card) => {
               return (
-                <div key={card.uuid} className="col-6">
+                <div key={card.uuid}>
                   <MyCard
                     key={card.uuid}
                     uuid={card.uuid}
@@ -77,10 +77,10 @@ const ProfilePage = () => {
                     setuuid={setuuid}
                   // deleteCard={deleteCard}
                   ></MyCard>
-                  <button
+                  <Button
                     type="button" className="btn btn-primary" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
                     Delete
-        </button>
+                  </Button>
                 </div>
               );
             })}
