@@ -64,6 +64,19 @@ cite {
   font-size: 9px;
   color: #636363;
 }
+.pageTitle {
+  margin: 30px;
+}
+.profile {
+  border-radius: 56px;
+  max-width: 200px;
+  height: auto;
+  margin: 0px 30px 30px 30px;
+}
+.sign-outBtn {
+  margin: 0px 0px 20px 0px!important;
+}
+
 
 /* .row {
     position:relative;
