@@ -74,9 +74,16 @@ cite {
   margin: 0px 30px 30px 30px;
 }
 .sign-outBtn {
-  margin: 0px 0px 20px 0px!important;
+  margin: 40px 0px 20px 0px!important;
 }
-
+@media screen and (max-width: 480px) {
+  .sign-outBtn {
+    margin-top: 0px!important;
+  }
+  .profileInfo {
+    margin: 0px 30px 30px 30px;
+  }
+}
 
 /* .row {
     position:relative;
