@@ -3,7 +3,7 @@ import UserContext from "../utils/UserContext";
 import { auth, storage } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
-import Banner from "../components/Banner";
+// import Banner from "../components/Banner";
 import { Modal, Button, Form } from "react-bootstrap";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
