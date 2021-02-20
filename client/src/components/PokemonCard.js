@@ -1,11 +1,13 @@
 import React from "react";
+import "../styles/style.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function PokemonCard(props) {
   return (
-    <div key={props.id} className="card">
+    <div key={props.id} className="card shadow p-3 mb-5 bg-white rounded">
       <div className="img-container">
-        <img alt={props.name} src={props.image} />
+        <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />
       </div>
       <div className="content">
         <ul>
