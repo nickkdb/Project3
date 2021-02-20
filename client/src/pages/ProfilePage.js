@@ -3,7 +3,7 @@ import UserContext from "../utils/UserContext";
 import { auth, storage } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
-// import Banner from "../components/Banner";
+import ProfileBanner from "../components/ProfileBanner";
 import { Modal, Button, Form } from "react-bootstrap";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
@@ -149,7 +149,7 @@ const ProfilePage = () => {
   function deleteCard(id, uuid) {
     console.log(id, uuid)
     API.deleteCard(id, uuid)
-    .then((res) => console.log(res));
+      .then((res) => console.log(res));
   }
 
   return (
