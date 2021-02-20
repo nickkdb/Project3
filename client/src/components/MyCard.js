@@ -8,126 +8,123 @@ function MyCard(props) {
   // console.log(props);
 
   return (
-    <div>
-      <div key={props.id} className="card myCard shadow p-3 bg-white rounded">
-        <div className="row">
-          <div className="col-md-5">
-            <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />
-          </div>
-          <div className="col-md-7">
-            <div className="row">
-              <ul>
-                <li>
-                  <strong>Name:</strong> {props.name}
-                </li>
-                <li>
-                  <strong>Description:</strong> {props.description}
-                </li>
-                <li>
-                  <strong>Price:</strong> ${props.price}
-                </li>
-                <li>
-                  <strong>Available:</strong> {props.available === true ? "Yes" : "No"}
-                </li></ul></div>
-            <div className="row catAtt">
-            <div className="row bottom-border">
-              Category Attributes:</div>
-            <ul><li>
+      <div>
+        <div key={props.id} className="card myCard shadow p-3 bg-white rounded">
+          <div className="row">
+            <div className="col-md-4">
+              <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />
+              <div className="row">
+                <ul>
+                  <li className="cardInfo">
+                    <br />
+                  Name: {props.name}
+                  </li>
+                  <li className="cardInfo">
+                    Description: {props.description}
+                  </li>
+                  <li className="cardInfo">
+                    Price: ${props.price}
+                  </li>
+                  <li className="cardInfo">
+                    Available: {props.available === true ? "Yes" : "No"}
+                  </li></ul></div></div>
+            <div className="col-md-8">
+              <div className="row catAtt">
+                <div className="row bottom-border catAttTitle">
+                  Attributes:</div>
 
                 {/* map the attributes dynamically here based on card type */}
                 {
                   Object.entries(props.attributes).map(([key, value]) => {
                     switch (key) {
                       case 'types':
-                        return <div><p>Types: </p> {value.map(item => {
+                        return <div><p class="attList">Types: </p><ul> {value.map(item => {
                           return (
-                            <p><strong>Type: </strong>{item}</p>
+                            <li class="attList">{item}</li>
                           )
                         })}
-                        </div>
+                        </ul></div>
                       case 'subtypes':
-                        return <div><p>Subtypes: </p> {value.map(item => {
+                        return <div><p class="attList">Subtypes: </p> <ul> {value.map(item => {
+
                           return (
-                            <p><strong>Subtype: </strong>{item}</p>
+                            <li class="attList">{item}</li>
                           )
                         })}
-                        </div>
+                        </ul></div>
                       case 'hp':
-                        return <p><strong>HP: </strong>{value}</p>
+                        return <p class="attList">HP: {value}</p>
                       case 'rarity':
-                        return <p><strong>Rarity: </strong>{value}</p>
+                        return <p class="attList">Rarity: {value}</p>
                       case 'manna':
-                        return <p><strong>Manna: </strong>{value}</p>
+                        return <p class="attList">Manna: {value}</p>
                       case 'damage':
-                        return <div><p>Attacks: </p> {value.map(item => {
+                        return <div><p class="attList">Attacks: </p><ul> {value.map(item => {
                           return (
                             <>
-                              <p><strong>Name: </strong>{item.name}</p>
-                              <p><strong>Damage: </strong>{item.damage && (item.damage.length) > 1 ? (item.damage) : "N/A"}</p>
+                              <li class="attList">Name: {item.name} | Damage: {item.damage && (item.damage.length) > 1 ? (item.damage) : "N/A"}</li>
                             </>
                           )
                         })}
-                        </div>
+                        </ul></div>
                       case 'weakness':
-                        return <div><p>Threats: </p> {value.map(item => {
+                        return <div><p class="attList">Threats: </p><ul>{value.map(item => {
                           return (
                             <>
-                              <p><strong>Type: </strong>{item.type}</p>
-                              <p><strong>Value: </strong>{item.value && (item.value.length) > 1 ? (item.value) : "N/A"}</p>
+                              <li class="attList">Type: {item.type}</li>
+                              <li class="attList">Value: {item.value && (item.value.length) > 1 ? (item.value) : "N/A"}</li>
                             </>
                           )
                         })}
-                        </div>
+                        </ul></div>
                       case 'colors':
-                        return <div><p>Colors: </p> {value.map(item => {
+                        return <div> {value.map(item => {
                           return (
-                            <p><strong>Color: </strong>{item}</p>
+                            <p class="attList">Color: {item}</p>
                           )
                         })}
                         </div>
                       case 'set':
-                        return <p><strong>Set: </strong>{value}</p>
+                        return <p class="attList">Set: {value}</p>
                       case 'type':
-                        return <p><strong> Type: </strong>{value}</p>
+                        return <p class="attList"> Type: {value}</p>
                       case 'level':
-                        return <p><strong>Level: </strong>{value}</p>
+                        return <p class="attList">Level: {value}</p>
                       case 'race':
-                        return <p><strong>Race: </strong>{value}</p>
+                        return <p class="attList">Race: {value}</p>
                       case 'attribute':
-                        return <p><strong>Attribute: </strong>{value}</p>
+                        return <p class="attList">Attribute: {value}</p>
                       default:
                         return null;
                     }
                   })
                 }
-              </li>
-              </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {props.profileType ?
-        <Button
-          onClick={() => {
-            props.openModal()
-            // props.postData(props.cardData);
-          }}
-          // cardData={props.cardData}
-          type="button" className="btn btn-primary">
-          Trade
+        {props.profileType ?
+          <Button
+            onClick={() => {
+              props.openModal()
+              // props.postData(props.cardData);
+            }}
+            // cardData={props.cardData}
+            type="button" className="btn btn-primary">
+            Trade
         </Button>
-        :
-        <Button
-          onClick={() => {
-            props.openModal()
-            props.setuuid(props.uuid);
-          }}
-          // cardData={props.cardData}
-          type="button" className="btn btn-primary">
-          Update
+          :
+          <Button
+            onClick={() => {
+              props.openModal()
+              props.setuuid(props.uuid);
+            }}
+            // cardData={props.cardData}
+            type="button" className="btn btn-primary">
+            Update
         </Button>
-      }
-    </div >
+        }
+      </div >
   );
 }
 

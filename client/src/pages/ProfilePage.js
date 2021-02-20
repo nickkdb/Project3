@@ -78,7 +78,7 @@ const ProfilePage = () => {
                   // deleteCard={deleteCard}
                   ></MyCard>
                   <Button
-                    type="button" className="btn btn-primary" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
+                    type="button" className="btn btn-primary delBtn-margin" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
                     Delete
                   </Button>
                 </div>

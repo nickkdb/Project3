@@ -1,7 +1,9 @@
+/* ================= All Pages =================== */
+
 h1, h3, h5 {
   color: #fff;
 }
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h3, h4, h5, h6, p, a, li, .catAttTitle {
   font-family: 'Reem Kufi', sans-serif;
 }
 h2{
@@ -9,6 +11,9 @@ h2{
   color: #ffe300;
   -webkit-text-stroke: 1px black;
   letter-spacing: 1px;
+}
+p{
+  font-size: 12px;
 }
 a {
   color: #242582!important;
@@ -49,6 +54,9 @@ a:hover {
   margin-left: auto!important;
   margin-right: auto!important;
 }
+
+/* ================= Home Page =================== */
+
 .sign-inCard{
   margin-top: 95px;
 }
@@ -64,6 +72,9 @@ cite {
   font-size: 9px;
   color: #636363;
 }
+
+/* ================= Profile & Dasboard Pages =================== */
+
 .pageTitle {
   margin: 30px;
 }
@@ -77,14 +88,25 @@ cite {
   margin: 40px 0px 20px 0px!important;
 }
 li {
-  list-style-type: none
+  font-size: 12px;
+}
+ul {
+  margin-bottom: 0rem!important;
+}
+
+.card{
+  max-width: 500px;
 }
 .myCard {
   margin: 20px 0px 20px 0px;
 }
+.cardInfo {
+  list-style-type: none;
+}
 .catAtt {
   background-color: #ffe300;
   margin: 0px 10px 0px 10px!important;
+  padding: 0px  20px 20px 20px;
   position: relative;
     display: flex;
     flex-direction: column;
@@ -94,9 +116,21 @@ li {
     border: 1px solid black;
     border-radius: .25rem;
 }
+.catAttTitle {
+  margin: 20px;
+  font-weight: 600;
+}
 .bottom-border{
   border-bottom: 1px solid black;
 }
+.attList {
+  margin-bottom: -3px;
+}
+.delBtn-margin {
+  margin-top: -66px;
+  margin-left: 84px!important;
+}
+
 @media screen and (max-width: 480px) {
   .sign-outBtn {
     margin-top: 0px!important;
@@ -105,15 +139,3 @@ li {
     margin: 0px 30px 30px 30px;
   }
 }
-
-/* .row {
-    position:relative;
-}
-.middle {
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-} */
