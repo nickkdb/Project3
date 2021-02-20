@@ -22,7 +22,7 @@ function Hero() {
               <h5>Currently supporting trades for Pokémon Trading Card Game, Magic: The Gathering, and Yu-Gi-Oh! Trading Card Game. More card series coming soon!</h5>
             </div>
             <div className="col-md-3">
-              <div className="card" style={{ width: "18rem" }}>
+              <div className="card sign-inCard" style={{ width: "18rem" }}>
                 <div className="card-body">
                   <SignIn />
                 </div>

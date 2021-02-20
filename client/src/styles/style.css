@@ -49,7 +49,7 @@ a:hover {
   margin-left: auto!important;
   margin-right: auto!important;
 }
-.card{
+.sign-inCard{
   margin-top: 95px;
 }
 .tradingCard {
@@ -63,6 +63,47 @@ a:hover {
 cite {
   font-size: 9px;
   color: #636363;
+}
+.pageTitle {
+  margin: 30px;
+}
+.profile {
+  border-radius: 56px;
+  max-width: 200px;
+  height: auto;
+  margin: 0px 30px 30px 30px;
+}
+.sign-outBtn {
+  margin: 40px 0px 20px 0px!important;
+}
+li {
+  list-style-type: none
+}
+.myCard {
+  margin: 20px 0px 20px 0px;
+}
+.catAtt {
+  background-color: #ffe300;
+  margin: 0px 10px 0px 10px!important;
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid black;
+    border-radius: .25rem;
+}
+.bottom-border{
+  border-bottom: 1px solid black;
+}
+@media screen and (max-width: 480px) {
+  .sign-outBtn {
+    margin-top: 0px!important;
+  }
+  .profileInfo {
+    margin: 0px 30px 30px 30px;
+  }
 }
 
 /* .row {
