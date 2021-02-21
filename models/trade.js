@@ -9,7 +9,6 @@ const tradeSchema = new Schema({
       return uuidv4();
     },
   },
-  users: [],
   proposedBy: {
     type: String,
     required: true,

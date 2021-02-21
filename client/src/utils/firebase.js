@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD22lGKNvFi8G2u23QxZJbO-hOADjdEWB4",
@@ -9,11 +10,13 @@ const firebaseConfig = {
   storageBucket: "nerdherd-63d63.appspot.com",
   messagingSenderId: "454349910523",
   appId: "1:454349910523:web:bc1eaad08477a17e0d1b5e",
-  measurementId: "G-7WZ8W8YD7W"
+  measurementId: "G-7WZ8W8YD7W",
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -36,7 +39,7 @@ export const generateUserDocument = async (user, additionalData) => {
         displayName,
         email,
         photoURL,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.error("Error creating user document", error);
@@ -45,16 +48,25 @@ export const generateUserDocument = async (user, additionalData) => {
   return getUserDocument(user.uid);
 };
 
-const getUserDocument = async uid => {
+const getUserDocument = async (uid) => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
 
     return {
       uid,
-      ...userDocument.data()
+      ...userDocument.data(),
     };
   } catch (error) {
     console.error("Error fetching user", error);
   }
 };
+
+export const storage = firebase.storage()
+// export function uploadProfileImage(image) {
+
+//   let thisRef = storageRef.child(image);
+//   thisRef.put(image).then(function () {
+//     console.log("Uploaded a blob or file!");
+//   });
+// }

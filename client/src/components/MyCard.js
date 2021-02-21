@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { Badge, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUndo, faCheck } from "@fortawesome/free-solid-svg-icons";
 import "../styles/style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from "react-bootstrap";
 
 function MyCard(props) {
   // console.log(Object.entries(props.attributes))
   // console.log(props);
-
+  const [interested, setInterested] = useState(false);
+  
   return (
     <div>
-      <div key={props.id} className="card myCard shadow p-3 bg-white rounded">
+      <div 
+      key={props.id} 
+      className="card myCard shadow p-3 rounded"
+      style={
+        !interested
+          ? { backgroundColor: "white" }
+          : { backgroundColor: "lightblue" }
+      }
+      >
         <div className="row">
           <div className="col-md-5">
             <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />
@@ -105,28 +116,56 @@ function MyCard(props) {
             </div>
           </div>
         </div>
+        {props.profileType && !interested ? (
+          <button
+            onClick={() => {
+              props.addToTrade(props.uuid);
+              setInterested(true);
+            }}
+            // cardData={props.cardData}
+            type="button"
+            className="btn btn-primary"
+          >
+            I'm Interested
+          </button>
+        ) : props.profileType && interested ? (
+          <div>
+            <Badge pill variant="success">
+              Added
+              <span className={"ml-2"}></span>
+              <FontAwesomeIcon icon={faCheck} />
+            </Badge>
+            <Badge
+              pill
+              variant="danger"
+              onClick={() => {
+                props.removeFromTrade(props.uuid);
+                setInterested(false);
+              }}
+            >
+              {/* Undo
+            <span className={"ml-2"}></span> */}
+              <FontAwesomeIcon icon={faUndo} />
+            </Badge>
+          </div>
+        ) : (
+          ""
+        )}
+        {!props.profileType && (
+          <button
+            onClick={() => {
+              props.openModal();
+              props.setModalSource("card");
+              props.setuuid(props.uuid);
+            }}
+            // cardData={props.cardData}
+            type="button"
+            className="btn btn-primary"
+          >
+            Update
+          </button>
+        )}
       </div>
-      {props.profileType ?
-        <Button
-          onClick={() => {
-            props.openModal()
-            // props.postData(props.cardData);
-          }}
-          // cardData={props.cardData}
-          type="button" className="btn btn-primary">
-          Trade
-        </Button>
-        :
-        <Button
-          onClick={() => {
-            props.openModal()
-            props.setuuid(props.uuid);
-          }}
-          // cardData={props.cardData}
-          type="button" className="btn btn-primary">
-          Update
-        </Button>
-      }
     </div >
   );
 }

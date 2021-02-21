@@ -13,6 +13,7 @@ import Search from "./Search";
 import Dashboard from "./Dashboard"
 import Home from "./Home"
 import OtherProfile from "./OtherProfile";
+import Trade from "./Trade";
 
 function Application() {
   const user = useContext(UserContext);
@@ -36,6 +37,9 @@ function Application() {
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route>
+            <Trade exact path="/trade"/>
           </Route>
         </Switch>
         <Footer />

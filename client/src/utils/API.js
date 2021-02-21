@@ -23,6 +23,9 @@ export default {
   deleteCard: function(id, uuid) {
     return axios.delete("/api/cards/" + id + "/" + uuid);
   },
+  createTrade: function(trade) {
+    return axios.post("/api/trades", trade)
+  },
   // Deletes the user with the given id
   // deleteUser: function(id) {
   //   return axios.delete("/api/users/" + id);
