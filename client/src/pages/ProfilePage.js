@@ -29,7 +29,7 @@ const ProfilePage = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
-  const [downloaded, setDownloaded] = useState(false)
+  const [downloaded, setDownloaded] = useState(false);
 
   //uploading image to FB
   const [imageAsFile, setImageAsFile] = useState("");
@@ -65,7 +65,7 @@ const ProfilePage = () => {
       const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
       // console.log(a);
       setCroppedImage(a);
-      setDownloaded(true)
+      setDownloaded(true);
       // console.log(tempFile)
     } catch (e) {
       console.error(e);
@@ -105,6 +105,7 @@ const ProfilePage = () => {
           });
       }
     );
+    // window.location.reload();
   };
 
   // YOU NEED TO STORE THE IMAGE AS THE ACTUAL FILENAME W/ THEIR ID ATTACHED
@@ -120,7 +121,7 @@ const ProfilePage = () => {
         console.log(fireBaseUrl);
         setProfilePic(fireBaseUrl);
       });
-  }, [user.mongo._id]);
+  }, [user.mongo._id, imageAsUrl]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -154,49 +155,35 @@ const ProfilePage = () => {
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        {profilePic ? (
-          <div>
-            <div
-              style={
-                profilePic
-                  ? {
-                      background: `url(${profilePic})  no-repeat center center`,
-                      backgroundSize: "cover",
-                      height: "200px",
-                      width: "200px",
-                    }
-                  : {
-                      background: `url(${avatar})  no-repeat center center`,
-                      backgroundSize: "contain",
-                      height: "200px",
-                      width: "200px",
-                    }
-              }
-              className="border border-blue-300"
-            ></div>
-            <button
-              className="btn btn-primary mt-3"
-              onClick={() => {
-                handleShow();
-                setModalSource("profilePic");
-              }}
-            >
-              Update Profile Pic
-            </button>
-          </div>
-        ) : (
+        <div>
+          <div
+            style={
+              profilePic
+                ? {
+                    background: `url(${profilePic})  no-repeat center center`,
+                    backgroundSize: "cover",
+                    height: "200px",
+                    width: "200px",
+                  }
+                : {
+                    background: `url(${avatar})  no-repeat center center`,
+                    backgroundSize: "contain",
+                    height: "200px",
+                    width: "200px",
+                  }
+            }
+            className="border border-blue-300"
+          ></div>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary mt-3"
             onClick={() => {
               handleShow();
               setModalSource("profilePic");
             }}
           >
-            Set Profile Pic
+            Update Profile Pic
           </button>
-        )}
-        {/* <img src={croppedImage}></img> */}
-
+        </div>
         <div className="md:pl-4">
           <h2 className="text-2xl font-semibold">
             Display Name: {displayName}
@@ -325,53 +312,51 @@ const ProfilePage = () => {
                               Crop Image
                             </button>
                           </div>
-                        <div
-                          style={
-                            tempImg.length > 1
-                              ? {
-                                  display: "block",
-                                  height: "25rem",
-                                  margin: "2rem",
-                                }
-                              : { display: "none" }
-                          }
-                        >
-                          <Cropper
-                            image={tempImg}
-                            crop={crop}
-                            rotation={rotation}
-                            zoom={zoom}
-                            aspect={3 / 3}
-                            onCropChange={setCrop}
-                            onRotationChange={setRotation}
-                            onCropComplete={onCropComplete}
-                            onZoomChange={setZoom}
-                            showGrid={true}
-                            style={{
-                              containerStyle: {
-                                margin: "12rem 3rem 5rem 3rem",
-                              },
-                            }}
-                          />
-                          <RangeSlider
-                            value={zoom}
-                            label="Zoom"
-                            min={1}
-                            max={3}
-                            step={0.1}
-                            aria-labelledby="Zoom"
-                            onChange={(changeEvent) =>
-                              setZoom(changeEvent.target.value)
+                          <div
+                            style={
+                              tempImg.length > 1
+                                ? {
+                                    display: "block",
+                                    height: "25rem",
+                                    margin: "2rem",
+                                  }
+                                : { display: "none" }
                             }
-                          />
+                          >
+                            <Cropper
+                              image={tempImg}
+                              crop={crop}
+                              rotation={rotation}
+                              zoom={zoom}
+                              aspect={3 / 3}
+                              onCropChange={setCrop}
+                              onRotationChange={setRotation}
+                              onCropComplete={onCropComplete}
+                              onZoomChange={setZoom}
+                              showGrid={true}
+                              style={{
+                                containerStyle: {
+                                  margin: "12rem 3rem 5rem 3rem",
+                                },
+                              }}
+                            />
+                            <RangeSlider
+                              value={zoom}
+                              label="Zoom"
+                              min={1}
+                              max={3}
+                              step={0.1}
+                              aria-labelledby="Zoom"
+                              onChange={(changeEvent) =>
+                                setZoom(changeEvent.target.value)
+                              }
+                            />
+                          </div>
                         </div>
-                      </div>
                       ) : downloaded ? (
                         <div>
                           <div className="mb-3">
-                            <h6>
-                              Click Download
-                            </h6>
+                            <h6>Click Download</h6>
                             <span className="ml-2">
                               <a
                                 href={croppedImage}
@@ -386,7 +371,7 @@ const ProfilePage = () => {
                                 <FontAwesomeIcon icon={faDownload} />
                               </a>
                             </span>
-                            </div>
+                          </div>
                           <div>
                             <h6>
                               Drag your downloaded image over here, and click
@@ -395,11 +380,11 @@ const ProfilePage = () => {
                             <input type="file" onChange={handleFile2}></input>
                           </div>
                         </div>
-                      )
-                      : ""
-                    }
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
-                </div>
                 </div>
               </Modal.Body>
               <Modal.Footer>
