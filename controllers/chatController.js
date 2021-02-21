@@ -9,41 +9,6 @@ const mongojs= require('mongojs');
 // });
 
 module.exports= {
-    checkForRoom: (room, cb) => {
-        db.chatdata.findOne({
-            roomname: room
-        }, (err, data) => {
-            if (err) {
-                throw err
-            } else if (data === null) {
-                cb(false);
-            } else {
-                cb(true)
-            }
-        })
-    },
-
-    createRoom: (room, user) => {
-        db.chatdata.insert({
-            roomname: room,
-            user: user,
-            messages: []
-        })
-    },
-
-    loadMessages: (room, cb) => {
-       db.chatdata.findOne({
-           roomname: room
-       }, (err, data) => {
-           if (err) {
-               throw err;
-           } else if (data === null || data.messages.length === 0) {
-               cb(false)
-           } else {
-               cb(data);
-           }
-       }) 
-    },
 
     writeMessage: (room, user, msg) => {
         db.chatdata.updateOne({
@@ -60,5 +25,35 @@ module.exports= {
             if (err) throw err;
             console.log(data);
         })
+    },
+    findUser: (user, cb) => {
+        db.userdata.findOne({
+            user: user
+        }, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                cb(data);
+            }
+        })
+    },
+    findRoom: (room, cb) => {
+        db.chatdata.findOne({
+            roomname: room
+        }, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                cb(data);
+            }
+        })
+    },
+    updateSubject: (subject, room) => {
+        db.userdata.updateMany(
+            {'threads.room': room }, {
+                $set: {
+                    'threads.$.subject':  subject,
+                }
+            })
     }
 }

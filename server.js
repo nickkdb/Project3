@@ -1,11 +1,13 @@
 const express = require("express");
+const http= require("http");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
-const server= require('http').createServer(app);
-const io= require('socket.io')(server);
-const { loadMessages, checkForRoom, writeMessage, createRoom } = require('./controllers/chatController');
+const server= http.createServer(app);
+const socket= require('socket.io');
+const io= socket(server);
+const { writeMessage, findUser, findRoom, updateSubject } = require('./controllers/chatController');
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -26,26 +28,34 @@ app.listen(PORT, function() {
 });
 
 io.on("connection", socket => {
-  socket.on('info', (info) => {
-      socket.join(info.room);
-      socket.emit('userjoin', `${info.user} has joined chat room: ${info.room}`);
-      checkForRoom(info.room, (data) => {
-          if (data) {
-              loadMessages(info.room, (res) => {
-                  if (res) socket.emit('savedmsgs', res.messages);
-              })
-          } else {
-              createRoom(info.room, info.user);
-          }
-      })
-      
-  })
-console.log(socket.id);
+  console.log(socket.id);
 
-socket.on('event', (data) => {
-  writeMessage(data.room, data.sender, data.msg);
-  io.to(data.room).emit('message', {sender: data.sender, msg: data.msg});
+socket.on("userdata", user => {
+  console.log("call made");
+  findUser(user, data => {
+      socket.emit("returnuser", data.threads);
   })
+})
+
+socket.on("updateSubject", data => {
+  updateSubject(data.subject, data.room);
+  console.log('updating subject!');
+
+  socket.emit('newSubject', {sub: data.subject, room: data.room});
+})
+
+socket.on("info", room => {
+  socket.join(room);
+  findRoom(room, (data) => {
+      socket.emit("response", data);
+  })
+})
+
+socket.on("sendmsg", data => {
+  writeMessage(data.room, data.user, data.newMessage);
+  io.to(data.room).emit("message", {text: data.newMessage, sender: data.user});
+  console.log(data);
+})
 })
 
 const env = require('dotenv');
