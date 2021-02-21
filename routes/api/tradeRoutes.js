@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const tradeController = require("../../controllers/tradeController");
 
-// Matches with "/api/books"
+// Matches with "/api/trades"
 router.route("/")
 .post(tradeController.create)
 .get(tradeController.find)
   
 
-// Matches with "/api/books/:id"
+// Matches with "/api/trades/:id"
 router.route("/:id")
   .get(tradeController.findOne)
   .put(tradeController.update)

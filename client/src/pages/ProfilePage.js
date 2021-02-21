@@ -32,7 +32,7 @@ const ProfilePage = () => {
   const [finalImage, setFinalImage] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
   const [profilePic, setProfilePic] = useState("");
-  // const [reRender, setReRender] = useState(false);
+
 
 
   const user = useContext(UserContext);

@@ -4,12 +4,19 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 import Banner from "../components/Banner";
+import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
-  const user = useContext(UserContext);
+ 
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
+
+  const [yourTrades, setYourTrades]= useState([]);
+
+  const user = useContext(UserContext);
+  // const { displayName, email, uid } = user;
+  console.log(user.mongo.displayName);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -45,6 +52,7 @@ function Dashboard() {
       .then((res) => {
         setList(res.data);
         console.log(res.data);
+        console.log(user.mongo.displayName)
       })
       .catch((err) => console.log(err));
     getFirebaseImages();
@@ -64,60 +72,90 @@ function Dashboard() {
     console.log(list);
   }
 
+  useEffect(() => {
+    loadTrades();
+  }, []);
+
+  function loadTrades () {
+    API.getTrades({user: user.mongo.displayName})
+    .then((res) => {
+      setYourTrades(res.data);
+     // console.log(res.data)
+    
+    })
+  }
+if( yourTrades.length >= 1) {
+  console.log(yourTrades)
+}
   return (
     <div className="container">
       <div className="row">
-        <div className="col-8">CHARTS GO HERE</div>
-        <div className="col-4">
+        {/* {yourTrades && yourTrades.map((trade) => {
+          return (
+          <div className="col-8">
+            <YourTrades
+            proposedBy={trade.proposedBy}
+            proposedTo={trade.proposedTo}
+            proposedByProducts={trade.proposedByProducts}
+            proposedToProducts={trade.proposedToProducts}
+
+            >
+              
+            </YourTrades>
+          </div>
+          )
+        })} */}
+
+          <div className="col-4">
           <form className="search">
-            <div className="form-group">
-              <label htmlFor="language">Search for values in any column:</label>
-              <input
-                value={search}
-                onChange={handleSearch}
-                name="term"
-                list="term"
-                type="text"
-                className="form-control"
-                placeholder="What are you looking for?"
-                id="term"
-              />
-              <small id="passwordHelpBlock" className="form-text text-muted">
-                * Search by displayName, card name, or card type. Results
-                include the username. Click to view profile and cards.
+          <div className="form-group">
+            <label htmlFor="language">Search for values in any column:</label>
+            <input
+              value={search}
+              onChange={handleSearch}
+              name="term"
+              list="term"
+              type="text"
+              className="form-control"
+              placeholder="What are you looking for?"
+              id="term"
+            />
+            <small id="passwordHelpBlock" className="form-text text-muted">
+              * Search by displayName, card name, or card type. Results
+              include the username. Click to view profile and cards.
               </small>
-              </div>
-              <button
-                type="button"
-                onClick={filterSearch}
-                className="btn btn-primary ml-2 mb-4 mt-2"
-              >
-                Search
+          </div>
+          <button
+            type="button"
+            onClick={filterSearch}
+            className="btn btn-primary ml-2 mb-4 mt-2"
+          >
+            Search
             </button>
-            {searchList &&
-              searchList.map((item) => {
-                let link = `profile/${item.displayName}`;
-                return (
-                  <div className="row border">
-                    <div className="col">
-                      <img
-                        src={item.image}
-                        alt={item.displayName + "Image"}
-                        style={{ width: "50%" }}
-                      ></img>
-                    </div>
-                    <div className="col">
-                      <p>
-                        <Link to={link}>{item.displayName}</Link>
-                      </p>
-                    </div>
+          {searchList &&
+            searchList.map((item) => {
+              let link = `profile/${item.displayName}`;
+              return (
+                <div className="row border">
+                  <div className="col">
+                    <img
+                      src={item.image}
+                      alt={item.displayName + "Image"}
+                      style={{ width: "50%" }}
+                    ></img>
                   </div>
-                );
-              })}
-          </form>
-        </div>
+                  <div className="col">
+                    <p>
+                      <Link to={link}>{item.displayName}</Link>
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+        </form>
       </div>
     </div>
+    </div >
   );
 }
 

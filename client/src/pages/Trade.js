@@ -12,7 +12,7 @@ function Trade(props) {
   );
   const [tradeItems, setTradeItems] = useState(trade ? trade.tradeItems : null);
   const [tradeUser, setTradeUser] = useState(trade ? trade.user : null)
-  const [whoseCards, setWhoseCards] = useState("YourCards");
+  const [whoseCards, setWhoseCards] = useState("YourCards");//////////////////
   console.log(whoseCards)
 
   const removeFromTrade = (uuid) => {

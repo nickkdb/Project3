@@ -26,10 +26,9 @@ export default {
   createTrade: function(trade) {
     return axios.post("/api/trades", trade)
   },
-  // Deletes the user with the given id
-  // deleteUser: function(id) {
-  //   return axios.delete("/api/users/" + id);
-  // },
+  getTrades: function(user) {
+    return axios.get("/api/trades", user);
+  },
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
