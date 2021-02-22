@@ -5,12 +5,20 @@ import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 import Banner from "../components/Banner";
 import avatar from "../images/avatar.png";
+import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
   const user = useContext(UserContext);
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
+
+  const [yourTrades, setYourTrades] = useState([]);
+  console.log(yourTrades)
+
+
+
+  // console.log(user.mongo.displayName);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -41,9 +49,8 @@ function Dashboard() {
     loadUsers();
   }, []);
 
-  useEffect(() => {
-    API.getTrade(user.mongo.displayName).then(res => console.log(res.data))
-  }, []);
+
+
 
   function loadUsers() {
     API.getUsers()
@@ -69,10 +76,66 @@ function Dashboard() {
     console.log(list);
   }
 
+  useEffect(() => {
+    API.getTrade(user.mongo.displayName)
+      .then((res) => {
+        setYourTrades(res.data);
+        // console.log(res.data.length)
+        // arr.push(res.data)
+        // return setYourTrades(arr)
+      
+      })
+  }, []);
+
+  // let arr = [];
+
+  // function makeArray() {
+  //   arr.push(yourTrades)
+  // }
+  // console.log(arr)
+
+  // useEffect(() => {
+  //   makeArray();
+  // }, []);
+
+  // const yourTrades= {yourTrades && yourTrades.map(trade) => {
+  //       <div>
+  //       </div>
+  // }}
+ 
+
   return (
     <div className="container">
+         <h2> Your Trades </h2>
       <div className="row">
-        <div className="col-8">CHARTS GO HERE</div>
+   
+       
+        {yourTrades && yourTrades.map((trade) => {
+            let proposedBy= ""
+            let proposedTo= ""
+          // console.log(trade.proposedByProducts)
+        trade.proposedByProducts[0].map((name) => {
+          (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
+        })
+
+        trade.proposedToProducts[0].map((name) => {
+          // proposedTo += name.name + " "
+          (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
+        })
+
+          return (
+            <div className="col-8">
+            
+              <YourTrades
+                proposedBy={trade.proposedBy}
+                proposedTo={trade.proposedTo}
+                proposedByProducts={proposedBy}
+                proposedToProducts={proposedTo}
+              >
+              </YourTrades>
+            </div>
+          )
+        })}
         <div className="col-4">
           <form className="search">
             <div className="form-group">
@@ -91,13 +154,13 @@ function Dashboard() {
                 * Search by displayName, card name, or card type. Results
                 include the username. Click to view profile and cards.
               </small>
-              </div>
-              <button
-                type="button"
-                onClick={filterSearch}
-                className="btn btn-primary ml-2 mb-4 mt-2"
-              >
-                Search
+            </div>
+            <button
+              type="button"
+              onClick={filterSearch}
+              className="btn btn-primary ml-2 mb-4 mt-2"
+            >
+              Search
             </button>
             {searchList &&
               searchList.map((item) => {
@@ -108,7 +171,7 @@ function Dashboard() {
                       <img
                         src={
                           item.image ? item.image
-                          : avatar
+                            : avatar
                         }
                         alt={item.displayName + "Image"}
                         style={{ width: "50%" }}
