@@ -6,7 +6,7 @@ module.exports = {
 
     find: function (req, res) {
         db.Trade.find({
-            $elemMatch: {users: req.params.id}
+            $or:[{"proposedBy": req.params.id}, {"proposedTo": req.params.id}]
         }).then(function (dbUser) {
             res.json(dbUser);
         });

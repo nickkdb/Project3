@@ -9,6 +9,9 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropper";
+import avatar from "../images/avatar.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const ProfilePage = () => {
   // updating products
@@ -26,6 +29,7 @@ const ProfilePage = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [downloaded, setDownloaded] = useState(false);
 
   //uploading image to FB
   const [imageAsFile, setImageAsFile] = useState("");
@@ -34,48 +38,46 @@ const ProfilePage = () => {
   const [profilePic, setProfilePic] = useState("");
   // const [reRender, setReRender] = useState(false);
 
-
   const user = useContext(UserContext);
   const { displayName, email, uid } = user;
 
   const handleFile = (e) => {
     // console.log(e);
     const img = e.target.files[0];
-    console.log(img);
+    // console.log(img);
     setTempImg(URL.createObjectURL(img));
     setImageAsFile(img);
   };
 
   const handleFile2 = (e) => {
     const img = e.target.files[0];
-    console.log(img);
+    // console.log(img);
     setFinalImage(img);
   };
-
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-
   const generateImg = async () => {
     try {
       const a = await getCroppedImg(tempImg, croppedAreaPixels, rotation);
-      const tempFile = new File([a], 'uhhh', {type: "image/jpeg"})
+      const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
+      // console.log(a);
       setCroppedImage(a);
-      console.log(tempFile)
+      setDownloaded(true);
+      // console.log(tempFile)
     } catch (e) {
       console.error(e);
     }
   };
-
 
   const handleFireBaseUpload = (e) => {
     e.preventDefault();
     handleClose();
     console.log("start of upload");
 
-    const uploadTask = storage.ref(`/images/${user.mongo._id}`).put( finalImage );
+    const uploadTask = storage.ref(`/images/${user.mongo._id}`).put(finalImage);
 
     //initiates the firebase side uploading
     uploadTask.on(
@@ -103,11 +105,12 @@ const ProfilePage = () => {
           });
       }
     );
+    // window.location.reload();
   };
 
   // YOU NEED TO STORE THE IMAGE AS THE ACTUAL FILENAME W/ THEIR ID ATTACHED
   // WHEN STORING, SEND THE SAME INFO TO MONGO
-  // SO WHEN CALLED, YOU CAN USE MONGO TO INFER TO ROUTE FOR THE IMAGE 
+  // SO WHEN CALLED, YOU CAN USE MONGO TO INFER TO ROUTE FOR THE IMAGE
 
   useEffect(() => {
     storage
@@ -118,7 +121,7 @@ const ProfilePage = () => {
         console.log(fireBaseUrl);
         setProfilePic(fireBaseUrl);
       });
-  }, [user.mongo._id]);
+  }, [user.mongo._id, imageAsUrl]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -144,51 +147,43 @@ const ProfilePage = () => {
     API.updateCard(user.mongo._id, data).then((res) => console.log(res));
   };
 
-
-
   function deleteCard(id, uuid) {
-    console.log(id, uuid)
-    API.deleteCard(id, uuid)
-      .then((res) => console.log(res));
+    console.log(id, uuid);
+    API.deleteCard(id, uuid).then((res) => console.log(res));
   }
 
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        {profilePic ? (
-          <div>
+        <div>
           <div
-            style={{
-              background: `url(${profilePic})  no-repeat center center`,
-              backgroundSize: "cover",
-              height: "300px",
-              width: "300px",
-            }}
+            style={
+              profilePic
+                ? {
+                    background: `url(${profilePic})  no-repeat center center`,
+                    backgroundSize: "cover",
+                    height: "200px",
+                    width: "200px",
+                  }
+                : {
+                    background: `url(${avatar})  no-repeat center center`,
+                    backgroundSize: "contain",
+                    height: "200px",
+                    width: "200px",
+                  }
+            }
             className="border border-blue-300"
           ></div>
           <button
-          className="btn btn-primary mt-3"
-          onClick={() => {
-            handleShow();
-            setModalSource("profilePic");
-          }}
-        >
-          Update Profile Pic
-        </button>
-        </div>
-        ) : (
-          <button
-            className="btn btn-primary"
+            className="btn btn-primary mt-3"
             onClick={() => {
               handleShow();
               setModalSource("profilePic");
             }}
           >
-            Set Profile Pic
+            Update Profile Pic
           </button>
-        )}
-        {/* <img src={croppedImage}></img> */}
-
+        </div>
         <div className="md:pl-4">
           <h2 className="text-2xl font-semibold">
             Display Name: {displayName}
@@ -223,12 +218,15 @@ const ProfilePage = () => {
                 // addCard={updateCard}
                 setuuid={setuuid}
                 setModalSource={setModalSource}
-              // deleteCard={deleteCard}
+                // deleteCard={deleteCard}
               ></MyCard>
               <button
-          type="button" className="btn btn-primary" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
-            Delete
-        </button>
+                type="button"
+                className="btn btn-primary"
+                onClick={() => deleteCard(user.mongo._id, card.uuid)}
+              >
+                Delete
+              </button>
             </div>
           );
         })}
@@ -292,63 +290,101 @@ const ProfilePage = () => {
               </Modal.Header>
               <Modal.Body>
                 <div>
-                    <div className="m-3">
-                    <div className="mb-2">
-                      <h5>Choose the Image</h5>
-                        <input type="file" onChange={handleFile}></input>
-                      </div>
-                      <div className="mb-2">
-                        <h5>Once you're done cropping, click "Crop Image", then "Download".</h5>
-                      <button className="btn btn-primary" onClick={generateImg}>Crop Image</button>
-                      <span className="ml-2"><a href={croppedImage} download="nerherdprofile.jpeg">
-                        Download
-                      </a></span>
-                      </div>
-                    </div>
-                    <div
-                      style={
-                        tempImg.length > 1
-                          ? { display: "block", height: "25rem", margin: "2rem"}
-                          : { display: "none" }
-                      }
-                    >
-                      <Cropper
-                        image={tempImg}
-                        crop={crop}
-                        rotation={rotation}
-                        zoom={zoom}
-                        aspect={3 / 3}
-                        onCropChange={setCrop}
-                        onRotationChange={setRotation}
-                        onCropComplete={onCropComplete}
-                        onZoomChange={setZoom}
-                        showGrid={true}
-                        style={{containerStyle: {margin: "12rem 3rem 5rem 3rem"}}}
-                      />
-                      <RangeSlider
-                        value={zoom}
-                        label="Zoom"
-                        min={1}
-                        max={3}
-                        step={0.1}
-                        aria-labelledby="Zoom"
-                        onChange={(changeEvent) =>
-                          setZoom(changeEvent.target.value)
-                        }
-                      />
-                    </div>
-                </div>
-                <div>
-                <div>
-                  {croppedImage ?
                   <div>
-                    <h5>Drag your downloaded image over here, and click "Save".</h5>
-                    <input type="file" onChange={handleFile2}></input>
+                    <div>
+                      {!imageAsFile && !downloaded ? (
+                        <div className="m-3">
+                          <div className="mb-2">
+                            <h6>Choose the Image</h6>
+                            <input type="file" onChange={handleFile}></input>
+                          </div>
+                        </div>
+                      ) : tempImg && !downloaded ? (
+                        <div className="m-3">
+                          <div className="mb-2">
+                            <h6>
+                              Once you're done cropping, click "Crop Image".
+                            </h6>
+                            <button
+                              className="btn btn-primary"
+                              onClick={generateImg}
+                            >
+                              Crop Image
+                            </button>
+                          </div>
+                          <div
+                            style={
+                              tempImg.length > 1
+                                ? {
+                                    display: "block",
+                                    height: "25rem",
+                                    margin: "2rem",
+                                  }
+                                : { display: "none" }
+                            }
+                          >
+                            <Cropper
+                              image={tempImg}
+                              crop={crop}
+                              rotation={rotation}
+                              zoom={zoom}
+                              aspect={3 / 3}
+                              onCropChange={setCrop}
+                              onRotationChange={setRotation}
+                              onCropComplete={onCropComplete}
+                              onZoomChange={setZoom}
+                              showGrid={true}
+                              style={{
+                                containerStyle: {
+                                  margin: "12rem 3rem 5rem 3rem",
+                                },
+                              }}
+                            />
+                            <RangeSlider
+                              value={zoom}
+                              label="Zoom"
+                              min={1}
+                              max={3}
+                              step={0.1}
+                              aria-labelledby="Zoom"
+                              onChange={(changeEvent) =>
+                                setZoom(changeEvent.target.value)
+                              }
+                            />
+                          </div>
+                        </div>
+                      ) : downloaded ? (
+                        <div>
+                          <div className="mb-3">
+                            <h6>Click Download</h6>
+                            <span className="ml-2">
+                              <a
+                                href={croppedImage}
+                                download="croppedNerdHerd.jpeg"
+                                className="btn btn-danger"
+                                // onClick={() => {
+                                //   setDownloaded(true)
+                                // }}
+                              >
+                                Download
+                                <span className={"ml-2"}></span>
+                                <FontAwesomeIcon icon={faDownload} />
+                              </a>
+                            </span>
+                          </div>
+                          <div>
+                            <h6>
+                              Drag your downloaded image over here, and click
+                              "Save".
+                            </h6>
+                            <input type="file" onChange={handleFile2}></input>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
-                    :
-                    ""
-                  }
-                </div>
+                  </div>
                 </div>
               </Modal.Body>
               <Modal.Footer>

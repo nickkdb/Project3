@@ -4,6 +4,7 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 import Banner from "../components/Banner";
+import avatar from "../images/avatar.png";
 
 function Dashboard() {
   const user = useContext(UserContext);
@@ -38,6 +39,10 @@ function Dashboard() {
 
   useEffect(() => {
     loadUsers();
+  }, []);
+
+  useEffect(() => {
+    API.getTrade(user.mongo.displayName).then(res => console.log(res.data))
   }, []);
 
   function loadUsers() {
@@ -101,7 +106,10 @@ function Dashboard() {
                   <div className="row border">
                     <div className="col">
                       <img
-                        src={item.image}
+                        src={
+                          item.image ? item.image
+                          : avatar
+                        }
                         alt={item.displayName + "Image"}
                         style={{ width: "50%" }}
                       ></img>
