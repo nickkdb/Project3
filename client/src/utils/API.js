@@ -26,6 +26,9 @@ export default {
   createTrade: function(trade) {
     return axios.post("/api/trades", trade)
   },
+  getTrade: function(user) {
+    return axios.get(`/api/trades/${user}`)
+  },
   // Deletes the user with the given id
   // deleteUser: function(id) {
   //   return axios.delete("/api/users/" + id);
