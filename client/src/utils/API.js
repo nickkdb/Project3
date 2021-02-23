@@ -29,12 +29,18 @@ export default {
   getTrade: function(user) {
     return axios.get(`/api/trades/${user}`)
   },
-  // Deletes the user with the given id
-  // deleteUser: function(id) {
-  //   return axios.delete("/api/users/" + id);
+  // getTrades: function(user) {
+  //   return axios.get("/api/trades", user);
   // },
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
   }
+
+
+
+   // Deletes the user with the given id
+  // deleteUser: function(id) {
+  //   return axios.delete("/api/users/" + id);
+  // },
 };
