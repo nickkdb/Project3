@@ -131,6 +131,7 @@ function Dashboard() {
                 proposedTo={trade.proposedTo}
                 proposedByProducts={proposedBy}
                 proposedToProducts={proposedTo}
+                currentUser={user.mongo.displayName}
               >
               </YourTrades>
             </div>
