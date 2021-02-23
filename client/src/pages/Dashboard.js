@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 import Banner from "../components/Banner";
 import avatar from "../images/avatar.png";
+import Bar from "../components/Bar";
 import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
@@ -108,7 +109,10 @@ function Dashboard() {
     <div className="container">
          <h2> Your Trades </h2>
       <div className="row">
-   
+        <div className="col-6">
+        <Bar  />        
+          </div>
+          <div className= "col-2" />  
        
         {yourTrades && yourTrades.map((trade) => {
             let proposedBy= ""
@@ -137,6 +141,7 @@ function Dashboard() {
             </div>
           )
         })}
+
         <div className="col-4">
           <form className="search">
             <div className="form-group">
