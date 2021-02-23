@@ -145,11 +145,13 @@ const ProfilePage = () => {
 
     console.log(data);
     API.updateCard(user.mongo._id, data).then((res) => console.log(res));
+    (window.location.reload())
   };
 
   function deleteCard(id, uuid) {
     console.log(id, uuid);
     API.deleteCard(id, uuid).then((res) => console.log(res));
+    (window.location.reload())
   }
 
   return (
