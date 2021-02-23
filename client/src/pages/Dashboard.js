@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
 import Banner from "../components/Banner";
 import avatar from "../images/avatar.png";
+import Bar from "../components/Bar";
 
 function Dashboard() {
   const user = useContext(UserContext);
@@ -72,7 +73,10 @@ function Dashboard() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-8">CHARTS GO HERE</div>
+        <div className="col-6">
+        <Bar  />        
+          </div>
+          <div className= "col-2" />
         <div className="col-4">
           <form className="search">
             <div className="form-group">
