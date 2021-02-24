@@ -14,6 +14,7 @@ import Dashboard from "./Dashboard"
 import Home from "./Home"
 import OtherProfile from "./OtherProfile";
 import Trade from "./Trade";
+import Messages from "./Messages";
 
 function Application() {
   const user = useContext(UserContext);
@@ -34,6 +35,9 @@ function Application() {
           </Route>
           <Route exact path="/search">
             <Search />
+          </Route>
+          <Route exact path="/messages">
+            <Messages />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />

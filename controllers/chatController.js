@@ -1,13 +1,6 @@
 const mongoose= require('mongoose');
 const db= require("../models");
 
-// const databaseUrl = "chatdb";
-// const collections = ["chatdata"];
-
-// const db = mongojs(databaseUrl, collections);
-// db.on("error", error => {
-//   console.log("Database Error:", error);
-// });
 
 module.exports= {
 

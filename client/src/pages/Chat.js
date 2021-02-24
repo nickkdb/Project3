@@ -97,13 +97,13 @@ const socket= useContext(socketContext);
             <>
             <Row>
                     <Col md={{span: 6, offset: 3}}>
-                        <h1 style={{textAlign: "center"}}>Inbox</h1>
+                        <h1 style={{textAlign: "center", color: "black"}}>Inbox</h1>
                     <hr color={"black"}/>
                     </Col>
                 </Row>
                 <Row style={{marginTop: "5rem"}}>
                 <Col md={4}>
-                <h3 style={{textAlign: "center"}}>Message Threads</h3>
+                <h3 style={{textAlign: "center", color: "black"}}>Message Threads</h3>
                 </Col>
                 </Row>
                 {results}
