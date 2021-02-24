@@ -75,7 +75,7 @@ function Dashboard() {
   function acceptTrade(id) {
     
     API.accept(id, {status: "accepted"})
-    .then((res)=> console.log(res))
+    .then((res) => window.location.reload());
 }
 
 function declineTrade(id) {
