@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { propTypes } from "react-bootstrap/esm/Image";
 import UserContext from "../utils/UserContext";
+import "./style.css";
 
 function YourTrades(props) {
 
@@ -7,11 +9,13 @@ function YourTrades(props) {
     return (
 
         <div class="card">
-            {/* <h2>Your Trades</h2>  */}
+
             <ul>
 
                 <li>
                     Proposed by: {props.proposedBy}
+                    {props.status === "accepted" ? <span className="span" style={{ background: "green", color: "white" }}>Accepted</span> : ""}
+                    {props.status === "declined" ? <span className="span" style={{ background: "red", color: "white" }}> Declined </span> : ""}
                 </li>
                 <li>
                     Proposed to: {props.proposedTo}
@@ -23,7 +27,7 @@ function YourTrades(props) {
                     {props.proposedTo}'s products: {props.proposedToProducts}
                 </li>
                 {props.status === "pending" ?
-                    <div>
+                    <>
 
                         {props.currentUser === props.proposedTo ?
                             <div>
@@ -36,20 +40,29 @@ function YourTrades(props) {
                                     Accept Trade</button>
                                 <button
                                     className="btn btn-primary ml-1"
-                                    onClick={() => { props.declineTrade(props.id) }}>
+                                    onClick={() => {
+                                        props.declineTrade(props.id)
+                                    }}>
                                     Decline Trade
                                 </button>
-                            </div> : <div style={{color: "blue"}}> Sent</div>
+                            </div> : <div style={{ color: "blue" }}> Sent</div>
                         }
 
-                    </div>
-                    : ""}
-            </ul>
-            <div
-            >
-                {props.status === "accepted" ? <div style={{ color: "green" }}>Accepted</div> : ""}
+                    </>
+                    : <button
+                        className="btn btn-danger deletetrade"
+                        onClick={() => { props.deleteTrade(props.id) }}>
+                        Delete
+                </button>
 
-            </div>
+                }
+
+
+            </ul>
+            <
+                >
+
+            </>
         </div>
     )
 }
