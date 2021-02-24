@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import UserContext from "../utils/UserContext";
 
 function YourTrades(props) {
+
 
     return (
 
@@ -21,20 +22,34 @@ function YourTrades(props) {
                 <li>
                     {props.proposedTo}'s products: {props.proposedToProducts}
                 </li>
-                <li>
-                    {props.currentUser === props.proposedTo ?
-                        <div>
-                            <button
-                                className="btn btn-primary ml-1"
-                                onClick={() => {props.acceptTrade(props.id)}}>
-                                Accept Trade</button>
-                            <button
-                                className="btn btn-primary ml-1">
-                                Decline Trade
+                {props.status === "pending" ?
+                    <div>
+
+                        {props.currentUser === props.proposedTo ?
+                            <div>
+                                <button
+                                    className="btn btn-primary ml-1"
+                                    onClick={() => {
+                                        props.acceptTrade(props.id)
+
+                                    }}>
+                                    Accept Trade</button>
+                                <button
+                                    className="btn btn-primary ml-1"
+                                    onClick={() => { props.declineTrade(props.id) }}>
+                                    Decline Trade
                                 </button>
-                        </div> : ""}
-                </li>
+                            </div> : ""
+                        }
+
+                    </div>
+                    : ""}
             </ul>
+            <div
+            >
+                {props.status === "accepted" ? <div style={{ color: "green" }}>Accepted</div> : ""}
+
+            </div>
         </div>
     )
 }

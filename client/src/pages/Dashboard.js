@@ -78,6 +78,10 @@ function Dashboard() {
     .then((res)=> console.log(res))
 }
 
+function declineTrade(id) {
+  API.decline(id)
+  .then((res) => window.location.reload());
+}
  
 
   return (
@@ -92,7 +96,7 @@ function Dashboard() {
         {yourTrades && yourTrades.map((trade) => {
             let proposedBy= ""
             let proposedTo= ""
-          // console.log(trade.proposedByProducts)
+          console.log(trade.status)
         trade.proposedByProducts[0].map((name) => {
           (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
         })
@@ -113,6 +117,8 @@ function Dashboard() {
                 proposedToProducts={proposedTo}
                 currentUser={user.mongo.displayName}
                 acceptTrade={acceptTrade}
+                declineTrade={declineTrade}
+                status={trade.status}
                 id={trade._id}
               >
               </YourTrades>
