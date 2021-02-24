@@ -31,6 +31,10 @@ function NavTabs() {
             </NavItem>
 
             <NavItem>
+              <NavLink className="nav-link" to="/messages">Messages</NavLink>
+            </NavItem>
+
+            <NavItem>
               <NavLink to="/signup" target="_blank"><Button className="">Sign Up</Button></NavLink>
             </NavItem>
 

@@ -1,17 +1,11 @@
-const mongojs= require('mongojs');
+const mongoose= require('mongoose');
+const db= require("../models");
 
-// const databaseUrl = "chatdb";
-// const collections = ["chatdata"];
-
-// const db = mongojs(databaseUrl, collections);
-// db.on("error", error => {
-//   console.log("Database Error:", error);
-// });
 
 module.exports= {
 
     writeMessage: (room, user, msg) => {
-        db.chatdata.updateOne({
+        db.Chat.updateOne({
             roomname: room
         },
         {
@@ -21,35 +15,26 @@ module.exports= {
                     msg: msg
                 }
             }
-        }, (err, data) => {
-            if (err) throw err;
-            console.log(data);
         })
+        .then(data => console.log(data))
+        .catch(err => console.error(err))
     },
     findUser: (user, cb) => {
-        db.userdata.findOne({
+        db.User.findOne({
             user: user
-        }, (err, data) => {
-            if (err) {
-                throw err;
-            } else {
-                cb(data);
-            }
         })
+        .then(data => cb(data))
+        .catch(err => console.error(err))
     },
     findRoom: (room, cb) => {
-        db.chatdata.findOne({
+        db.Chat.findOne({
             roomname: room
-        }, (err, data) => {
-            if (err) {
-                throw err;
-            } else {
-                cb(data);
-            }
         })
+        .then(data => cb(data))
+        .catch(err => console.error(err))
     },
     updateSubject: (subject, room) => {
-        db.userdata.updateMany(
+        db.User.updateMany(
             {'threads.room': room }, {
                 $set: {
                     'threads.$.subject':  subject,
