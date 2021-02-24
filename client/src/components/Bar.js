@@ -16,15 +16,15 @@ const state = {
             hoverBorderColor: 'rgb(54, 40, 255)',
             data: [3,7, 5]
         },
-        {
-            label: "Avg value of category",
-            backgroundColor: 'rgba(248, 64, 58, 0.2)',
-            borderColor: 'rgba(226, 12, 5, 0.2)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(172, 0, 0, 0.2)',
-            hoverBorderColor: 'rgb(255, 40, 40)',
-            data: [4,3, 6]
-        },
+        // {
+        //     label: "Avg value of category",
+        //     backgroundColor: 'rgba(248, 64, 58, 0.2)',
+        //     borderColor: 'rgba(226, 12, 5, 0.2)',
+        //     borderWidth: 1,
+        //     hoverBackgroundColor: 'rgba(172, 0, 0, 0.2)',
+        //     hoverBorderColor: 'rgb(255, 40, 40)',
+        //     data: [4,3, 6]
+        // },
     ]
 }
 const options = { 
