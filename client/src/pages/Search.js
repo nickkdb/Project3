@@ -147,6 +147,7 @@ function Search() {
           {yCards &&
             yCards.map((card) => {
               return (
+                <div className="col-6">
                 <YugiohCard
                   key={card.id}
                   id={card.id}
@@ -183,6 +184,7 @@ function Search() {
                   })}
                 >
                 </YugiohCard>
+                </div>
               );
             })}
 

@@ -84,7 +84,7 @@ cite {
   color: #636363;
 }
 
-/* ================= Profile, Dasboard, & Search Pages =================== */
+/* ================= Rendering Cards on Profile & Search Pages =================== */
 
 .pageTitle {
   margin: 30px;
@@ -108,9 +108,8 @@ ul {
 .ul2 {
   padding: 0px;
 }
-.col-6 {
-  flex: 0 0 50%;
-  max-width: 50%;
+select {
+  max-width: 200px;
 }
 .myCard {
   margin: 20px 0px 20px 0px;
