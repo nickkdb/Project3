@@ -144,19 +144,23 @@ const ProfilePage = () => {
     };
 
     console.log(data);
-    API.updateCard(user.mongo._id, data).then((res) => console.log(res));
-    window.location.reload();
+    API.updateCard(user.mongo._id, data).then((res) => window.location.reload());
   };
 
   function deleteCard(id, uuid) {
     console.log(id, uuid);
-    API.deleteCard(id, uuid).then((res) => console.log(res));
-    window.location.reload();
+    API.deleteCard(id, uuid).then((res) => window.location.reload());
   }
 
   return (
     <div>
-      <ProfileBanner pageTitle={displayName} profileImg="https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png" email={email} userId={uid} />
+      <ProfileBanner
+        pageTitle={displayName}
+        avatar={avatar}
+        fbImage={profilePic}
+        email={email}
+        userId={uid}
+      />
       <div className="container">
         <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
           {user &&
@@ -177,10 +181,13 @@ const ProfilePage = () => {
                     // addCard={updateCard}
                     setuuid={setuuid}
                     setModalSource={setModalSource}
-                  // deleteCard={deleteCard}
+                    // deleteCard={deleteCard}
                   ></MyCard>
                   <Button
-                    type="button" className="btn btn-primary delBtn-margin" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
+                    type="button"
+                    className="btn btn-primary delBtn-margin"
+                    onClick={() => deleteCard(user.mongo._id, card.uuid)}
+                  >
                     Delete
                   </Button>
                 </div>
@@ -195,168 +202,168 @@ const ProfilePage = () => {
           keyboard={false}
           size="lg"
         >
-        <div>
-          {modalSource === "card" ? (
-            <div>
-              <Modal.Header closeButton>
-                <Modal.Title>Update Card</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    rows={2}
-                  />
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    value={descr}
-                    onChange={(e) => setDescr(e.target.value)}
-                    rows={2}
-                  />
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Available?</Form.Label>
-                  <Form.Control
-                    onChange={(e) => setAvail(e.target.value)}
-                    as="select"
-                  >
-                    <option>Yes</option>
-                    <option>No</option>
-                  </Form.Control>
-                </Form.Group>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={updateCard}>
-                  Save
-                </Button>
-              </Modal.Footer>
-            </div>
-          ) : (
-            <div>
-              <Modal.Header closeButton>
-                <Modal.Title>Set Profile Pic</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div>
+          <div>
+            {modalSource === "card" ? (
+              <div>
+                <Modal.Header closeButton>
+                  <Modal.Title>Update Card</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      rows={2}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      value={descr}
+                      onChange={(e) => setDescr(e.target.value)}
+                      rows={2}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Label>Available?</Form.Label>
+                    <Form.Control
+                      onChange={(e) => setAvail(e.target.value)}
+                      as="select"
+                    >
+                      <option>Yes</option>
+                      <option>No</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={updateCard}>
+                    Save
+                  </Button>
+                </Modal.Footer>
+              </div>
+            ) : (
+              <div>
+                <Modal.Header closeButton>
+                  <Modal.Title>Set Profile Pic</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                   <div>
                     <div>
-                      {!imageAsFile && !downloaded ? (
-                        <div className="m-3">
-                          <div className="mb-2">
-                            <h6>Choose the Image</h6>
-                            <input type="file" onChange={handleFile}></input>
+                      <div>
+                        {!imageAsFile && !downloaded ? (
+                          <div className="m-3">
+                            <div className="mb-2">
+                              <h6>Choose the Image</h6>
+                              <input type="file" onChange={handleFile}></input>
+                            </div>
                           </div>
-                        </div>
-                      ) : tempImg && !downloaded ? (
-                        <div className="m-3">
-                          <div className="mb-2">
-                            <h6>
-                              Once you're done cropping, click "Crop Image".
-                            </h6>
-                            <button
-                              className="btn btn-primary"
-                              onClick={generateImg}
-                            >
-                              Crop Image
-                            </button>
-                          </div>
-                          <div
-                            style={
-                              tempImg.length > 1
-                                ? {
-                                    display: "block",
-                                    height: "25rem",
-                                    margin: "2rem",
-                                  }
-                                : { display: "none" }
-                            }
-                          >
-                            <Cropper
-                              image={tempImg}
-                              crop={crop}
-                              rotation={rotation}
-                              zoom={zoom}
-                              aspect={3 / 3}
-                              onCropChange={setCrop}
-                              onRotationChange={setRotation}
-                              onCropComplete={onCropComplete}
-                              onZoomChange={setZoom}
-                              showGrid={true}
-                              style={{
-                                containerStyle: {
-                                  margin: "12rem 3rem 5rem 3rem",
-                                },
-                              }}
-                            />
-                            <RangeSlider
-                              value={zoom}
-                              label="Zoom"
-                              min={1}
-                              max={3}
-                              step={0.1}
-                              aria-labelledby="Zoom"
-                              onChange={(changeEvent) =>
-                                setZoom(changeEvent.target.value)
-                              }
-                            />
-                          </div>
-                        </div>
-                      ) : downloaded ? (
-                        <div>
-                          <div className="mb-3">
-                            <h6>Click Download</h6>
-                            <span className="ml-2">
-                              <a
-                                href={croppedImage}
-                                download="croppedNerdHerd.jpeg"
-                                className="btn btn-danger"
-                                // onClick={() => {
-                                //   setDownloaded(true)
-                                // }}
+                        ) : tempImg && !downloaded ? (
+                          <div className="m-3">
+                            <div className="mb-2">
+                              <h6>
+                                Once you're done cropping, click "Crop Image".
+                              </h6>
+                              <button
+                                className="btn btn-primary"
+                                onClick={generateImg}
                               >
-                                Download
-                                <span className={"ml-2"}></span>
-                                <FontAwesomeIcon icon={faDownload} />
-                              </a>
-                            </span>
+                                Crop Image
+                              </button>
+                            </div>
+                            <div
+                              style={
+                                tempImg.length > 1
+                                  ? {
+                                      display: "block",
+                                      height: "25rem",
+                                      margin: "2rem",
+                                    }
+                                  : { display: "none" }
+                              }
+                            >
+                              <Cropper
+                                image={tempImg}
+                                crop={crop}
+                                rotation={rotation}
+                                zoom={zoom}
+                                aspect={3 / 3}
+                                onCropChange={setCrop}
+                                onRotationChange={setRotation}
+                                onCropComplete={onCropComplete}
+                                onZoomChange={setZoom}
+                                showGrid={true}
+                                style={{
+                                  containerStyle: {
+                                    margin: "12rem 3rem 5rem 3rem",
+                                  },
+                                }}
+                              />
+                              <RangeSlider
+                                value={zoom}
+                                label="Zoom"
+                                min={1}
+                                max={3}
+                                step={0.1}
+                                aria-labelledby="Zoom"
+                                onChange={(changeEvent) =>
+                                  setZoom(changeEvent.target.value)
+                                }
+                              />
+                            </div>
                           </div>
+                        ) : downloaded ? (
                           <div>
-                            <h6>
-                              Drag your downloaded image over here, and click
-                              "Save".
-                            </h6>
-                            <input type="file" onChange={handleFile2}></input>
+                            <div className="mb-3">
+                              <h6>Click Download</h6>
+                              <span className="ml-2">
+                                <a
+                                  href={croppedImage}
+                                  download="croppedNerdHerd.jpeg"
+                                  className="btn btn-danger"
+                                  // onClick={() => {
+                                  //   setDownloaded(true)
+                                  // }}
+                                >
+                                  Download
+                                  <span className={"ml-2"}></span>
+                                  <FontAwesomeIcon icon={faDownload} />
+                                </a>
+                              </span>
+                            </div>
+                            <div>
+                              <h6>
+                                Drag your downloaded image over here, and click
+                                "Save".
+                              </h6>
+                              <input type="file" onChange={handleFile2}></input>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleFireBaseUpload}>
-                  Save
-                </Button>
-              </Modal.Footer>
-            </div>
-          )}
-        </div>
-      </Modal>
-    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleFireBaseUpload}>
+                    Save
+                  </Button>
+                </Modal.Footer>
+              </div>
+            )}
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 };
