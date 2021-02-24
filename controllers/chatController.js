@@ -21,7 +21,7 @@ module.exports= {
     },
     findUser: (user, cb) => {
         db.User.findOne({
-            user: user
+            displayName: user
         })
         .then(data => cb(data))
         .catch(err => console.error(err))
