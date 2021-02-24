@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function PokemonCard(props) {
   return (
-    <div key={props.id} className="card shadow p-3 mb-5 bg-white rounded">
+    <div key={props.id} className="card shadow p-3 mb-5 rounded">
       <div className="row">
         <div className="col-md-6">
           <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />

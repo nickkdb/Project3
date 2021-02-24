@@ -186,7 +186,7 @@ function Search() {
               );
             })}
 
-          <div className="row align-items-center">
+          <div className="row">
             {pCards &&
               pCards.map((pCard) => {
                 return (
@@ -228,7 +228,7 @@ function Search() {
               })}
           </div>
 
-          <div className="row align-items-center">
+          <div className="row">
             {mCards &&
               mCards.map((mCard) => {
                 return (
