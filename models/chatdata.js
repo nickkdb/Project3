@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 
 const chatSchema = new Schema({
   roomname: { type: String, required: true, unique: true},
-  user1: { type: String, required: true},
-  user2: { type: String, required: true},
   messages: [
     {
       user: {
@@ -15,15 +13,15 @@ const chatSchema = new Schema({
       msg: {
         type: String, 
         required: false
-      },
-      time: {
-          type: Date,
-          default: Date.now
       }
+      // time: {
+      //     type: Date,
+      //     default: Date.now
+      // }
     }
   ]
 });
 
-const chatdata = mongoose.model("chatdata", chatSchema);
+const Chat = mongoose.model("Chat", chatSchema, "chatdata");
 
 module.exports = chatdata;
