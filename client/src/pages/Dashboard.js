@@ -3,6 +3,7 @@ import UserContext from "../utils/UserContext";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
+import {Tab,Sonnet,Tabs} from "react-bootstrap"
 
 function Dashboard() {
     const user = useContext(UserContext);
@@ -66,7 +67,7 @@ function Dashboard() {
                                     type="text"
                                     className="form-control"
                                     placeholder="What are you looking for?"
-                                    id="term"/>
+                                    id="term" />
                                 <small id="passwordHelpBlock" className="form-text text-muted">
                                     * Search by displayName, card name, card type, anything
                                 </small>
@@ -83,12 +84,23 @@ function Dashboard() {
                                     return <p><Link to={link}>{item.displayName}</Link></p>;
                                 })}
                         </form>
+                        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                            <Tab eventKey="home" title="Home">
+                                <Sonnet />
+                            </Tab>
+                            <Tab eventKey="profile" title="Profile">
+                                <Sonnet />
+                            </Tab>
+                            <Tab eventKey="contact" title="Contact" disabled>
+                                <Sonnet />
+                            </Tab>
+                        </Tabs>
                     </div>
 
                 </div>
             </div>
         </div>
-  );
+    );
 }
 
 export default Dashboard;
