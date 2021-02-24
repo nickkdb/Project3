@@ -145,99 +145,56 @@ const ProfilePage = () => {
 
     console.log(data);
     API.updateCard(user.mongo._id, data).then((res) => console.log(res));
+    window.location.reload();
   };
 
   function deleteCard(id, uuid) {
     console.log(id, uuid);
     API.deleteCard(id, uuid).then((res) => console.log(res));
+    window.location.reload();
   }
 
   return (
-    <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-      <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        <div>
-          <div
-            style={
-              profilePic
-                ? {
-                    background: `url(${profilePic})  no-repeat center center`,
-                    backgroundSize: "cover",
-                    height: "200px",
-                    width: "200px",
-                  }
-                : {
-                    background: `url(${avatar})  no-repeat center center`,
-                    backgroundSize: "contain",
-                    height: "200px",
-                    width: "200px",
-                  }
-            }
-            className="border border-blue-300"
-          ></div>
-          <button
-            className="btn btn-primary mt-3"
-            onClick={() => {
-              handleShow();
-              setModalSource("profilePic");
-            }}
-          >
-            Update Profile Pic
-          </button>
+    <div>
+      <ProfileBanner pageTitle={displayName} profileImg="https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png" email={email} userId={uid} />
+      <div className="container">
+        <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
+          {user &&
+            user.mongo.products.map((card) => {
+              return (
+                <div key={card.uuid}>
+                  <MyCard
+                    key={card.uuid}
+                    uuid={card.uuid}
+                    name={card.name}
+                    category={card.category}
+                    description={card.description}
+                    available={card.available}
+                    image={card.image}
+                    price={card.price}
+                    attributes={card.attributes}
+                    openModal={handleShow}
+                    // addCard={updateCard}
+                    setuuid={setuuid}
+                    setModalSource={setModalSource}
+                  // deleteCard={deleteCard}
+                  ></MyCard>
+                  <Button
+                    type="button" className="btn btn-primary delBtn-margin" onClick={() => deleteCard(user.mongo._id, card.uuid)}>
+                    Delete
+                  </Button>
+                </div>
+              );
+            })}
         </div>
-        <div className="md:pl-4">
-          <h2 className="text-2xl font-semibold">
-            Display Name: {displayName}
-          </h2>
-          <h3 className="italic">Email: {email}</h3>
-          <h3 className="italic">UID: {uid}</h3>
-        </div>
-      </div>
-      <button
-        className="w-full py-3 bg-red-600 mt-4 text-white"
-        onClick={() => {
-          auth.signOut();
-        }}
-      >
-        Sign out
-      </button>
-      {user &&
-        user.mongo.products.map((card) => {
-          return (
-            <div key={card.uuid} className="col-6">
-              <MyCard
-                key={card.uuid}
-                uuid={card.uuid}
-                name={card.name}
-                category={card.category}
-                description={card.description}
-                available={card.available}
-                image={card.image}
-                price={card.price}
-                attributes={card.attributes}
-                openModal={handleShow}
-                // addCard={updateCard}
-                setuuid={setuuid}
-                setModalSource={setModalSource}
-                // deleteCard={deleteCard}
-              ></MyCard>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => deleteCard(user.mongo._id, card.uuid)}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-        size="lg"
-      >
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          size="lg"
+        >
         <div>
           {modalSource === "card" ? (
             <div>
@@ -399,6 +356,7 @@ const ProfilePage = () => {
           )}
         </div>
       </Modal>
+    </div>
     </div>
   );
 };
