@@ -40,6 +40,13 @@ const userSchema = new Schema({
       },
       attributes: {}
     }
+  ],
+  threads: [
+    {
+      user: { type: String, required: true },
+      room: { type: String, required: true, unique: true }, 
+      subject: { type: String, required: true }
+    }
   ]
 });
 

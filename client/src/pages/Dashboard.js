@@ -18,21 +18,11 @@ function Dashboard() {
   console.log(yourTrades)
 
 
-
-  // console.log(user.mongo.displayName);
-
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
     setSearch(value);
   }
-
-  //   let x = 0;
-  //   if(list && x === 0) {
-  //       console.log(list)
-  //       x = 1
-  //     //   console.log(typeof(list))
-  //   }
 
 
   function filterSearch() {
@@ -49,8 +39,6 @@ function Dashboard() {
   useEffect(() => {
     loadUsers();
   }, []);
-
-
 
 
   function loadUsers() {
@@ -80,11 +68,7 @@ function Dashboard() {
   useEffect(() => {
     API.getTrade(user.mongo.displayName)
       .then((res) => {
-        setYourTrades(res.data);
-        // console.log(res.data.length)
-        // arr.push(res.data)
-        // return setYourTrades(arr)
-      
+        setYourTrades(res.data);      
       })
   }, []);
 
@@ -98,13 +82,13 @@ function Dashboard() {
 
   return (
     <div className="container">
-         <h2> Your Trades </h2>
       <div className="row">
-        <div className="col-6">
-        <Bar  />        
-          </div>
+        <div className="col-7">
+        <Bar  
+          trades={yourTrades}
+        />        
           <div className= "col-2" />  
-       
+          <h2> Your Trades </h2>
         {yourTrades && yourTrades.map((trade) => {
             let proposedBy= ""
             let proposedTo= ""
@@ -135,7 +119,10 @@ function Dashboard() {
             </div>
           )
         })}
+        </div>
+        <div className="col-1">
 
+        </div>
         <div className="col-4">
           <form className="search">
             <div className="form-group">
