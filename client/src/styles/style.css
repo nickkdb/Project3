@@ -1,29 +1,40 @@
 /* ================= All Pages =================== */
 
-h1, h3, h5 {
+h1,
+h3,
+h5 {
   color: #fff;
 }
-h1, h3, h4, h5, h6, p, a, li, .catAttTitle {
-  font-family: 'Reem Kufi', sans-serif;
+h1,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+.catAttTitle {
+  font-family: "Reem Kufi", sans-serif;
 }
-h2{
-  font-family: 'Freckle Face', cursive;
+h2 {
+  font-family: "Freckle Face", cursive;
   color: #ffe300;
   -webkit-text-stroke: 1px black;
   letter-spacing: 1px;
 }
-p{
+p {
   font-size: 12px;
 }
 a {
-  color: #242582!important;
+  color: #242582 !important;
   font-size: 12px;
 }
 a:hover {
-  color: #b5072d!important;
-  text-decoration: none!important;
+  color: #b5072d !important;
+  text-decoration: none !important;
 }
-.hero, .banner {
+.hero,
+.banner {
   min-height: 700px;
   background-image: linear-gradient(
       to bottom,
@@ -41,28 +52,28 @@ a:hover {
 .logo {
   margin-top: 125px;
   max-width: 600px;
-  height:auto;
+  height: auto;
 }
 .logo-small {
   max-width: 150px;
-  height:auto;
+  height: auto;
 }
 .btn-primary {
-  background-color:#ffe300!important;
-  border-color: black!important;
-  color: black!important;
-  margin-left: auto!important;
-  margin-right: auto!important;
+  background-color: #ffe300 !important;
+  border-color: black !important;
+  color: black !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* ================= Home Page =================== */
 
-.sign-inCard{
+.sign-inCard {
   margin-top: 95px;
 }
 .tradingCard {
   max-height: 250px;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
 .tradingCard-margin {
   margin-top: 20px;
@@ -85,16 +96,20 @@ cite {
   margin: 0px 30px 30px 30px;
 }
 .sign-outBtn {
-  margin: 40px 0px 20px 0px!important;
+  margin: 40px 0px 20px 0px !important;
 }
 li {
   font-size: 12px;
 }
+
 ul {
-  margin-bottom: 0rem!important;
+  margin-bottom: 0rem !important;
+}
+.ul2 {
+  padding: 0px;
 }
 
-.card{
+.card {
   max-width: 500px;
 }
 .myCard {
@@ -105,22 +120,22 @@ ul {
 }
 .catAtt {
   background-color: #ffe300;
-  margin: 0px 10px 0px 10px!important;
-  padding: 0px  20px 20px 20px;
+  margin: 0px 10px 0px 10px !important;
+  padding: 0px 20px 20px 20px;
   position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-clip: border-box;
-    border: 1px solid black;
-    border-radius: .25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid black;
+  border-radius: 0.25rem;
 }
 .catAttTitle {
   margin: 20px;
   font-weight: 600;
 }
-.bottom-border{
+.bottom-border {
   border-bottom: 1px solid black;
 }
 .attList {
@@ -128,12 +143,16 @@ ul {
 }
 .delBtn-margin {
   margin-top: -66px;
-  margin-left: 84px!important;
+  margin-left: 84px !important;
+}
+
+.margin-top {
+  margin-top: 32px;
 }
 
 @media screen and (max-width: 480px) {
   .sign-outBtn {
-    margin-top: 0px!important;
+    margin-top: 0px !important;
   }
   .profileInfo {
     margin: 0px 30px 30px 30px;

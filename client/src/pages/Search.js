@@ -137,7 +137,7 @@ function Search() {
               </div>
             </div>
             <div className="col">
-              <button onClick={handleFormSubmit} type="button" className="btn btn-primary">
+              <button onClick={handleFormSubmit} type="button" className="btn btn-primary margin-top">
                 Search Cards
               </button>
             </div>
