@@ -10,7 +10,7 @@ function Chat() {
 
 const socket= useContext(socketContext);
 
-    const user= useContext(UserContext);
+    const user= useContext(UserContext).displayName;
     const [threads, setThreads]= useState(null);
     const [otherUser, setOtherUser]= useState();
     const [subtitle, setSubtitle]= useState();
