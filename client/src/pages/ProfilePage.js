@@ -1,127 +1,22 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../utils/UserContext";
-import { auth, storage } from "../utils/firebase";
+import { auth } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
 import ProfileBanner from "../components/ProfileBanner";
 import { Modal, Button, Form } from "react-bootstrap";
-import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
-import RangeSlider from "react-bootstrap-range-slider";
-import Cropper from "react-easy-crop";
-import getCroppedImg from "../utils/cropper";
-import avatar from "../images/avatar.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const ProfilePage = () => {
-  // updating products
   const [show, setShow] = useState(false);
   const [price, setPrice] = useState("");
   const [descr, setDescr] = useState("");
   const [avail, setAvail] = useState("Yes");
   const [uuid, setuuid] = useState("");
-  const [modalSource, setModalSource] = useState("");
-
-  // cropping an iamge
-  const [tempImg, setTempImg] = useState({});
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState(0);
-  const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
-  const [downloaded, setDownloaded] = useState(false);
-
-  //uploading image to FB
-  const [imageAsFile, setImageAsFile] = useState("");
-  const [finalImage, setFinalImage] = useState("");
-  const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
-  const [profilePic, setProfilePic] = useState("");
   // const [reRender, setReRender] = useState(false);
 
+
   const user = useContext(UserContext);
-  const { displayName, email, uid } = user;
-
-  const handleFile = (e) => {
-    // console.log(e);
-    const img = e.target.files[0];
-    // console.log(img);
-    setTempImg(URL.createObjectURL(img));
-    setImageAsFile(img);
-  };
-
-  const handleFile2 = (e) => {
-    const img = e.target.files[0];
-    // console.log(img);
-    setFinalImage(img);
-  };
-
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
-
-  const generateImg = async () => {
-    try {
-      const a = await getCroppedImg(tempImg, croppedAreaPixels, rotation);
-      const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
-      // console.log(a);
-      setCroppedImage(a);
-      setDownloaded(true);
-      // console.log(tempFile)
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const handleFireBaseUpload = (e) => {
-    e.preventDefault();
-    handleClose();
-    console.log("start of upload");
-
-    const uploadTask = storage.ref(`/images/${user.mongo._id}`).put(finalImage);
-
-    //initiates the firebase side uploading
-    uploadTask.on(
-      "state_changed",
-      (snapShot) => {
-        //takes a snap shot of the process as it is happening
-        console.log(snapShot);
-      },
-      (err) => {
-        //catches the errors
-        console.log(err);
-      },
-      () => {
-        // gets the functions from storage refences the image storage in firebase by the children
-        // gets the download url then sets the image from firebase as the value for the imgUrl key:
-        storage
-          .ref("images")
-          .child(user.mongo._id)
-          .getDownloadURL()
-          .then((fireBaseUrl) => {
-            setImageAsUrl((prevObject) => ({
-              ...prevObject,
-              imgUrl: fireBaseUrl,
-            }));
-          });
-      }
-    );
-    // window.location.reload();
-  };
-
-  // YOU NEED TO STORE THE IMAGE AS THE ACTUAL FILENAME W/ THEIR ID ATTACHED
-  // WHEN STORING, SEND THE SAME INFO TO MONGO
-  // SO WHEN CALLED, YOU CAN USE MONGO TO INFER TO ROUTE FOR THE IMAGE
-
-  useEffect(() => {
-    storage
-      .ref("images")
-      .child(user.mongo._id)
-      .getDownloadURL()
-      .then((fireBaseUrl) => {
-        console.log(fireBaseUrl);
-        setProfilePic(fireBaseUrl);
-      });
-  }, [user.mongo._id, imageAsUrl]);
+  const { photoURL, displayName, email, uid } = user;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -136,16 +31,21 @@ const ProfilePage = () => {
       newAvail = false;
     }
 
+    // data.price = price;
+    // data.description = descr;
+
     const data = {
       available: newAvail,
       price: price,
       description: descr,
-      uuid: uuid,
-    };
+      uuid: uuid
+    }
 
     console.log(data);
     API.updateCard(user.mongo._id, data).then((res) => window.location.reload());
   };
+
+
 
   function deleteCard(id, uuid) {
     console.log(id, uuid);
@@ -162,11 +62,11 @@ const ProfilePage = () => {
         userId={uid}
       />
       <div className="container">
-        <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
+        <div className="row">
           {user &&
             user.mongo.products.map((card) => {
               return (
-                <div key={card.uuid}>
+                <div key={card.uuid} className="col-6">
                   <MyCard
                     key={card.uuid}
                     uuid={card.uuid}
@@ -182,6 +82,7 @@ const ProfilePage = () => {
                     setuuid={setuuid}
                     setModalSource={setModalSource}
                     // deleteCard={deleteCard}
+
                   ></MyCard>
                   <Button
                     type="button"
@@ -193,7 +94,6 @@ const ProfilePage = () => {
                 </div>
               );
             })}
-        </div>
 
         <Modal
           show={show}

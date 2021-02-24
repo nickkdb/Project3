@@ -137,7 +137,7 @@ function Search() {
               </div>
             </div>
             <div className="col">
-              <button onClick={handleFormSubmit} type="button" className="btn btn-primary">
+              <button onClick={handleFormSubmit} type="button" className="btn btn-primary margin-top">
                 Search Cards
               </button>
             </div>
@@ -147,6 +147,7 @@ function Search() {
           {yCards &&
             yCards.map((card) => {
               return (
+                <div className="col-6">
                 <YugiohCard
                   key={card.id}
                   id={card.id}
@@ -183,10 +184,11 @@ function Search() {
                   })}
                 >
                 </YugiohCard>
+                </div>
               );
             })}
 
-          <div className="row align-items-center">
+          <div className="row">
             {pCards &&
               pCards.map((pCard) => {
                 return (
@@ -228,7 +230,7 @@ function Search() {
               })}
           </div>
 
-          <div className="row align-items-center">
+          <div className="row">
             {mCards &&
               mCards.map((mCard) => {
                 return (
