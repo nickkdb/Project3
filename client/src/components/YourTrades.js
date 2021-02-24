@@ -39,7 +39,7 @@ function YourTrades(props) {
                                     onClick={() => { props.declineTrade(props.id) }}>
                                     Decline Trade
                                 </button>
-                            </div> : ""
+                            </div> : <div style={{color: "blue"}}> Sent</div>
                         }
 
                     </div>
