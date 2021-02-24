@@ -4,9 +4,12 @@ import {HorizontalBar} from 'react-chartjs-2';
 import UserContext from "../utils/UserContext";
 
 function Bar (props) {
+    const trades = props.trades[0]
     const user = useContext(UserContext)
     const cardNames = user.mongo.products.map(item => item.name)
     const cardPrices = user.mongo.products.map(item => item.price)
+    const myPrices = trades && trades.proposedByProducts.map(item => item.price)
+    console.log(myPrices);
 
     const state = {
         labels: cardNames,

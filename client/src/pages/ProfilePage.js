@@ -152,6 +152,11 @@ const ProfilePage = () => {
     API.deleteCard(id, uuid).then((res) => window.location.reload());
   }
 
+  function updatePicButton() {
+    setModalSource("profilePic")
+    handleShow();
+  }
+
   return (
     <div>
       <ProfileBanner
@@ -160,6 +165,7 @@ const ProfilePage = () => {
         fbImage={profilePic}
         email={email}
         userId={uid}
+        updatePicButton={updatePicButton}
       />
       <div className="container">
         <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">

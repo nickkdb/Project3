@@ -93,11 +93,11 @@ function Dashboard() {
             let proposedBy= ""
             let proposedTo= ""
           // console.log(trade.proposedByProducts)
-        trade.proposedByProducts[0].map((name) => {
+        trade.proposedByProducts.map((name) => {
           (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
         })
 
-        trade.proposedToProducts[0].map((name) => {
+        trade.proposedToProducts.map((name) => {
           // proposedTo += name.name + " "
           (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
         })
