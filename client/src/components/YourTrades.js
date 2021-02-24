@@ -25,7 +25,8 @@ function YourTrades(props) {
                     {props.currentUser === props.proposedTo ?
                         <div>
                             <button
-                                className="btn btn-primary ml-1">
+                                className="btn btn-primary ml-1"
+                                onClick={() => {props.acceptTrade(props.id)}}>
                                 Accept Trade</button>
                             <button
                                 className="btn btn-primary ml-1">

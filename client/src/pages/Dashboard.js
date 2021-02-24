@@ -88,21 +88,12 @@ function Dashboard() {
       })
   }, []);
 
-  // let arr = [];
+  function acceptTrade(id) {
+    
+    API.accept(id, {status: "accepted"})
+    .then((res)=> console.log(res))
+}
 
-  // function makeArray() {
-  //   arr.push(yourTrades)
-  // }
-  // console.log(arr)
-
-  // useEffect(() => {
-  //   makeArray();
-  // }, []);
-
-  // const yourTrades= {yourTrades && yourTrades.map(trade) => {
-  //       <div>
-  //       </div>
-  // }}
  
 
   return (
@@ -127,6 +118,7 @@ function Dashboard() {
           (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
         })
 
+        console.log(trade._id)
           return (
             <div className="col-8">
             
@@ -136,6 +128,8 @@ function Dashboard() {
                 proposedByProducts={proposedBy}
                 proposedToProducts={proposedTo}
                 currentUser={user.mongo.displayName}
+                acceptTrade={acceptTrade}
+                id={trade._id}
               >
               </YourTrades>
             </div>

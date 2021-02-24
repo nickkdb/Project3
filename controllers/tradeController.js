@@ -29,16 +29,20 @@ module.exports = {
    
 
     update: function (req, res) {
-        db.User.updateOne(
+        console.log(req.body.status)
+        db.Trade.updateOne(
+         
         {_id: mongojs.ObjectID(req.params.id)}, {
-            '$set': {
+            
+            $set: {
                 'status': req.body.status
             }
+        
+            
         })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-
 
     remove: function (req, res) {
         db.Trade.findOneAndDelete(
