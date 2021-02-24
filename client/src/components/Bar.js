@@ -1,15 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {HorizontalBar} from 'react-chartjs-2';
 // import '../../css/defaults.css';
 import UserContext from "../utils/UserContext";
 
 function Bar (props) {
-    const trades = props.trades[0]
+    const trades = props.trades
     const user = useContext(UserContext)
+    const [selectedTrade, setSelectedTrade] = useState({})
+    const [myPrices, setMyPrices] = useState(0)
+    const [yourPrices, setYourPrices] = useState(0)
+    if (selectedTrade){console.log(selectedTrade)}
+
     const cardNames = user.mongo.products.map(item => item.name)
     const cardPrices = user.mongo.products.map(item => item.price)
-    const myPrices = trades && trades.proposedByProducts.map(item => item.price)
-    console.log(myPrices);
+
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+    if (yourPrices){console.log(yourPrices.reduce(reducer))}
+    if (myPrices){console.log(myPrices.reduce(reducer))}
+    
+    useEffect(() => {
+        setSelectedTrade(props.trades[0])
+      }, []);
+
+    // useEffect(() => {
+    //     let tempM = selectedTrade && selectedTrade.proposedByProducts.map(item => item.price)
+    //     setMyPrices(tempM)
+    //     // setYourPrices(selectedTrade && selectedTrade.proposedToProducts.map(item => item.price))
+    // }, [selectedTrade])
 
     const state = {
         labels: cardNames,

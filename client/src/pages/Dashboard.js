@@ -15,7 +15,7 @@ function Dashboard() {
   const [searchList, setSearchList] = useState([]);
 
   const [yourTrades, setYourTrades] = useState([]);
-  console.log(yourTrades)
+  // console.log(yourTrades)
 
 
   function handleSearch(event) {
@@ -45,7 +45,7 @@ function Dashboard() {
     API.getUsers()
       .then((res) => {
         setList(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
     getFirebaseImages();
@@ -62,7 +62,7 @@ function Dashboard() {
         });
       return 0;
     });
-    console.log(list);
+    // console.log(list);
   }
 
   useEffect(() => {
@@ -102,7 +102,7 @@ function Dashboard() {
           (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
         })
 
-        console.log(trade._id)
+        // console.log(trade._id)
           return (
             <div className="col-8">
             
