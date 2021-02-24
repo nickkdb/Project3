@@ -84,7 +84,7 @@ cite {
   color: #636363;
 }
 
-/* ================= Profile & Dasboard Pages =================== */
+/* ================= Profile, Dasboard, & Search Pages =================== */
 
 .pageTitle {
   margin: 30px;
@@ -108,10 +108,10 @@ ul {
 .ul2 {
   padding: 0px;
 }
-/* 
-.card {
-  max-width: 500px;
-} */
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
 .myCard {
   margin: 20px 0px 20px 0px;
 }
@@ -156,5 +156,9 @@ ul {
   }
   .profileInfo {
     margin: 0px 30px 30px 30px;
+  }
+  .col-6 {
+    flex: 0 0 100%!important;
+    max-width: 100%!important;
   }
 }
