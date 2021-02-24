@@ -27,7 +27,7 @@ function NavTabs() {
             </NavItem>
 
             <NavItem>
-              <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
+              <NavLink className="nav-link" to="/profile">Profile</NavLink>
             </NavItem>
 
             <NavItem>

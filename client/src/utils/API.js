@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
 export default {
@@ -23,12 +22,24 @@ export default {
   deleteCard: function(id, uuid) {
     return axios.delete("/api/cards/" + id + "/" + uuid);
   },
-  // Deletes the user with the given id
-  // deleteUser: function(id) {
-  //   return axios.delete("/api/users/" + id);
-  // },
+  createTrade: function(trade) {
+    return axios.post("/api/trades", trade)
+  },
+  getTrade: function(user) {
+    return axios.get(`/api/trades/${user}`)
+  },
+ accept: function(id, body) {
+   return axios.put(`api/trades/` + id, body)
+ },
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
   }
+
+
+
+   // Deletes the user with the given id
+  // deleteUser: function(id) {
+  //   return axios.delete("/api/users/" + id);
+  // },
 };
