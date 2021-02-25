@@ -6,7 +6,7 @@ module.exports = {
 
     find: function (req, res) {
         db.Trade.find({
-            $or:[{"proposedBy": req.params.id}, {"proposedTo": req.params.id}]
+            $or: [{ "proposedBy": req.params.id }, { "proposedTo": req.params.id }]
         }).then(function (dbUser) {
             res.json(dbUser);
         });
@@ -14,44 +14,58 @@ module.exports = {
 
     create: function (req, res) {
         db.Trade
-        .create(req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     },
 
     findOne: function (req, res) {
         db.Trade.findOne(
-            {users: { $all: [req.body.user1, req.body.user2] }}
+            { users: { $all: [req.body.user1, req.body.user2] } }
         )
-        .then(dbModel => {res.json(dbModel)})
-        .catch(err => { res.status(422).json(err)})
+            .then(dbModel => { res.json(dbModel) })
+            .catch(err => { res.status(422).json(err) })
     },
-   
+
 
     update: function (req, res) {
-        console.log(req.body.status)
+        // console.log(req.body.status)
         db.Trade.updateOne(
-         
-        {_id: mongojs.ObjectID(req.params.id)}, {
-            
+
+            { _id: mongojs.ObjectID(req.params.id) }, {
+
             $set: {
                 'status': req.body.status
             }
-        
-            
+
+
         })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
+    // remove: function (req, res) {
+    //     db.Trade.findOneAndRemove(
+    //         {
+    //             _id: mongojs.ObjectID(req.params.id)
+    //         }
+    //             .then(dbModel => { res.json(dbModel) })
+    //             .catch(err => { res.status(422).json(err) })
+    //     )
+    // }
     remove: function (req, res) {
-        db.Trade.findOneAndDelete(
-            params.uuid,
+        db.Trade.remove(
             {
-                uuid: req.params.uuid
-            }
-                .then(dbModel => { res.json(dbModel) })
-                .catch(err => { res.status(422).json(err) })
-        )
+                _id: mongojs.ObjectID(req.params.id)
+            },
+            (error, data) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.send(data);
+                }
+            },
+
+        );
     }
 }

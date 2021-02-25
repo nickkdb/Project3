@@ -31,6 +31,12 @@ export default {
  accept: function(id, body) {
    return axios.put(`api/trades/` + id, body)
  },
+ decline: function (id, body) {
+   return axios.put(`api/trades/` + id, body)
+ },
+ delete: function (id) {
+   return axios.delete(`api/trades/` + id)
+ },
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
