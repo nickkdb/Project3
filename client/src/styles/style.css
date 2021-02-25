@@ -1,19 +1,9 @@
 /* ================= All Pages =================== */
 
-h1,
-h3,
-h5 {
+h1, h3, h5 {
   color: #fff;
 }
-h1,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-li,
-.catAttTitle {
+h1, h3, h4, h5, h6, p, a, li, .btn, .catAttTitle {
   font-family: "Reem Kufi", sans-serif;
 }
 h2 {
@@ -33,8 +23,7 @@ a:hover {
   color: #b5072d !important;
   text-decoration: none !important;
 }
-.hero,
-.banner {
+.hero, .banner {
   min-height: 700px;
   background-image: linear-gradient(
       to bottom,
@@ -65,6 +54,9 @@ a:hover {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.pageTitle {
+  margin: 30px;
+}
 
 /* ================= Home Page =================== */
 
@@ -84,11 +76,8 @@ cite {
   color: #636363;
 }
 
-/* ================= Rendering Cards on Profile & Search Pages =================== */
+/* ================= Profile & Dashboard =================== */
 
-.pageTitle {
-  margin: 30px;
-}
 .profile {
   border-radius: 56px;
   max-width: 200px;
@@ -98,6 +87,9 @@ cite {
 .sign-outBtn {
   margin: 40px 0px 20px 0px !important;
 }
+
+/* ================= Card Renderings =================== */
+
 li {
   font-size: 12px;
 }
@@ -148,6 +140,13 @@ select {
 .margin-top {
   margin-top: 32px;
 }
+
+/* ================= Reset Password Page =================== */
+.pika {
+  max-width: 300px;
+}
+
+/* ================= Mobile =================== */
 
 @media screen and (max-width: 480px) {
   .sign-outBtn {
