@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
+import Footer from "../components/Footer";
+
+//==================Images====================
+import pikachu from "../images/pv-2.png"
+//============================================
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -30,14 +35,11 @@ const PasswordReset = () => {
   };
   return (
     <div>
-      <Banner pageTitle="Sign In" />
+      <Banner pageTitle="Password Reset" />
       <div className="container">
-
-        <div className="mt-8">
-          <h1 className="text-xl text-center font-bold mb-3">
-            Reset your Password
-      </h1>
-          <div className="border border-blue-300 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+        <div className="row mt-8">
+          <div className="col-md-2"></div>
+          <div className="card myCard shadow p-3 rounded col-md-4">
             <form action="">
               {emailHasBeenSent && (
                 <div className="py-3 bg-green-400 w-full text-white text-center mb-3">
@@ -49,37 +51,41 @@ const PasswordReset = () => {
                   {error}
                 </div>
               )}
-              <label htmlFor="userEmail" className="w-full block">
-                Email:
-          </label>
-              <input
-                type="email"
-                name="userEmail"
-                id="userEmail"
-                value={email}
-                placeholder="Input your email"
-                onChange={onChangeHandler}
-                className="mb-3 w-full px-1 py-2"
-              />
-              <button
-                className="w-full bg-blue-400 text-white py-3"
-                onClick={event => {
-                  sendResetEmail(event);
-                }}
-              >
-                Send me a reset link
-          </button>
+              <div className="row">
+                <label htmlFor="userEmail" className="w-full block">
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  name="userEmail"
+                  id="userEmail"
+                  value={email}
+                  placeholder="Input your email"
+                  onChange={onChangeHandler}
+                  className="mb-3 w-full px-1 py-2"
+                /></div>
+              <div className="row">
+                <button
+                  className="btn btn-primary"
+                  onClick={event => {
+                    sendResetEmail(event);
+                  }}
+                >
+                  Send me a reset link
+          </button></div>
             </form>
-
+            <br /><br />
             <Link
               to="/"
-              className="my-2 text-blue-700 hover:text-blue-800 text-center block"
+              className="text-center block"
             >
               &larr; back to sign in page
         </Link>
           </div>
+          <img src={pikachu} alt="excited pikachu" className="pika"/>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
