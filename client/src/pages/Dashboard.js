@@ -75,9 +75,18 @@ function Dashboard() {
   function acceptTrade(id) {
     
     API.accept(id, {status: "accepted"})
-    .then((res)=> console.log(res))
+    .then((res) => window.location.reload());
 }
 
+function declineTrade(id) {
+  API.decline(id, {status: "declined"})
+  .then((res) => window.location.reload());
+}
+
+function deleteTrade(id) {
+  API.delete(id)
+  .then((res) => window.location.reload());
+}
  
 
   return (
@@ -113,6 +122,9 @@ function Dashboard() {
                 proposedToProducts={proposedTo}
                 currentUser={user.mongo.displayName}
                 acceptTrade={acceptTrade}
+                declineTrade={declineTrade}
+                deleteTrade={deleteTrade}
+                status={trade.status}
                 id={trade._id}
               >
               </YourTrades>
