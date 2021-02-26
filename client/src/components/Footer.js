@@ -47,17 +47,15 @@ function Footer() {
 
                         <ul className="list-unstyled">
                             <li>
-                                <a href="#!" className="text-dark">Link 1</a>
+                                <a href="https://www.yugioh-card.com/en/" className="text-dark">YuGiOPh</a>
                             </li>
                             <li>
-                                <a href="#!" className="text-dark">Link 2</a>
+                                <a href="https://www.pokemon.com/" className="text-dark">Pokemon 2</a>
                             </li>
                             <li>
-                                <a href="#!" className="text-dark">Link 3</a>
+                                <a href="https://magic.wizards.com/" className="text-dark">Magic The Gathering</a>
                             </li>
-                            <li>
-                                <a href="#!" className="text-dark">Link 4</a>
-                            </li>
+                            
                         </ul>
                     </div>
 
