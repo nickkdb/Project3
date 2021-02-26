@@ -50,7 +50,7 @@ function Thread(props) {
         return (          
             <Row style={{marginLeft: "15px"}}>
             <Col style={{borderStyle: "solid", borderWidth: "1px", borderColor: "lightgray"}} md={4}>
-                    <h3 onClick={() => props.fxn(data)} style={{marginTop: "10px", marginLeft: "10px"}}>{props.name}</h3>
+                    <h3 onClick={() => props.fxn(data)} style={{marginTop: "10px", marginLeft: "10px", color: "black"}}>{props.name}</h3>
                     <br />
                     <h4 id="parent" style={{marginLeft: "10px"}}>Subject: {content}
                     </h4>

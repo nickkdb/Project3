@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { propTypes } from "react-bootstrap/esm/Image";
 import UserContext from "../utils/UserContext";
+import "./style.css";
 
 function YourTrades(props) {
+
 
     return (
 
         <div class="card">
-            {/* <h2>Your Trades</h2>  */}
+
             <ul>
 
                 <li>
                     Proposed by: {props.proposedBy}
+                    {props.status === "accepted" ? <span className="span" style={{ background: "green", color: "white" }}>Accepted</span> : ""}
+                    {props.status === "declined" ? <span className="span" style={{ background: "red", color: "white" }}> Declined </span> : ""}
                 </li>
                 <li>
                     Proposed to: {props.proposedTo}
@@ -21,20 +26,43 @@ function YourTrades(props) {
                 <li>
                     {props.proposedTo}'s products: {props.proposedToProducts}
                 </li>
-                <li>
-                    {props.currentUser === props.proposedTo ?
-                        <div>
-                            <button
-                                className="btn btn-primary ml-1"
-                                onClick={() => {props.acceptTrade(props.id)}}>
-                                Accept Trade</button>
-                            <button
-                                className="btn btn-primary ml-1">
-                                Decline Trade
+                {props.status === "pending" ?
+                    <>
+
+                        {props.currentUser === props.proposedTo ?
+                            <div>
+                                <button
+                                    className="btn btn-primary ml-1"
+                                    onClick={() => {
+                                        props.acceptTrade(props.id)
+
+                                    }}>
+                                    Accept Trade</button>
+                                <button
+                                    className="btn btn-primary ml-1"
+                                    onClick={() => {
+                                        props.declineTrade(props.id)
+                                    }}>
+                                    Decline Trade
                                 </button>
-                        </div> : ""}
-                </li>
+                            </div> : <div style={{ color: "blue" }}> Sent</div>
+                        }
+
+                    </>
+                    : <button
+                        className="btn btn-danger deletetrade"
+                        onClick={() => { props.deleteTrade(props.id) }}>
+                        Delete
+                </button>
+
+                }
+
+
             </ul>
+            <
+                >
+
+            </>
         </div>
     )
 }

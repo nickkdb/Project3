@@ -13,7 +13,7 @@ function ProfileBanner(props) {
           </div>
           <div className="row">
             <div className="col-md-5">
-              <img className="profile" src={props.profileImg} alt="profile"></img></div>
+              <img className="profile" src={props.fbImage ? props.fbImage : props.avatar} alt="profile"></img></div>
             <div className="col-md-7 profileInfo">
               <div className="row">
                 <Button className="sign-outBtn" onClick={() => { auth.signOut(); }}>Sign Out</Button></div>

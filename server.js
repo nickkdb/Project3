@@ -5,8 +5,7 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server= http.createServer(app);
-const socket= require('socket.io');
-const io= socket(server);
+const io= require('socket.io')(server);
 const { writeMessage, findUser, findRoom, updateSubject } = require('./controllers/chatController');
 
 // Define middleware here
@@ -23,7 +22,7 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nerdherd");
 
 // Start the API server
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 

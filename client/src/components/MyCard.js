@@ -12,15 +12,12 @@ function MyCard(props) {
   
   return (
       <div>
-        <div 
-        key={props.id} 
-        className="card myCard shadow p-3 rounded"
+        <div key={props.id} className="card myCard shadow p-3 rounded"
         style={
           !interested
             ? { backgroundColor: "white" }
             : { backgroundColor: "lightblue" }
-        }
-        >
+        }>
           <div className="row">
             <div className="col-md-4">
               <img className="img-fluid tradingCard shadow" alt={props.name} src={props.image} />
