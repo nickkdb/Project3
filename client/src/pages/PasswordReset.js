@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
 //==================Images====================
@@ -35,6 +36,7 @@ const PasswordReset = () => {
   };
   return (
     <div>
+      <Nav />
       <Banner pageTitle="Password Reset" />
       <div className="container">
         <div className="row mt-8">

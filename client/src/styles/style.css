@@ -146,6 +146,23 @@ select {
   max-width: 300px;
 }
 
+
+
+/* ================= Chat =================== */
+.rcw-conversation-container .rcw-header {
+  background-color: #4f519d!important;
+}
+.rcw-launcher {
+    background-color: #4f519d!important;
+}
+.rcw-client .rcw-message-text {
+    background-color: #ffe300!important;
+}
+
+
+
+
+
 /* ================= Mobile =================== */
 
 @media screen and (max-width: 480px) {
