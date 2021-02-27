@@ -25,12 +25,12 @@ function Bar (props) {
             
                     // have to map over all the cards a user has
                     {
-                        label: "Your cards value",
-                        backgroundColor: 'rgba(94, 118, 253, 0.2)',
-                        borderColor: 'rgba(25, 59, 247, 0.2)',
+                        label: "Card values",
+                        backgroundColor: ["rgba(255, 205, 86, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(255, 205, 86)", "rgb(153, 102, 255)"],
                         borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(0, 26, 172, 0.2)',
-                        hoverBorderColor: 'rgb(54, 40, 255)',
+                        hoverBackgroundColor: ['rgba(255, 204, 86, 0.411)', 'rgba(123, 58, 253, 0.404)'],
+                        hoverBorderColor: ['rgba(248, 185, 39, 0.788)', 'rgba(94, 16, 248, 0.705)'],
                         data: [trade.totalPriceBy, trade.totalPriceTo]
                     },
                 ]
@@ -44,12 +44,12 @@ function Bar (props) {
             
                     // have to map over all the cards a user has
                     {
-                        label: "Your cards value",
-                        backgroundColor: 'rgba(94, 118, 253, 0.2)',
-                        borderColor: 'rgba(25, 59, 247, 0.2)',
+                        label: "Card values",
+                        backgroundColor: ["rgba(255, 205, 86, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(255, 205, 86)", "rgb(153, 102, 255)"],
                         borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(0, 26, 172, 0.2)',
-                        hoverBorderColor: 'rgb(54, 40, 255)',
+                        hoverBackgroundColor: ['rgba(255, 204, 86, 0.411)', 'rgba(123, 58, 253, 0.404)'],
+                        hoverBorderColor: ['rgba(248, 185, 39, 0.788)', 'rgba(94, 16, 248, 0.705)'],
                         data: [props.trade.totalPriceBy, props.trade.totalPriceTo]
                     },
                 ]
@@ -80,3 +80,5 @@ function Bar (props) {
 }
 
 export default Bar
+
+

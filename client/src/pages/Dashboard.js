@@ -15,10 +15,13 @@ function Dashboard() {
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [yourTrades, setYourTrades] = useState([]);
+
   const [selectedTrade, setSelectedTrade] = useState({})
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
-  const [profilePic, setProfilePic] = useState("");
-  // console.log(yourTrades)
+  const [profilePic, setProfilePic] = useState("");  
+
+
+  console.log(yourTrades)
 
   useEffect(() => {
     API.getTrade(user.mongo.displayName)
@@ -106,6 +109,23 @@ function Dashboard() {
       .then((res) => window.location.reload());
   }
 
+function deleteTrade(id) {
+  API.delete(id)
+  .then((res) => window.location.reload());
+}
+
+
+
+
+function makeTrade (trade) {
+  console.log(trade)
+  API.updateUser(trade)
+  .then((res) => {
+    console.log(res)
+    // acceptTrade(yourTrades[2]._id)
+  });
+}
+ 
 
   return (
     <div>
@@ -151,12 +171,17 @@ function Dashboard() {
                 proposedTo={trade.proposedTo}
                 proposedByProducts={proposedBy}
                 proposedToProducts={proposedTo}
+                proposedByName={proposedBy.name}
+                proposedToName={proposedTo.name}
                 currentUser={user.mongo.displayName}
+                makeTrade={makeTrade}
                 acceptTrade={acceptTrade}
+
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
                 status={trade.status}
                 id={trade._id}
+                mongoId={user.mongo._id}
                 setChart={setSelectedTrade}
               >
               </YourTrades>

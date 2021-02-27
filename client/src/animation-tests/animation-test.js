@@ -25,7 +25,6 @@ gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, Pix
 gsap.to(".class", { duration: 2, x: 300 });
 
 
-
 function Animation() {
     return (
         <div className="hero">
@@ -38,8 +37,8 @@ function Animation() {
     );
 }
 
-export default Animation;
 
+export default Animation;
 
 
 // class Animate extends Component {

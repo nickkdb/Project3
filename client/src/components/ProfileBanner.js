@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 
 function ProfileBanner(props) {
   const location = useLocation();
-  console.log(location.pathname)
+  // console.log(location.pathname)
   return (
     <div>
       <div className="banner">

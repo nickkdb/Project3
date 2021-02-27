@@ -7,9 +7,9 @@ module.exports = {
     find: function (req, res) {
         db.Trade.aggregate([ {
             $addFields: { totalPriceBy:
-              { $avg: "$proposedByProducts.price" },
+              { $sum: "$proposedByProducts.price" },
                totalPriceTo:
-              { $avg: "$proposedToProducts.price" }
+              { $sum: "$proposedToProducts.price" }
               
               }
           }])
