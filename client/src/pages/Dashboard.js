@@ -93,11 +93,11 @@ function Dashboard() {
     // console.log(list);
   }
 
-  // function acceptTrade(id) {
+  function acceptTrade(id) {
 
-  //   API.accept(id, { status: "accepted" })
-  //     .then((res) => window.location.reload());
-  // }
+    API.accept(id, { status: "accepted" })
+      .then((res) => window.location.reload());
+  }
 
   function declineTrade(id) {
     API.decline(id, { status: "declined" })
@@ -117,12 +117,13 @@ function deleteTrade(id) {
 
 
 
-function makeTrade () {
-  API.updateUser(yourTrades[0])
-    // proposedToProducts: yourTrades[0].proposedToProducts[0].uuid,
-    // proposedByProducts: yourTrades[0].proposedByProducts[0]
-
-  .then((res) => console.log(res));
+function makeTrade (trade) {
+  console.log(trade)
+  API.updateUser(trade)
+  .then((res) => {
+    console.log(res)
+    // acceptTrade(yourTrades[2]._id)
+  });
 }
  
 
@@ -174,7 +175,7 @@ function makeTrade () {
                 proposedToName={proposedTo.name}
                 currentUser={user.mongo.displayName}
                 makeTrade={makeTrade}
-                // acceptTrade={acceptTrade}
+                acceptTrade={acceptTrade}
 
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
