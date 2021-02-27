@@ -40,6 +40,9 @@ export default {
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
+  },
+  createChatRoom: function(data) {
+    return axios.post("/api/chats", data);
   }
 
 

@@ -31,6 +31,7 @@ const socket= useContext(socketContext);
     })
 
     useEffect(() => {
+        dropMessages();
         if (threads=== null) {
             console.log("hello " + user);
             socket.emit("userdata", user);
