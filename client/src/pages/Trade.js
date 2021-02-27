@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
+import {Link} from "react-router-dom"
 
 function Trade(props) {
   const user = useContext(UserContext);
@@ -120,7 +121,10 @@ function Trade(props) {
                 submitTrade()
               }}
             >
-            Submit</button>
+              <Link to="/">
+              Submit
+              </Link>
+            </button>
 
           </div>
           <div className="container">

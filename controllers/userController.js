@@ -1,36 +1,40 @@
 const db = require("../models");
 const moongoose = require("mongoose");
 const mongojs = require("mongojs");
-const pushToProducts = () => {
+
+const pushToProducts = (data) => {
     db.User.updateOne(
-    { displayName: req.body.proposedTo },
+    { displayName: data.proposedTo },
     {
-        $push: { products: {$each: proposedByProducts} }
+        $push: { products: {$each: data.proposedByProducts} }
     }
   )
   .then(res => console.log(res))
     .catch(err => console.error(err));
 }
-const pullByProducts = () => {
+
+const pullByProducts = (data) => {
   db.User.updateOne(
-    { displayName: req.body.proposedBy },
+    { displayName: data.proposedBy },
     {
-        $pullAll: { products: proposedByProducts }
+        $pullAll: { products: data.proposedByProducts }
     }
   )
   .then(res => console.log(res))
   .catch(err => console.error(err));
 }
-const pullToProducts = () => {
+
+const pullToProducts = (data) => {
   db.User.updateOne(
-    { displayName: req.body.proposedTo },
+    { displayName: data.proposedTo },
     {
-        $pullAll: { products: proposedToProducts }
+        $pullAll: { products: data.proposedToProducts }
     }
   )
   .then(res => console.log(res))
   .catch(err => console.error(err));
 }
+
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {
@@ -69,16 +73,12 @@ module.exports = {
     db.User.updateOne(
       { displayName: req.body.proposedBy },
       {
-          $push: { products: {$each: proposedToProducts} }
+          $push: { products: {$each: req.body.proposedToProducts} }
       })
       .then(data => {
-        if (data) {
-            console.log("already exists!");
-        } else {
             pushToProducts(req.body);
             pullByProducts(req.body);
             pullToProducts(req.body);
-        }
       })
   }
 }
