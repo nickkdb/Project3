@@ -22,15 +22,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, PixiPlugin, TextPlugin, ScrollToPlugin, ScrollTrigger);
 //============================================
 
-gsap.to(".class", { duration: 2, x: 300 });
-
 
 function Animation() {
+    gsap.to(".class", {rotation: 27, duration: 2, x: 300 });
+
     return (
         <div className="hero">
             <div className="container">
                 <div className="row">
-                    <div class="class">{pika}</div>
+                    <div class="class"><img src={pika} alt=""/></div>
                 </div>
             </div>
         </div>
