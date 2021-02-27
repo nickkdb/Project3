@@ -117,6 +117,7 @@ function deleteTrade(id) {
 
 function makeTrade (trade) {
   console.log(trade)
+
   API.executeTrade(trade)
   .then((res) => {
     console.log(res)

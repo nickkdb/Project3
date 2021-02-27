@@ -40,7 +40,7 @@ function ProfileBanner(props) {
                 }
                 </>
                 <Button
-                  className="sign-outBtn"
+                  className="btn btn-primary sign-outBtn"
                   onClick={() => {
                     auth.signOut();
                   }}
