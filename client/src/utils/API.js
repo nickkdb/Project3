@@ -44,9 +44,15 @@ export default {
   createUser: function(user) {
     return axios.post("/api/users", user);
   },
+<<<<<<< HEAD
   // trade: function (id, body) {
   //   return axios.put(`api/cards/` + id, body)
   // }
+=======
+  createChatRoom: function(data) {
+    return axios.post("/api/chats", data);
+  }
+>>>>>>> 71ceebde77627ee47655f2c1966bb446338cff34
 
 
 

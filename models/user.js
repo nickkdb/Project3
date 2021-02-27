@@ -44,7 +44,7 @@ const userSchema = new Schema({
   threads: [
     {
       user: { type: String, required: true },
-      room: { type: String, required: true, unique: true }, 
+      room: { type: String, required: true, unique: false }, 
       subject: { type: String, required: true }
     }
   ]

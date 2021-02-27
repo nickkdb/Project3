@@ -60,6 +60,23 @@ const ProfilePage = () => {
     setTrade(tempArr);
   };
 
+  const handleChat= () => {
+    let arr= [user.displayName.toLowerCase(), displayName.toLowerCase()];
+    let sorted= arr.sort();
+    let room= `${sorted[0]}-${sorted[1]}`;
+    console.log(room);
+
+    let data= {
+      user: user.displayName,
+      otherUser: displayName,
+      room: room
+    }
+
+    API.createChatRoom(data)
+    .then(res => console.log(res))
+    .catch(err => console.error(err));
+  }
+
   // if (trade.length >= 1) {
   //   console.log(trade);
   // }
@@ -96,7 +113,7 @@ const ProfilePage = () => {
           <h2 className="text-2xl font-semibold">{displayName}</h2>
         </div>
       </div>
-      <button className="w-full py-3 bg-red-600 mt-4 text-white">Chat</button>
+      <button onClick={handleChat} className="w-full py-3 bg-red-600 mt-4 text-white">Chat</button>
       <button className="btn btn-success" onClick={setLocalTrade}>
         <Link to="/trade" className="text-blue-500 hover:text-blue-600">
           Propose Trade

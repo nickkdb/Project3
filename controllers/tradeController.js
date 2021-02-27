@@ -5,9 +5,15 @@ const mongojs = require("mongojs");
 module.exports = {
 
     find: function (req, res) {
-        db.Trade.find({
-            $or: [{ "proposedBy": req.params.id }, { "proposedTo": req.params.id }]
-        }).then(function (dbUser) {
+        db.Trade.aggregate([ {
+            $addFields: { totalPriceBy:
+              { $avg: "$proposedByProducts.price" },
+               totalPriceTo:
+              { $avg: "$proposedToProducts.price" }
+              
+              }
+          }])
+        .then(function (dbUser) {
             res.json(dbUser);
         });
     },

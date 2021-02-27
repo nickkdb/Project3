@@ -1,36 +1,39 @@
-import React, {useState, useEffect, useCallback, useContext} from 'react';
-import {Row, Col} from "react-bootstrap";
+import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { Row, Col } from "react-bootstrap";
 import { addResponseMessage, addUserMessage, Widget, dropMessages } from 'react-chat-widget';
 import Thread from '../components/thread';
-import {socketContext} from '../utils/socketContext';
+import { socketContext } from '../utils/socketContext';
 import UserContext from "../utils/UserContext";
+import Banner from "../components/Banner";
+import "../styles/style.css";
 
 
 function Chat() {
 
-const socket= useContext(socketContext);
+    const socket = useContext(socketContext);
 
-    const user= useContext(UserContext).displayName;
-    const [threads, setThreads]= useState(null);
-    const [otherUser, setOtherUser]= useState();
-    const [subtitle, setSubtitle]= useState();
-    const [room, setRoom]= useState(null);
-    const [resData, setResData]= useState();
+    const user = useContext(UserContext).displayName;
+    const [threads, setThreads] = useState(null);
+    const [otherUser, setOtherUser] = useState();
+    const [subtitle, setSubtitle] = useState();
+    const [room, setRoom] = useState(null);
+    const [resData, setResData] = useState();
 
     let results;
 
     useEffect(() => {
         socket.on("message", data => {
             if (data.sender === otherUser) {
-                let text= data.text;
+                let text = data.text;
                 addResponseMessage(text);
             }
         })
 
-        return function cleanup() {socket.off("message")}
+        return function cleanup() { socket.off("message") }
     })
 
     useEffect(() => {
+        dropMessages();
         if (threads=== null) {
             console.log("hello " + user);
             socket.emit("userdata", user);
@@ -57,17 +60,17 @@ const socket= useContext(socketContext);
     const handleNewUserMessage = (newMessage) => {
         console.log(`New message incoming! ${newMessage}`);
         if (room) {
-            socket.emit("sendmsg", {newMessage, room, user});
+            socket.emit("sendmsg", { newMessage, room, user });
         }
-      };
+    };
 
-      const handleResponse = useCallback((res) => {
+    const handleResponse = useCallback((res) => {
         setResData(res);
-      }, []);
+    }, []);
 
-    const handleCB= useCallback((childData) => {
+    const handleCB = useCallback((childData) => {
         dropMessages();
-        let roomname= childData.room;
+        let roomname = childData.room;
         setOtherUser(childData.name);
         setSubtitle(childData.subject);
         setRoom(roomname);
@@ -80,43 +83,41 @@ const socket= useContext(socketContext);
         }
     }, []);
 
-    const updateSubject= useCallback((sub, roomname) => {
-        socket.emit('updateSubject', {subject: sub, room: roomname});
+    const updateSubject = useCallback((sub, roomname) => {
+        socket.emit('updateSubject', { subject: sub, room: roomname });
         setSubtitle(sub);
     }, []);
 
     if (threads) {
-        results= threads.map(el => {
+        results = threads.map(el => {
             return (
-            <Thread update={updateSubject} fxn={handleCB} room={el.room} name={el.user} subject={el.subject} />
+                <Thread update={updateSubject} fxn={handleCB} room={el.room} name={el.user} subject={el.subject} />
             )
-        })     
+        })
     }
 
-        return (
-            <>
+    return (
+        <>
+            <Banner pageTitle="Inbox" />
             <Row>
-                    <Col md={{span: 6, offset: 3}}>
-                        <h1 style={{textAlign: "center", color: "black"}}>Inbox</h1>
-                    <hr color={"black"}/>
-                    </Col>
-                </Row>
-                <Row style={{marginTop: "5rem"}}>
-                <Col md={4}>
-                <h3 style={{textAlign: "center", color: "black"}}>Message Threads</h3>
-                {/* {threads === null && 
-               <h1 style={{color: "black"}}> You have no message threads yet</h1> 
-                } */}
+                <Col md={{ span: 6, offset: 3 }}>
+                    {/* <h1 style={{ textAlign: "center", color: "black" }}>Inbox</h1>
+                    <hr color={"black"} /> */}
                 </Col>
-                </Row>
-                {results}
-                <Widget 
-                title={otherUser || "Welcome"} 
-                subtitle={subtitle || "Select a User to begin messaging"} 
+            </Row>
+            <Row style={{ marginTop: "5rem" }}>
+                <Col md={4}>
+                    <h3 style={{ textAlign: "center", color: "black" }}>Message Threads</h3>
+                </Col>
+            </Row>
+            {results}
+            <Widget
+                title={otherUser || "Welcome"}
+                subtitle={subtitle || "Select a User to begin messaging"}
                 handleNewUserMessage={handleNewUserMessage}
             />
-      </>
-        )
+        </>
+    )
 }
 
 export default Chat;
