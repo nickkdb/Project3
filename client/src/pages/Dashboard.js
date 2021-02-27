@@ -15,10 +15,13 @@ function Dashboard() {
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [yourTrades, setYourTrades] = useState([]);
+
   const [selectedTrade, setSelectedTrade] = useState({})
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
-  const [profilePic, setProfilePic] = useState("");
-  // console.log(yourTrades)
+  const [profilePic, setProfilePic] = useState("");  
+
+
+  console.log(yourTrades)
 
   useEffect(() => {
     API.getTrade(user.mongo.displayName)
@@ -90,11 +93,11 @@ function Dashboard() {
     // console.log(list);
   }
 
-  function acceptTrade(id) {
+  // function acceptTrade(id) {
 
-    API.accept(id, { status: "accepted" })
-      .then((res) => window.location.reload());
-  }
+  //   API.accept(id, { status: "accepted" })
+  //     .then((res) => window.location.reload());
+  // }
 
   function declineTrade(id) {
     API.decline(id, { status: "declined" })
@@ -106,6 +109,22 @@ function Dashboard() {
       .then((res) => window.location.reload());
   }
 
+function deleteTrade(id) {
+  API.delete(id)
+  .then((res) => window.location.reload());
+}
+
+
+
+
+function makeTrade () {
+  API.updateUser(yourTrades[0])
+    // proposedToProducts: yourTrades[0].proposedToProducts[0].uuid,
+    // proposedByProducts: yourTrades[0].proposedByProducts[0]
+
+  .then((res) => console.log(res));
+}
+ 
 
   return (
     <div>
@@ -151,12 +170,17 @@ function Dashboard() {
                 proposedTo={trade.proposedTo}
                 proposedByProducts={proposedBy}
                 proposedToProducts={proposedTo}
+                proposedByName={proposedBy.name}
+                proposedToName={proposedTo.name}
                 currentUser={user.mongo.displayName}
-                acceptTrade={acceptTrade}
+                makeTrade={makeTrade}
+                // acceptTrade={acceptTrade}
+
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
                 status={trade.status}
                 id={trade._id}
+                mongoId={user.mongo._id}
                 setChart={setSelectedTrade}
               >
               </YourTrades>
