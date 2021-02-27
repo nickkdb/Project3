@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { propTypes } from "react-bootstrap/esm/Image";
 import UserContext from "../utils/UserContext";
 import "./style.css";
+import { Badge } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 
 function YourTrades(props) {
 
@@ -9,6 +12,22 @@ function YourTrades(props) {
     return (
 
         <div class="card">
+            <div>
+            <Badge 
+                pill variant="success"
+                style={{float: "right", cursor: "pointer"}}
+                className="m-2"
+                onClick={() => {
+                //    console.log("ALERT")
+                //    console.log(props.tradeObj)
+                    props.setChart(props.tradeObj);
+                  }}
+            >
+                Analyze It!
+                <span className={"ml-2"}></span>
+                <FontAwesomeIcon icon={faChartBar} />
+            </Badge>
+            </div>
 
             <ul>
 

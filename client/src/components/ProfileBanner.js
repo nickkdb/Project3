@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/style.css";
 import { Button } from "react-bootstrap";
 import { auth } from "../utils/firebase";
+import {Link} from "react-router-dom";
 
 function ProfileBanner(props) {
   return (
@@ -35,7 +36,9 @@ function ProfileBanner(props) {
                     auth.signOut();
                   }}
                 >
+                  <Link to="/">
                   Sign Out
+                  </Link>
                 </Button>
               </div>
               <div className="row">

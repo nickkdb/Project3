@@ -13,10 +13,21 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-
   const [yourTrades, setYourTrades] = useState([]);
+  const [selectedTrade, setSelectedTrade] = useState({})
   // console.log(yourTrades)
 
+  useEffect(() => {
+    API.getTrade(user.mongo.displayName)
+      .then((res) => {
+        setYourTrades(res.data);
+      })
+  }, []);
+
+
+  useEffect(() => {
+    console.log(selectedTrade)
+  }, [selectedTrade]);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -65,13 +76,6 @@ function Dashboard() {
     // console.log(list);
   }
 
-  useEffect(() => {
-    API.getTrade(user.mongo.displayName)
-      .then((res) => {
-        setYourTrades(res.data);      
-      })
-  }, []);
-
   function acceptTrade(id) {
     
     API.accept(id, {status: "accepted"})
@@ -93,9 +97,12 @@ function deleteTrade(id) {
     <div className="container">
       <div className="row">
         <div className="col-7">
-        <Bar  
-          trades={yourTrades}
-        />        
+          {!yourTrades.length >= 1 ? "" :
+            <Bar  
+              trade={yourTrades[0]}
+              selectedTrade={selectedTrade}
+            />   
+          }    
           <div className= "col-2" />  
           <h2> Your Trades </h2>
         {yourTrades && yourTrades.map((trade) => {
@@ -111,11 +118,12 @@ function deleteTrade(id) {
           (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
         })
 
-        // console.log(trade._id)
+        // console.log(trade)
           return (
             <div className="col-8">
             
               <YourTrades
+                tradeObj={trade}
                 proposedBy={trade.proposedBy}
                 proposedTo={trade.proposedTo}
                 proposedByProducts={proposedBy}
@@ -126,6 +134,7 @@ function deleteTrade(id) {
                 deleteTrade={deleteTrade}
                 status={trade.status}
                 id={trade._id}
+                setChart={setSelectedTrade}
               >
               </YourTrades>
             </div>
