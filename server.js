@@ -38,9 +38,9 @@ socket.on("userdata", user => {
 
 socket.on("updateSubject", data => {
   updateSubject(data.subject, data.room);
-  console.log('updating subject!');
+  // console.log('updating subject!');
 
-  socket.emit('newSubject', {sub: data.subject, room: data.room});
+  // socket.emit('newSubject', {sub: data.subject, room: data.room});
 })
 
 socket.on("info", room => {
