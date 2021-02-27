@@ -17,7 +17,8 @@ const ProfilePage = () => {
   console.log(x);
 
   const [thisUser, setThisUser] = useState({});
-  const [trade, setTrade] = useState([]);
+  const [fbImage, setFbImage] = useState({})
+  const [trade, setTrade] = useState([])
   // const [interested, setInterested] = (false)
 
   useEffect(() => {
@@ -26,23 +27,27 @@ const ProfilePage = () => {
 
   function loadUser() {
     API.getProfile(x)
-      .then((res) => setThisUser(res.data))
+      .then((res) => {
+        getFbImage(res.data)
+        setThisUser(res.data)
+      })
       .catch((err) => console.error(err));
   }
 
-  // function getFirebaseImage() {
-  //   storage
-  //     .ref("images")
-  //     .child(thisUser._id)
-  //     .getDownloadURL()
-  //     .then((fireBaseUrl) => {
-  //       console.log(fireBaseUrl);
-  //       thisUser.image = fireBaseUrl;
-  //     });
-  // }
 
-  if (thisUser) {
-    console.log(thisUser);
+  const getFbImage = (data) => {
+    storage
+    .ref("images")
+    .child(data._id)
+    .getDownloadURL()
+    .then((fireBaseUrl) => {
+      setFbImage(fireBaseUrl)
+    });
+
+  }
+
+  if (fbImage) {
+    console.log(fbImage);
     // getFirebaseImage()
   }
 
@@ -92,10 +97,10 @@ const ProfilePage = () => {
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
         <div
           style={
-            thisUser.image ?
+            fbImage ?
             {
-            background: `url(${thisUser.image})  no-repeat center center`,
-            backgroundSize: "cover",
+            background: `url(${fbImage})  no-repeat center center`,
+            backgroundSize: "contain",
             height: "200px",
             width: "200px",
           }
