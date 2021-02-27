@@ -73,12 +73,15 @@ module.exports= {
         .catch(err => console.error(err))
     },
     updateSubject: (subject, room) => {
+        console.log("updating subject!");
         db.User.updateMany(
             {'threads.room': room }, {
                 $set: {
                     'threads.$.subject':  subject,
                 }
             })
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
     },
     check: (req, res) => {
         console.log(req.body);
