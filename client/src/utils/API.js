@@ -10,7 +10,7 @@ export default {
     return axios.get("/api/users/" + id);
   },
   updateUser: function (body){
-    return axios.put(`api/users` + body)
+    return axios.put(`/api/users`, body)
   },
   getProfile: function(id) {
     return axios.get("/api/users/profile/" + id);
@@ -44,15 +44,9 @@ export default {
   createUser: function(user) {
     return axios.post("/api/users", user);
   },
-<<<<<<< HEAD
-  // trade: function (id, body) {
-  //   return axios.put(`api/cards/` + id, body)
-  // }
-=======
   createChatRoom: function(data) {
     return axios.post("/api/chats", data);
   }
->>>>>>> 71ceebde77627ee47655f2c1966bb446338cff34
 
 
 

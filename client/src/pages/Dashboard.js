@@ -15,12 +15,13 @@ function Dashboard() {
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [yourTrades, setYourTrades] = useState([]);
-  console.log(yourTrades)
-  console.log(user)
+
   const [selectedTrade, setSelectedTrade] = useState({})
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
-  const [profilePic, setProfilePic] = useState("");
-  // console.log(yourTrades)
+  const [profilePic, setProfilePic] = useState("");  
+
+
+  console.log(yourTrades)
 
   useEffect(() => {
     API.getTrade(user.mongo.displayName)
@@ -92,11 +93,11 @@ function Dashboard() {
     // console.log(list);
   }
 
-  function acceptTrade(id) {
+  // function acceptTrade(id) {
 
-    API.accept(id, { status: "accepted" })
-      .then((res) => window.location.reload());
-  }
+  //   API.accept(id, { status: "accepted" })
+  //     .then((res) => window.location.reload());
+  // }
 
   function declineTrade(id) {
     API.decline(id, { status: "declined" })
@@ -116,12 +117,11 @@ function deleteTrade(id) {
 
 
 
-
 function makeTrade () {
-  API.updateUser({
-    proposedToProducts: yourTrades.proposedToProducts[0].uuid,
-    proposedByProducts: yourTrades.proposedByProducts[0]
-  })
+  API.updateUser(yourTrades[0])
+    // proposedToProducts: yourTrades[0].proposedToProducts[0].uuid,
+    // proposedByProducts: yourTrades[0].proposedByProducts[0]
+
   .then((res) => console.log(res));
 }
  

@@ -4,7 +4,8 @@ const userController = require("../../controllers/userController");
 // Matches with "/api/books"
 router.route("/")
   .get(userController.findAll)
-  .post(userController.create);
+  .post(userController.create)
+  .put(userController.executeTrade);
 
 // Matches with "/api/books/:id"
 router.route("/:id")
