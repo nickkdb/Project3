@@ -275,12 +275,12 @@ const ProfilePage = () => {
                               <h6>
                                 Once you're done cropping, click "Crop Image".
                               </h6>
-                              <button
+                              {/* <button
                                 className="btn btn-primary"
                                 onClick={generateImg}
                               >
                                 Crop Image
-                              </button>
+                              </button> */}
                             </div>
                             <div
                               style={
@@ -358,13 +358,42 @@ const ProfilePage = () => {
                   </div>
                 </Modal.Body>
                 <Modal.Footer>
+                  <div>
+                    { !imageAsFile && !downloaded ? (
+                      <div>
+                        <div>
+                      <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleFireBaseUpload}>
+                    Save
+                  </Button>
+                  </div>
+                      </div>
+                    ) : tempImg && !downloaded ? (
+                      <div>
+                        <Button variant="secondary" onClick={handleClose}>Close</Button>
+                      <Button variant="primary" onClick={generateImg}>Crop Image</Button>
+                      </div>
+                    ) : (
+                    <div>
+                      <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleFireBaseUpload}>
+                    Save
+                  </Button>
+                  </div>)}
+                  </div>
+                </Modal.Footer>
+                {/* <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>
                     Close
                   </Button>
                   <Button variant="primary" onClick={handleFireBaseUpload}>
                     Save
                   </Button>
-                </Modal.Footer>
+                </Modal.Footer> */}
               </div>
             )}
           </div>
