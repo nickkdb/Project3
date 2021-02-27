@@ -44,8 +44,8 @@ function Footer() {
             </div>
 
 
-            <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
-                © 2021 Copyright: Group 5
+            <div className="text-center p-3 footer-bg">
+                <h6>© 2021 Copyright: Group 5</h6>
             </div>
 
         </footer>
