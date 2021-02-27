@@ -119,34 +119,41 @@ const ProfilePage = () => {
           <h2 className="text-2xl font-semibold">{displayName}</h2>
         </div>
       </div>
+      <div className="m-3">
       <CustomLink to="/messages" 
-      children= {<button onClick={handleChat} className="w-full py-3 bg-red-600 mt-4 text-white">Chat</button>} />
-      <button className="btn btn-success" onClick={setLocalTrade}>
+      children= {<button onClick={handleChat} className="btn btn-primary mr-2">Chat</button>} />
+     
         <Link to="/trade" className="text-blue-500 hover:text-blue-600">
+        <button className="btn btn-success" onClick={setLocalTrade}>
           Propose Trade
+          </button>
         </Link>
-      </button>
-      {thisUser.products &&
-        thisUser.products.map((card) => {
-          return (
-            <div key={card.uuid} className="col-6">
-              <MyCard
-                key={card.uuid}
-                uuid={card.uuid}
-                profileType={location.pathname}
-                name={card.name}
-                category={card.category}
-                description={card.description}
-                available={card.available}
-                image={card.image}
-                price={card.price}
-                attributes={card.attributes}
-                addToTrade={addToTrade}
-                removeFromTrade={removeFromTrade}
-              ></MyCard>
-            </div>
-          );
-        })}
+      </div>
+      <div className="container">
+        <div className="row">
+          {thisUser.products &&
+            thisUser.products.map((card) => {
+            return (
+              <div key={card.uuid} className="col-6">
+                <MyCard
+                  key={card.uuid}
+                  uuid={card.uuid}
+                  profileType={location.pathname}
+                  name={card.name}
+                  category={card.category}
+                  description={card.description}
+                  available={card.available}
+                  image={card.image}
+                  price={card.price}
+                  attributes={card.attributes}
+                  addToTrade={addToTrade}
+                  removeFromTrade={removeFromTrade}
+                ></MyCard>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

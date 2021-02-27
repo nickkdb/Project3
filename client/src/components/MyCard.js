@@ -125,7 +125,7 @@ function MyCard(props) {
           </button>
         ) : props.profileType && interested ? (
           <div>
-            <Badge pill variant="success">
+            <Badge pill variant="success" style={{cursor: "pointer"}}>
               Added
               <span className={"ml-2"}></span>
               <FontAwesomeIcon icon={faCheck} />
@@ -133,6 +133,7 @@ function MyCard(props) {
             <Badge
               pill
               variant="danger"
+              style={{cursor: "pointer"}}
               onClick={() => {
                 props.removeFromTrade(props.uuid);
                 setInterested(false);
