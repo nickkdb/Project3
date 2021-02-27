@@ -9,6 +9,7 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
+
   executeTrade: function (body){
     return axios.put(`/api/users`, body)
   },

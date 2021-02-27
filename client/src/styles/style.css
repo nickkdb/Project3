@@ -160,7 +160,9 @@ select {
 }
 
 
-
+.footer-bg {
+  background-color: #4f519d33;
+}
 
 
 /* ================= Mobile =================== */

@@ -8,7 +8,7 @@ import logo from "../images/logo74KBblack.png"
 
 function Footer() {
     return (
-        <footer className="bg-light text-center text-lg-start">
+        <footer className="bg-light text-lg-start">
 
             <div className="container p-4">
 
@@ -21,39 +21,20 @@ function Footer() {
                             Currently supporting trades for Pokémon Trading Card Game, Magic: The Gathering, and Yu-Gi-Oh! Trading Card Game. More card series coming soon!
                         </p>
                     </div>
-
-
-
-                    <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 className="text-uppercase footerTitle">Trading Cards</h5>
-
-                        <ul className="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" className="text-dark">Pokémon</a>
-                            </li>
-                            <li>
-                                <a href="#!" className="text-dark">Magic the Gathering</a>
-                            </li>
-                            <li>
-                                <a href="#!" className="text-dark">Yu-Gi-Oh!</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-
-                    <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 className="text-uppercase mb-0 footerTitle">Links</h5>
+      
+                    <div className="col-lg-3 col-md-12 mb-4 mb-md-0"></div>
+                    <div className="col-lg-3 col-md-12 mb-4 mb-md-0">
+                        <h6 className="mb-0">Resources</h6>
 
                         <ul className="list-unstyled">
-                            <li>
-                                <a href="https://www.yugioh-card.com/en/" className="text-dark">YuGiOPh</a>
+                        <li>
+                                <a href="https://www.pokemon.com/" rel="noreferrer" target="_blank" className="text-dark">Pokémon Official Website</a>
                             </li>
                             <li>
-                                <a href="https://www.pokemon.com/" className="text-dark">Pokemon 2</a>
+                                <a href="https://magic.wizards.com/" rel="noreferrer" target="_blank" className="text-dark">Magic The Gathering Official Website</a>
                             </li>
                             <li>
-                                <a href="https://magic.wizards.com/" className="text-dark">Magic The Gathering</a>
+                                <a href="https://www.yugioh-card.com/en/" rel="noreferrer" target="_blank" className="text-dark">Yu-Gi-Oh! Official Website</a>
                             </li>
                             
                         </ul>
@@ -64,8 +45,8 @@ function Footer() {
             </div>
 
 
-            <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
-                © 2021 Copyright: Group 5
+            <div className="text-center p-3 footer-bg">
+                <h6>© 2021 Copyright: Group 5</h6>
             </div>
 
         </footer>
