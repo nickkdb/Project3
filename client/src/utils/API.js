@@ -9,6 +9,9 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
+  updateUser: function (body){
+    return axios.put(`api/users` + body)
+  },
   getProfile: function(id) {
     return axios.get("/api/users/profile/" + id);
   },
@@ -40,7 +43,10 @@ export default {
   // Saves a user to the database
   createUser: function(user) {
     return axios.post("/api/users", user);
-  }
+  },
+  // trade: function (id, body) {
+  //   return axios.put(`api/cards/` + id, body)
+  // }
 
 
 

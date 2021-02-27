@@ -104,6 +104,9 @@ const socket= useContext(socketContext);
                 <Row style={{marginTop: "5rem"}}>
                 <Col md={4}>
                 <h3 style={{textAlign: "center", color: "black"}}>Message Threads</h3>
+                {/* {threads === null && 
+               <h1 style={{color: "black"}}> You have no message threads yet</h1> 
+                } */}
                 </Col>
                 </Row>
                 {results}

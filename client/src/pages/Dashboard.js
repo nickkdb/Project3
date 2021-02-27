@@ -16,6 +16,7 @@ function Dashboard() {
 
   const [yourTrades, setYourTrades] = useState([]);
   console.log(yourTrades)
+  console.log(user)
 
 
   function handleSearch(event) {
@@ -72,11 +73,12 @@ function Dashboard() {
       })
   }, []);
 
-  function acceptTrade(id) {
+//   function acceptTrade(id) {
     
-    API.accept(id, {status: "accepted"})
-    .then((res) => window.location.reload());
-}
+//     API.accept(id, {status: "accepted"})
+//     .then((res) => window.location.reload());
+// }
+
 
 function declineTrade(id) {
   API.decline(id, {status: "declined"})
@@ -86,6 +88,18 @@ function declineTrade(id) {
 function deleteTrade(id) {
   API.delete(id)
   .then((res) => window.location.reload());
+}
+
+
+
+
+
+function makeTrade () {
+  API.updateUser({
+    proposedToProducts: yourTrades.proposedToProducts[0].uuid,
+    proposedByProducts: yourTrades.proposedByProducts[0]
+  })
+  .then((res) => console.log(res));
 }
  
 
@@ -120,12 +134,17 @@ function deleteTrade(id) {
                 proposedTo={trade.proposedTo}
                 proposedByProducts={proposedBy}
                 proposedToProducts={proposedTo}
+                proposedByName={proposedBy.name}
+                proposedToName={proposedTo.name}
                 currentUser={user.mongo.displayName}
-                acceptTrade={acceptTrade}
+                makeTrade={makeTrade}
+                // acceptTrade={acceptTrade}
+
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
                 status={trade.status}
                 id={trade._id}
+                mongoId={user.mongo._id}
               >
               </YourTrades>
             </div>
