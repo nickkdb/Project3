@@ -38,8 +38,8 @@ function Trade(props) {
     const trade = {
         proposedBy: user.mongo.displayName,
         proposedTo: tradeUser.displayName,
-        proposedByProducts: [myProducts],
-        proposedToProducts: [theirProducts],
+        proposedByProducts: myProducts,
+        proposedToProducts: theirProducts,
         status: "pending"
         
     }

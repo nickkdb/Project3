@@ -14,10 +14,34 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-
   const [yourTrades, setYourTrades] = useState([]);
-  console.log(yourTrades)
+  const [selectedTrade, setSelectedTrade] = useState({})
+  const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
+  const [profilePic, setProfilePic] = useState("");
+  // console.log(yourTrades)
 
+  useEffect(() => {
+    API.getTrade(user.mongo.displayName)
+      .then((res) => {
+        setYourTrades(res.data);
+      })
+  }, []);
+
+  useEffect(() => {
+    storage
+      .ref("images")
+      .child(user.mongo._id)
+      .getDownloadURL()
+      .then((fireBaseUrl) => {
+        console.log(fireBaseUrl);
+        setProfilePic(fireBaseUrl);
+      });
+  }, [user.mongo._id, imageAsUrl]);
+
+
+  useEffect(() => {
+    console.log(selectedTrade)
+  }, [selectedTrade]);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -46,7 +70,7 @@ function Dashboard() {
     API.getUsers()
       .then((res) => {
         setList(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
     getFirebaseImages();
@@ -63,15 +87,8 @@ function Dashboard() {
         });
       return 0;
     });
-    console.log(list);
+    // console.log(list);
   }
-
-  useEffect(() => {
-    API.getTrade(user.mongo.displayName)
-      .then((res) => {
-        setYourTrades(res.data);
-      })
-  }, []);
 
   function acceptTrade(id) {
 
@@ -92,56 +109,61 @@ function Dashboard() {
 
   return (
     <div>
-      <ProfileBanner
-        pageTitle={displayName}
-        avatar={avatar}
-        //fbImage={profilePic}
-        email={email}
-        userId={uid}
-        //updatePicButton={updatePicButton}
-      />
-      <div className="container">
-        <div className="row">
-          <div className="col-7">
-            <Bar
-              trades={yourTrades}
-            />
-            <div className="col-2" />
-            <h2> Your Trades </h2>
-            {yourTrades && yourTrades.map((trade) => {
-              let proposedBy = ""
-              let proposedTo = ""
-              console.log(trade.status)
-              trade.proposedByProducts[0].map((name) => {
-                (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
-              })
+    <ProfileBanner
+    pageTitle={displayName}
+    avatar={avatar}
+    fbImage={profilePic}
+    email={email}
+    userId={uid}
+    // updatePicButton={updatePicButton}
+  />
+    <div className="container">
+      <div className="row">
+        <div className="col-7">
+          {!yourTrades.length >= 1 ? "" :
+            <Bar  
+              trade={yourTrades[0]}
+              selectedTrade={selectedTrade}
+            />   
+          }    
+          <div className= "col-2" />  
+          <h2> Your Trades </h2>
+        {yourTrades && yourTrades.map((trade) => {
+            let proposedBy= ""
+            let proposedTo= ""
+          // console.log(trade.proposedByProducts)
+        trade.proposedByProducts.map((name) => {
+          (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
+        })
 
-              trade.proposedToProducts[0].map((name) => {
-                // proposedTo += name.name + " "
-                (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
-              })
+        trade.proposedToProducts.map((name) => {
+          // proposedTo += name.name + " "
+          (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
+        })
 
-              console.log(trade._id)
-              return (
-                <div className="col-8">
-
-                  <YourTrades
-                    proposedBy={trade.proposedBy}
-                    proposedTo={trade.proposedTo}
-                    proposedByProducts={proposedBy}
-                    proposedToProducts={proposedTo}
-                    currentUser={user.mongo.displayName}
-                    acceptTrade={acceptTrade}
-                    declineTrade={declineTrade}
-                    deleteTrade={deleteTrade}
-                    status={trade.status}
-                    id={trade._id}
-                  >
-                  </YourTrades>
-                </div>
-              )
-            })}
-          </div>
+        // console.log(trade)
+          return (
+            <div className="col-8">
+            
+              <YourTrades
+                tradeObj={trade}
+                proposedBy={trade.proposedBy}
+                proposedTo={trade.proposedTo}
+                proposedByProducts={proposedBy}
+                proposedToProducts={proposedTo}
+                currentUser={user.mongo.displayName}
+                acceptTrade={acceptTrade}
+                declineTrade={declineTrade}
+                deleteTrade={deleteTrade}
+                status={trade.status}
+                id={trade._id}
+                setChart={setSelectedTrade}
+              >
+              </YourTrades>
+            </div>
+          )
+        })}
+        </div>
           <div className="col-1">
 
           </div>
@@ -198,7 +220,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 
