@@ -38,7 +38,7 @@ const pullToProducts = (data) => {
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {
-    db.User.find({}).then(function (dbUser) {
+    db.User.find({}).select("_id displayName products.category products.name").then(function (dbUser) {
       res.json(dbUser);
     });
   },

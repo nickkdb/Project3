@@ -9,7 +9,7 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
-  updateUser: function (body){
+  executeTrade: function (body){
     return axios.put(`/api/users`, body)
   },
   getProfile: function(id) {
