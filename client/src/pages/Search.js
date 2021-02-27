@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
 import axios from "axios";
 import YugiohCard from "../components/yuigiohCard";
@@ -22,11 +22,19 @@ function Search() {
   const [postData, setPostData] = useState("");
   const [yImage, setYImage] = useState("");
   const [ySet, setYSet] = useState("");
+  const [yugiohSearch, setYugiohSearch] = useState([])
   
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
   };
+
+  useEffect(() => {
+    axios
+    .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php`)
+    .then(res => setYugiohSearch(res.data.data))
+  })
+
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -37,21 +45,36 @@ function Search() {
 
     // yugioh
     if (searchType === "Yugioh!") {
-      axios
-        .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
-        .then((res) => {
-          setYCards(res.data.data);
-          setPCards(null);
-          setMCards(null)
-          console.log(res.data.data);
-        });
+      let lowerSearch = search.toLocaleLowerCase();
+      if (search && yugiohSearch) {
+        let c = yugiohSearch.map((x) => JSON.stringify(x.name));
+        let temp = c
+          .filter((card) => card.toLocaleLowerCase().includes(lowerSearch) === true)
+          .map((x) => JSON.parse(x));
+        console.log(c)
+        console.log(temp)
+        let final = yugiohSearch.filter(item => temp.includes(item.name))
+
+        setYCards(final);
+        setPCards(null);
+        setMCards(null)
+      }
+      
+      // axios
+      //   .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${search}`)
+      //   .then((res) => {
+      //     setYCards(res.data.data);
+      //     setPCards(null);
+      //     setMCards(null)
+      //     console.log(res.data.data);
+      //   });
     }
 
 
     //pokemon
     if (searchType === "Pokemon") {
       axios
-        .get(`https://api.pokemontcg.io/v2/cards?q=name:${search}`)
+        .get(`https://api.pokemontcg.io/v2/cards?q=name:*${search}*`)
         .then((res) => {
           setPCards(res.data.data);
           setMCards(null)
@@ -147,7 +170,7 @@ function Search() {
           {yCards &&
             yCards.map((card) => {
               return (
-                <div className="col-6">
+                <div key={card.id} className="col-6">
                 <YugiohCard
                   key={card.id}
                   id={card.id}
@@ -164,7 +187,7 @@ function Search() {
                   sets={card.card_sets}
                   setYSet={setYSet}
                   setYImage={setYImage}
-                  initSet={`${card.card_sets[0].set_name} | ${card.card_sets[0].set_rarity}`}
+                  initSet={ card.card_sets ? `${card.card_sets[0].set_name} | ${card.card_sets[0].set_rarity}` : ""}
                   openModal={handleShow}
                   addCard={addCard}
                   postData={setPostData}

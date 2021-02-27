@@ -136,7 +136,7 @@ function makeTrade (trade) {
     userId={uid}
     // updatePicButton={updatePicButton}
   />
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
         <div className="col-7">
           {!yourTrades.length >= 1 ? "" :

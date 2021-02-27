@@ -1,5 +1,5 @@
 import React from "react";
-// import Hero from "../components/Hero";
+import Hero from "../components/Hero";
 import Animation from "../animation-tests/animation-test";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav"
@@ -19,8 +19,8 @@ function Home() {
     return (
     <div>
             <Nav />
-            {/* <Hero/> */}
-            <Animation />
+            <Hero/>
+            {/* <Animation /> */}
             <Section1 series="Pokémon Trading Card Game" image={poke} alt="pokemon card back" link="https://en.wikipedia.org/wiki/Pok%C3%A9mon_Trading_Card_Game" cite="1" anchor="#1"
             description="The Pokémon Trading Card Game, abbreviated to PTCG or Pokémon TCG, is a collectible card game, based on Nintendo's Pokémon franchise of video 
             games and anime, first published in October 1996 by Media Factory in Japan (One Month after Bandai Pokemon Carddass Part 1 Green and Part 2 red, September 
