@@ -11,7 +11,7 @@ function YourTrades(props) {
 
     return (
 
-        <div class="card">
+        <div className="card">
             <div>
             <Badge 
                 pill variant="success"
