@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import avatar from "../images/avatar.png";
 import { storage } from "../utils/firebase";
 import { Link } from "react-router-dom";
+import CustomLink from "../components/customLink";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -118,7 +119,8 @@ const ProfilePage = () => {
           <h2 className="text-2xl font-semibold">{displayName}</h2>
         </div>
       </div>
-      <button onClick={handleChat} className="w-full py-3 bg-red-600 mt-4 text-white">Chat</button>
+      <CustomLink to="/messages" 
+      children= {<button onClick={handleChat} className="w-full py-3 bg-red-600 mt-4 text-white">Chat</button>} />
       <button className="btn btn-success" onClick={setLocalTrade}>
         <Link to="/trade" className="text-blue-500 hover:text-blue-600">
           Propose Trade
