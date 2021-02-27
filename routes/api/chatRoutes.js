@@ -5,6 +5,9 @@ const chatController = require("../../controllers/chatController");
 // router.route("/")
 // .post(chatController.createRoom)
 //   .get(chatController.checkForRoom)
+
+router.route("/")
+.post(chatController.check)
   
 
 // // Matches with "/api/books/:id"

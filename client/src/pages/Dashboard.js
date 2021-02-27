@@ -3,18 +3,21 @@ import UserContext from "../utils/UserContext";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
-import Banner from "../components/Banner";
+import ProfileBanner from "../components/ProfileBanner";
 import avatar from "../images/avatar.png";
 import Bar from "../components/Bar";
 import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
   const user = useContext(UserContext);
+  const { displayName, email, uid } = user;
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [yourTrades, setYourTrades] = useState([]);
   const [selectedTrade, setSelectedTrade] = useState({})
+  const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
+  const [profilePic, setProfilePic] = useState("");
   // console.log(yourTrades)
 
   useEffect(() => {
@@ -23,6 +26,17 @@ function Dashboard() {
         setYourTrades(res.data);
       })
   }, []);
+
+  useEffect(() => {
+    storage
+      .ref("images")
+      .child(user.mongo._id)
+      .getDownloadURL()
+      .then((fireBaseUrl) => {
+        console.log(fireBaseUrl);
+        setProfilePic(fireBaseUrl);
+      });
+  }, [user.mongo._id, imageAsUrl]);
 
 
   useEffect(() => {
@@ -77,23 +91,32 @@ function Dashboard() {
   }
 
   function acceptTrade(id) {
-    
-    API.accept(id, {status: "accepted"})
-    .then((res) => window.location.reload());
-}
 
-function declineTrade(id) {
-  API.decline(id, {status: "declined"})
-  .then((res) => window.location.reload());
-}
+    API.accept(id, { status: "accepted" })
+      .then((res) => window.location.reload());
+  }
 
-function deleteTrade(id) {
-  API.delete(id)
-  .then((res) => window.location.reload());
-}
- 
+  function declineTrade(id) {
+    API.decline(id, { status: "declined" })
+      .then((res) => window.location.reload());
+  }
+
+  function deleteTrade(id) {
+    API.delete(id)
+      .then((res) => window.location.reload());
+  }
+
 
   return (
+    <div>
+    <ProfileBanner
+    pageTitle={displayName}
+    avatar={avatar}
+    fbImage={profilePic}
+    email={email}
+    userId={uid}
+    // updatePicButton={updatePicButton}
+  />
     <div className="container">
       <div className="row">
         <div className="col-7">
@@ -141,62 +164,63 @@ function deleteTrade(id) {
           )
         })}
         </div>
-        <div className="col-1">
+          <div className="col-1">
 
-        </div>
-        <div className="col-4">
-          <form className="search">
-            <div className="form-group">
-              <label htmlFor="language">Search for values in any column:</label>
-              <input
-                value={search}
-                onChange={handleSearch}
-                name="term"
-                list="term"
-                type="text"
-                className="form-control"
-                placeholder="What are you looking for?"
-                id="term"
-              />
-              <small id="passwordHelpBlock" className="form-text text-muted">
-                * Search by displayName, card name, or card type. Results
-                include the username. Click to view profile and cards.
+          </div>
+          <div className="col-4">
+            <form className="search">
+              <div className="form-group">
+                <label htmlFor="language">Search for values in any column:</label>
+                <input
+                  value={search}
+                  onChange={handleSearch}
+                  name="term"
+                  list="term"
+                  type="text"
+                  className="form-control"
+                  placeholder="What are you looking for?"
+                  id="term"
+                />
+                <small id="passwordHelpBlock" className="form-text text-muted">
+                  * Search by displayName, card name, or card type. Results
+                  include the username. Click to view profile and cards.
               </small>
-            </div>
-            <button
-              type="button"
-              onClick={filterSearch}
-              className="btn btn-primary ml-2 mb-4 mt-2"
-            >
-              Search
+              </div>
+              <button
+                type="button"
+                onClick={filterSearch}
+                className="btn btn-primary ml-2 mb-4 mt-2"
+              >
+                Search
             </button>
-            {searchList &&
-              searchList.map((item) => {
-                let link = `profile/${item.displayName}`;
-                return (
-                  <div className="row border">
-                    <div className="col">
-                      <img
-                        src={
-                          item.image ? item.image
-                            : avatar
-                        }
-                        alt={item.displayName + "Image"}
-                        style={{ width: "50%" }}
-                      ></img>
+              {searchList &&
+                searchList.map((item) => {
+                  let link = `profile/${item.displayName}`;
+                  return (
+                    <div className="row border">
+                      <div className="col">
+                        <img
+                          src={
+                            item.image ? item.image
+                              : avatar
+                          }
+                          alt={item.displayName + "Image"}
+                          style={{ width: "50%" }}
+                        ></img>
+                      </div>
+                      <div className="col">
+                        <p>
+                          <Link to={link}>{item.displayName}</Link>
+                        </p>
+                      </div>
                     </div>
-                    <div className="col">
-                      <p>
-                        <Link to={link}>{item.displayName}</Link>
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-          </form>
+                  );
+                })}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 

@@ -3,8 +3,11 @@ import "../styles/style.css";
 import { Button } from "react-bootstrap";
 import { auth } from "../utils/firebase";
 import {Link} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function ProfileBanner(props) {
+  const location = useLocation();
+  console.log(location.pathname)
   return (
     <div>
       <div className="banner">
@@ -22,14 +25,20 @@ function ProfileBanner(props) {
             </div>
             <div className="col-md-7 profileInfo">
               <div className="row">
-                <Button
-                  className="sign-outBtn mr-2"
-                  onClick={() => {
-                    props.updatePicButton();
-                  }}
-                >
-                  Update Profile Pic
-                </Button>
+                <>
+                {location.pathname === "/profile" ?
+                  <Button
+                    className="sign-outBtn mr-2"
+                    onClick={() => {
+                      props.updatePicButton();
+                    }}
+                  >
+                    Update Profile Pic
+                  </Button>
+                  :
+                  ""
+                }
+                </>
                 <Button
                   className="sign-outBtn"
                   onClick={() => {
