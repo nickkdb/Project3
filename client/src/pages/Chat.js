@@ -33,7 +33,8 @@ function Chat() {
     })
 
     useEffect(() => {
-        if (threads === null) {
+        dropMessages();
+        if (threads=== null) {
             console.log("hello " + user);
             socket.emit("userdata", user);
             socket.on("returnuser", data => {
