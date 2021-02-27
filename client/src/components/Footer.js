@@ -21,6 +21,7 @@ function Footer() {
                             Currently supporting trades for Pokémon Trading Card Game, Magic: The Gathering, and Yu-Gi-Oh! Trading Card Game. More card series coming soon!
                         </p>
                     </div>
+      
                     <div className="col-lg-3 col-md-12 mb-4 mb-md-0"></div>
                     <div className="col-lg-3 col-md-12 mb-4 mb-md-0">
                         <h6 className="mb-0">Resources</h6>

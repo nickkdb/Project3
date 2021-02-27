@@ -20,9 +20,6 @@ function Dashboard() {
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
   const [profilePic, setProfilePic] = useState("");  
 
-
-  console.log(yourTrades)
-
   useEffect(() => {
     API.getTrade(user.mongo.displayName)
       .then((res) => {
@@ -42,9 +39,9 @@ function Dashboard() {
   }, [user.mongo._id, imageAsUrl]);
 
 
-  useEffect(() => {
-    console.log(selectedTrade)
-  }, [selectedTrade]);
+  // useEffect(() => {
+  //   console.log(selectedTrade)
+  // }, [selectedTrade]);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -76,7 +73,6 @@ function Dashboard() {
         // console.log(res.data);
       })
       .catch((err) => console.log(err));
-    getFirebaseImages();
   }
 
   function getFirebaseImages() {
@@ -88,9 +84,11 @@ function Dashboard() {
         .then((fireBaseUrl) => {
           user.image = fireBaseUrl;
         });
-      return 0;
     });
-    // console.log(list);
+  }
+
+  if (list) {
+    getFirebaseImages();
   }
 
   function acceptTrade(id) {
@@ -119,7 +117,8 @@ function deleteTrade(id) {
 
 function makeTrade (trade) {
   console.log(trade)
-  API.updateUser(trade)
+
+  API.executeTrade(trade)
   .then((res) => {
     console.log(res)
     // acceptTrade(yourTrades[2]._id)
