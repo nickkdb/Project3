@@ -51,9 +51,10 @@ socket.on("info", room => {
 })
 
 socket.on("sendmsg", data => {
+  console.log("otherUser: " + data.otherUser);
   writeMessage(data.room, data.user, data.newMessage);
   io.to(data.room).emit("message", {text: data.newMessage, sender: data.user});
-  console.log(data);
+  socket.broadcast.emit("notification", {sender: data.user, receiver: data.otherUser});
 })
 })
 

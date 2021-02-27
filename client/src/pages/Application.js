@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { store } from 'react-notifications-component';
 import UserContext from "../utils/UserContext";
+import { socketContext } from "../utils/socketContext";
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
 
@@ -18,6 +20,31 @@ import Messages from "./Messages";
 
 function Application() {
   const user = useContext(UserContext);
+  const socket= useContext(socketContext);
+
+  useEffect(() => {
+    socket.on("notification", data => {
+      if (data.receiver === user.displayName) {
+        store.addNotification({
+          title: "Alert",
+          message: `You have a new message from ${data.sender}`,
+          type: "warning",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 3000,
+            onScreen: true
+          }
+        });
+      }
+    });
+
+    return function cleanup() {socket.off("notification")}
+  })
+ 
+
 
   return (
     user ?
