@@ -11,7 +11,15 @@ function YourTrades(props) {
 
     return (
 
-        <div className="card">
+        <div 
+            style={
+                props.id === props.selectedTrade._id ?
+                {border: "2px solid green"}
+                :
+                {border: "1px solid lightgrey"}
+            }
+            className="card"
+        >
             <div>
             <Badge 
                 pill variant="success"

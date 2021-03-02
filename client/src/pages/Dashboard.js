@@ -25,7 +25,7 @@ function Dashboard() {
       .then((res) => {
         setYourTrades(res.data);
       })
-  }, []);
+  }, [yourTrades]);
 
   useEffect(() => {
     storage
@@ -102,17 +102,11 @@ function Dashboard() {
       .then((res) => window.location.reload());
   }
 
-  function deleteTrade(id) {
-    API.delete(id)
-      .then((res) => window.location.reload());
-  }
 
 function deleteTrade(id) {
   API.delete(id)
-  .then((res) => window.location.reload());
+  .then((res) => yourTrades.splice(yourTrades.indexOf(id), 1));
 }
-
-
 
 
 function makeTrade (trade) {
@@ -123,6 +117,8 @@ function makeTrade (trade) {
     console.log(res)
     // acceptTrade(yourTrades[2]._id)
   });
+
+  window.location.reload();
 }
  
 
@@ -175,7 +171,7 @@ function makeTrade (trade) {
                 currentUser={user.mongo.displayName}
                 makeTrade={makeTrade}
                 acceptTrade={acceptTrade}
-
+                selectedTrade={selectedTrade}
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
                 status={trade.status}

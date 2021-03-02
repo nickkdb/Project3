@@ -120,6 +120,7 @@ function Search() {
 
     console.log(data)
     API.addCard(user.mongo._id, data).then(res => console.log(res));
+    user.mongo.products.push(data);
   }
 
   const handleClose = () => setShow(false);
