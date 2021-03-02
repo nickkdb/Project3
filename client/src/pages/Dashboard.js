@@ -65,6 +65,9 @@ function Dashboard() {
     loadUsers();
   }, []);
 
+  useEffect(() => {
+    getFirebaseImages();
+  }, [list]);
 
   function loadUsers() {
     API.getUsers()
@@ -87,9 +90,9 @@ function Dashboard() {
     });
   }
 
-  if (list) {
-    getFirebaseImages();
-  }
+  // if (list) {
+  //   getFirebaseImages();
+  // }
 
   function acceptTrade(id) {
 
