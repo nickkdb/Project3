@@ -1,0 +1,33 @@
+.animation-box {
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  position: relative;
+  top: 16%;
+}
+.pika {
+  z-index: 5;
+  margin-top: 0;
+  position: absolute;
+}
+.pika-img {
+    border-radius: 0.75rem;
+    width: auto;
+}
+.yugi {
+  z-index: 10;
+  margin-top: 0;
+  position: absolute;
+}
+.yugi-img {
+  max-height: 700px;
+  width: auto;
+  border-radius: 0.75rem;
+}
+.mtg {
+  z-index: 15;
+  position: absolute;
+}
+.myg-img {
+    border-radius: 0.75rem;
+}

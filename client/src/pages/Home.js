@@ -1,6 +1,6 @@
 import React from "react";
 // import Hero from "../components/Hero";
-import Animation from "../animation-tests/animation-test";
+import Animation from "../components/Animation";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav"
 import Section1 from "../components/Section1";

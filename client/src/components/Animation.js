@@ -1,11 +1,15 @@
 import React from "react";
 import "../styles/style.css";
+import "../styles/animations.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 //==================Images====================
 
 import pika from "../images/pv-2.png";
+import yugi from "../images/yugi-main.png";
+
 //============================================
 
 //==================GSAP Imports====================
@@ -24,14 +28,16 @@ gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, Pix
 
 
 function Animation() {
-    gsap.to(".class", {rotation: 27, duration: 2, x: 300 });
+    gsap.to(".pika", { rotation: 27, duration: 2, x: "200%" });
+    gsap.to(".yugi", { duration: 4, x: 10 });
+    gsap.to(".mtg", { rotation: 27, duration: 2, x: 300 });
 
     return (
         <div className="hero">
-            <div className="container">
-                <div className="row">
-                    <div class="class"><img src={pika} alt=""/></div>
-                </div>
+            <div className="row animation-box">
+            <div class="yugi"><img class="yugi-img img-fluid" src={yugi} alt="" /></div>
+                <div class="pika"><img class="pika-img img-fluid" src={pika} alt="" /></div>
+                {/* <div class="mtg"><img src={mtg} alt=""/></div> */}
             </div>
         </div>
     );
@@ -39,29 +45,3 @@ function Animation() {
 
 
 export default Animation;
-
-
-// class Animate extends Component {
-//     constructor(props){
-//       super(props);
-//       // reference to the DOM node
-//       this.myElement = null;
-//       // reference to the animation
-//       this.myTween = null;
-//     }
-
-//     componentDidMount(){
-//       // use the node ref to create the animation
-//       this.myTween
-//       .to(this.myElement, 0.5, {x: 100})
-//       .to(this.myElement, 0.5, {y: 100, rotation: 180})
-//       .play();
-//     }
-
-//     render(){
-//       return <div ref={div => this.myElement = div} />;
-//     }
-//   }
-
-// export default Animate;
-
