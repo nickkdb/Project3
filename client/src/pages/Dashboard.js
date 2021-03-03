@@ -3,13 +3,17 @@ import UserContext from "../utils/UserContext";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
+import { socketContext } from '../utils/socketContext';
 import ProfileBanner from "../components/ProfileBanner";
 import avatar from "../images/avatar.png";
 import Bar from "../components/Bar";
 import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
+
+  const socket = useContext(socketContext);
   const user = useContext(UserContext);
+  
   const { displayName, email, uid } = user;
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
