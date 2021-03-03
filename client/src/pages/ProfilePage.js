@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import UserContext from "../utils/UserContext";
-import { auth, storage } from "../utils/firebase";
+import { storage } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
 import ProfileBanner from "../components/ProfileBanner";
@@ -43,6 +43,14 @@ const ProfilePage = () => {
   const user = useContext(UserContext);
   const { displayName, email, uid } = user;
 
+  useEffect(() => {
+    API.getUser(user.email).then(res => {
+      user.mongo = res.data[0]
+    })
+  }, [user])
+
+
+
   const handleFile = (e) => {
     // console.log(e);
     const img = e.target.files[0];
@@ -64,7 +72,7 @@ const ProfilePage = () => {
   const generateImg = async () => {
     try {
       const a = await getCroppedImg(tempImg, croppedAreaPixels, rotation);
-      const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
+      //const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
       // console.log(a);
       setCroppedImage(a);
       setDownloaded(true);
