@@ -77,5 +77,19 @@ module.exports = {
             },
 
         );
+    },
+    cancelTrades: function (req, res) {
+        console.log("logging req.body.uuid: " + req.body.uuid);
+        db.Trade.updateMany(
+            { $or: [
+            {"proposedByProducts.uuid": req.body.uuid},
+            {"proposedToProducts.uuid": req.body.uuid}]},
+            {
+            $set: {
+                'status': "canceled"
+                }
+            }
+        ).then(data => res.json(data))
+        .catch(err => console.error(err));
     }
 }
