@@ -42,6 +42,17 @@ const SignUp = () => {
     }
   };
 
+  const handleSC = (event) => {
+
+    var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+
+  }
+
   return (
     <div>
       <Banner pageTitle="Sign Up" />
@@ -66,6 +77,7 @@ const SignUp = () => {
                 placeholder="E.g: Faruq"
                 id="displayName"
                 onChange={event => onChangeHandler(event)}
+                onKeyPress={event => handleSC(event)}
               />
               <label htmlFor="userEmail" className="block">
                 Email:
