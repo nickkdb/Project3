@@ -4,6 +4,9 @@ const tradeController = require("../../controllers/tradeController");
 // Matches with "/api/books"
 router.route("/")
 .post(tradeController.create)
+
+router.route("/verify")
+.put(tradeController.cancelTrades)
   
 
 // Matches with "/api/books/:id"

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import UserContext from "../utils/UserContext";
-import { auth, storage } from "../utils/firebase";
+import { storage } from "../utils/firebase";
 import API from "../utils/API";
 import MyCard from "../components/MyCard";
 import ProfileBanner from "../components/ProfileBanner";
@@ -9,18 +9,19 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropper";
-import avatar from "../images/avatar.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const ProfilePage = () => {
   // updating products
   const [show, setShow] = useState(false);
+  const [confirm, setConfirm]= useState(false);
   const [price, setPrice] = useState("");
   const [descr, setDescr] = useState("");
   const [avail, setAvail] = useState("Yes");
   const [uuid, setuuid] = useState("");
   const [modalSource, setModalSource] = useState("");
+  const [toDelete, setDelete]= useState("");
 
   // cropping an iamge
   const [tempImg, setTempImg] = useState({});
@@ -40,6 +41,14 @@ const ProfilePage = () => {
 
   const user = useContext(UserContext);
   const { displayName, email, uid } = user;
+
+  useEffect(() => {
+    API.getUser(user.email).then(res => {
+      user.mongo = res.data[0]
+    })
+  }, [user])
+
+
 
   const handleFile = (e) => {
     // console.log(e);
@@ -62,7 +71,7 @@ const ProfilePage = () => {
   const generateImg = async () => {
     try {
       const a = await getCroppedImg(tempImg, croppedAreaPixels, rotation);
-      const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
+      //const tempFile = new File([a], "uhhh", { type: "image/jpeg" });
       // console.log(a);
       setCroppedImage(a);
       setDownloaded(true);
@@ -123,7 +132,10 @@ const ProfilePage = () => {
       });
   }, [user.mongo._id, imageAsUrl]);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setConfirm(false);
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   const updateCard = (event) => {
@@ -147,6 +159,18 @@ const ProfilePage = () => {
     API.updateCard(user.mongo._id, data).then((res) => window.location.reload());
   };
 
+  function confirmDelete(uuid) {
+    setDelete(uuid);
+    setConfirm(true);
+  }
+
+  function verifyTrades(id, uuid) {
+    const data= {
+      uuid: uuid
+    }
+    API.verifyTrades(data).then(res => deleteCard(id, uuid))
+  }
+
   function deleteCard(id, uuid) {
     console.log(id, uuid);
     API.deleteCard(id, uuid).then((res) => window.location.reload());
@@ -161,7 +185,6 @@ const ProfilePage = () => {
     <div>
       <ProfileBanner
         pageTitle={displayName}
-        avatar={avatar}
         fbImage={profilePic}
         email={email}
         userId={uid}
@@ -192,7 +215,7 @@ const ProfilePage = () => {
                   <Button
                     type="button"
                     className="btn btn-primary delBtn-margin"
-                    onClick={() => deleteCard(user.mongo._id, card.uuid)}
+                    onClick={() => confirmDelete(card.uuid)}
                   >
                     Delete
                   </Button>
@@ -200,6 +223,21 @@ const ProfilePage = () => {
               );
             })}
         </div>
+
+        <Modal show={confirm} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure you wish to delete?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>If this card is present in any pending trades, the trade will be canceled.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => verifyTrades(user.mongo._id, toDelete)}>
+            Delete Card
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
         <Modal
           show={show}

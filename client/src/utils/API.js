@@ -26,6 +26,9 @@ export default {
   deleteCard: function(id, uuid) {
     return axios.delete("/api/cards/" + id + "/" + uuid);
   },
+  verifyTrades: function(uuid) {
+    return axios.put("/api/trades/verify", uuid);
+  },
   createTrade: function(trade) {
     return axios.post("/api/trades", trade)
   },
@@ -35,7 +38,7 @@ export default {
  accept: function(id, body) {
    return axios.put(`api/trades/` + id, body)
  },
- decline: function (id, body) {
+ updateStatus: function (id, body) {
    return axios.put(`api/trades/` + id, body)
  },
  delete: function (id) {

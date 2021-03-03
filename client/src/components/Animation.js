@@ -28,12 +28,12 @@ function Animation() {
     gsap.to(".mtg", { duration: 2, x: 400 });
 
     //card animations
-    gsap.from(".card1", { x: 3000 });
-    gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: 300, ease: "bounce" });
-    gsap.from(".card2", { x: 3000 });
-    gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 500, ease: "bounce" });
-    gsap.from(".card3", { x: 3000 });
-    gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 700, ease: "bounce" });
+    gsap.from(".card1", { delay: 2, x: 3000 });
+    gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: 300, ease: "bounce"});
+    gsap.from(".card2", { delay: 3, x: 3000 });
+    gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 500, ease: "bounce"});
+    gsap.from(".card3", { delay: 4, x: 3000 });
+    gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 700, ease: "bounce"});
 
     gsap.to(".animation-box", { delay: 8, duration: 1, width: "200%"})
     gsap.to(".animation-box", { delay: 8, duration: 1, opacity: 0 })

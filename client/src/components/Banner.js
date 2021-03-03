@@ -9,6 +9,9 @@ function Banner(props) {
           <div className="row">
             <h1 className="pageTitle">{props.pageTitle}</h1>
           </div>
+          <div className="row">
+            <h3 className="pageTitle">{props.desc}</h3>
+          </div>
         </div>
       </div>
   </div>

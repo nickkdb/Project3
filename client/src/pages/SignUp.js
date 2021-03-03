@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import API from "../utils/API";
 import { auth, signInWithGoogle, generateUserDocument } from "../utils/firebase";
 import Banner from "../components/Banner"
@@ -9,6 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
+  const history = useHistory();
 
   const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
     event.preventDefault();
@@ -41,6 +42,17 @@ const SignUp = () => {
     }
   };
 
+  const handleSC = (event) => {
+
+    var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+
+  }
+
   return (
     <div>
       <Banner pageTitle="Sign Up" />
@@ -65,6 +77,7 @@ const SignUp = () => {
                 placeholder="E.g: Faruq"
                 id="displayName"
                 onChange={event => onChangeHandler(event)}
+                onKeyPress={event => handleSC(event)}
               />
               <label htmlFor="userEmail" className="block">
                 Email:
@@ -90,18 +103,17 @@ const SignUp = () => {
                 id="userPassword"
                 onChange={event => onChangeHandler(event)}
               />
-              <Link to="/">
               <button
                 className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
                 onClick={event => {
                   createUserWithEmailAndPasswordHandler(event, email, password);
+                  history.push("/")
                 }}
               >
                 
                   Sign up
            
               </button>
-              </Link>
             </form>
             <p className="text-center my-3">or</p>
             <button

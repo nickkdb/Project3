@@ -22,7 +22,6 @@ function Hero() {
         <div className="home-box">
           <div className="row">
             <div className="col-md-9">
-
               <img src={logo} alt="nerd herred logo" className="logo"/>
               <h1>Trading Community</h1>
               <br /><br /><br /><br />

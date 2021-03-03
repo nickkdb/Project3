@@ -43,6 +43,7 @@ function YourTrades(props) {
                     Proposed by: {props.proposedBy}
                     {props.status === "accepted" ? <span className="span" style={{ background: "green", color: "white" }}>Accepted</span> : ""}
                     {props.status === "declined" ? <span className="span" style={{ background: "red", color: "white" }}> Declined </span> : ""}
+                    {props.status === "canceled" ? <span className="span" style={{ background: "red", color: "white"}}>Canceled</span> : ""}
                 </li>
                 <li>
                     Proposed to: {props.proposedTo}
@@ -72,7 +73,11 @@ function YourTrades(props) {
                                     }}>
                                     Decline Trade
                                 </button>
-                            </div> : <div style={{ color: "blue" }}> Sent</div>
+                            </div> : <><div style={{ color: "blue", float: "left" }}> Sent</div>
+                            <button className="btn btn-primary ml-1" style={{float: "right"}}
+                            onClick={() => {
+                                props.cancelTrade(props.id)
+                            }}>Cancel Trade</button></>
                         }
 
                     </>

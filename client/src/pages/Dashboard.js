@@ -97,18 +97,33 @@ function Dashboard() {
   function acceptTrade(id) {
 
     API.accept(id, { status: "accepted" })
-      .then((res) => window.location.reload());
+      .then((res) => 
+        API.getTrade(user.mongo.displayName)
+        .then((res) => {
+          setYourTrades(res.data);
+        })
+      );
   }
 
   function declineTrade(id) {
-    API.decline(id, { status: "declined" })
-      .then((res) => window.location.reload());
+    API.updateStatus(id, { status: "declined" })
+      .then((res) => 
+      API.getTrade(user.mongo.displayName)
+      .then((res) => {
+        setYourTrades(res.data);
+      })
+    );
   }
 
 
 function deleteTrade(id) {
   API.delete(id)
   .then((res) => yourTrades.splice(yourTrades.indexOf(id), 1));
+}
+
+function cancelTrade(id) {
+API.updateStatus(id, {status: "canceled" })
+.then((res) => window.location.reload());
 }
 
 
@@ -121,7 +136,7 @@ function makeTrade (trade) {
     // acceptTrade(yourTrades[2]._id)
   });
 
-  window.location.reload();
+  // window.location.reload();
 }
  
 
@@ -177,6 +192,7 @@ function makeTrade (trade) {
                 selectedTrade={selectedTrade}
                 declineTrade={declineTrade}
                 deleteTrade={deleteTrade}
+                cancelTrade={cancelTrade}
                 status={trade.status}
                 id={trade._id}
                 mongoId={user.mongo._id}
