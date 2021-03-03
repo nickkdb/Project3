@@ -98,7 +98,7 @@ function Dashboard() {
   //   getFirebaseImages();
   // }
 
-  function acceptTrade(id) {
+  function acceptTrade(id, otherUser) {
 
     API.accept(id, { status: "accepted" })
       .then((res) => 
@@ -107,9 +107,10 @@ function Dashboard() {
           setYourTrades(res.data);
         })
       );
+      socket.emit("event", {user: user.displayName, otherUser, type: "accepted"});
   }
 
-  function declineTrade(id) {
+  function declineTrade(id, otherUser) {
     API.updateStatus(id, { status: "declined" })
       .then((res) => 
       API.getTrade(user.mongo.displayName)
@@ -117,6 +118,7 @@ function Dashboard() {
         setYourTrades(res.data);
       })
     );
+    socket.emit("event", {user: user.displayName, otherUser, type: "declined"});
   }
 
 

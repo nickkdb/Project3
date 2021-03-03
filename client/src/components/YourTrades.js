@@ -63,13 +63,13 @@ function YourTrades(props) {
                                     className="btn btn-primary ml-1"
                                     onClick={() => {
                                         props.makeTrade(props.tradeObj)
-                                        props.acceptTrade(props.id)
+                                        props.acceptTrade(props.id, props.proposedBy)
                                     }}>
                                     Accept Trade</button>
                                 <button
                                     className="btn btn-primary ml-1"
                                     onClick={() => {
-                                        props.declineTrade(props.id)
+                                        props.declineTrade(props.id, props.proposedBy)
                                     }}>
                                     Decline Trade
                                 </button>
