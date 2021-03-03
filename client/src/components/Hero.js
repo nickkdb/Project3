@@ -1,31 +1,25 @@
 import React from "react";
 import "../styles/style.css";
+import "../styles/animations.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignIn from "../components/SignIn";
+import Animation from "../components/Animation";
+import { gsap } from "gsap";
+
 
 //==================Images====================
 import logo from "../images/logo74KB.png"
 //============================================
 
-//==================GSAP Imports====================
-import { gsap } from "gsap";
-import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-import { Draggable } from "gsap/Draggable";
-import { EaselPlugin } from "gsap/EaselPlugin";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { PixiPlugin } from "gsap/PixiPlugin";
-import { TextPlugin } from "gsap/TextPlugin";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, PixiPlugin, TextPlugin, ScrollToPlugin, ScrollTrigger);
-//============================================
-
 function Hero() {
+
+  gsap.to(".home-box", { delay: 10, duration: 2, opacity: 1 });
+
   return (
     <div>
       <div className="hero">
-        <div className="container">
+        <Animation/>
+        <div className="home-box">
           <div className="row">
             <div className="col-md-9">
 

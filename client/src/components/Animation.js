@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/style.css";
 import "../styles/animations.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { gsap } from "gsap";
 
 
 //==================Images====================
@@ -10,42 +10,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import pika from "../images/pv-2.png";
 import yugi from "../images/yugi-main.png";
 import mtg from "../images/planeswalker.png"
+import card1 from "../images/animate1.png"
+import card2 from "../images/animate2.png"
+import card3 from "../images/animate3.png"
 
-//============================================
-
-//==================GSAP Imports====================
-import { gsap } from "gsap";
-import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-import { Draggable } from "gsap/Draggable";
-import { EaselPlugin } from "gsap/EaselPlugin";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { PixiPlugin } from "gsap/PixiPlugin";
-import { TextPlugin } from "gsap/TextPlugin";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, PixiPlugin, TextPlugin, ScrollToPlugin, ScrollTrigger);
 //============================================
 
 
 function Animation() {
-    gsap.from(".pika", { x: -1000 });
-    gsap.to(".pika", { rotation: 27, duration: 2, x: 500 });
-    gsap.from(".yugi", { x: -1000 });
-    gsap.to(".yugi", { duration: 4, x: -100 });
-    gsap.from(".mtg", { x: -1000 });
-    gsap.to(".mtg", { duration: 3, x: 400 });
 
+    //character animations
+    gsap.from(".pika", { x: -3000 });
+    gsap.to(".pika", { rotation: 387, duration: 1, x: "155%" });
+    gsap.from(".yugi", { x: -3000 });
+    gsap.to(".yugi", { duration: 2, x: "-100" });
+    gsap.from(".mtg", { x: -3000 });
+    gsap.to(".mtg", { duration: 2, x: 400 });
 
+    //card animations
+    gsap.from(".card1", { x: 3000 });
+    gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: 300, ease: "bounce" });
+    gsap.from(".card2", { x: 3000 });
+    gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 500, ease: "bounce" });
+    gsap.from(".card3", { x: 3000 });
+    gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 700, ease: "bounce" });
+
+    gsap.to(".animation-box", { delay: 8, duration: 1, width: "200%"})
+    gsap.to(".animation-box", { delay: 8, duration: 1, opacity: 0 })
 
     return (
-        <div className="hero">
             <div className="animation-box">
-                    <div class="yugi"><img class="img-fluid" src={yugi} alt="" /></div>
-                    <div class="pika"><img class="img-fluid" src={pika} alt="" /></div>
-                    <div class="mtg"><img class="img-fluid" src={mtg} alt="" /></div>
+                    <div class="yugi"><img class="img-fluid shadow-png" src={yugi} alt="" /></div>
+                    <div class="pika"><img class="img-fluid shadow-png" src={pika} alt="" /></div>
+                    <div class="mtg"><img class="img-fluid shadow-png" src={mtg} alt="" /></div>
+                    <div class="card1"><img class="img-fluid shadow-png" src={card1} alt="" /></div>
+                    <div class="card2"><img class="img-fluid shadow-png" src={card2} alt="" /></div>
+                    <div class="card3"><img class="img-fluid shadow-png" src={card3} alt="" /></div>
             </div>
-        </div>
     );
 }
 
