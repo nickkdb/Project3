@@ -98,7 +98,10 @@ function Chat() {
 
     return (
         <>
-            <Banner pageTitle="Inbox" />
+            <Banner 
+                pageTitle="Inbox"
+                desc="Click someone's username below to start a chat!"
+             />
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
                     {/* <h1 style={{ textAlign: "center", color: "black" }}>Inbox</h1>

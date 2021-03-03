@@ -6,8 +6,9 @@ import MyCard from "../components/MyCard";
 import { useLocation } from "react-router-dom";
 import avatar from "../images/avatar.png";
 import { storage } from "../utils/firebase";
-import { Link } from "react-router-dom";
-import CustomLink from "../components/customLink";
+// import { Link } from "react-router-dom";
+// import CustomLink from "../components/customLink";
+import ProfileBanner from "../components/ProfileBanner";
 
 const ProfilePage = () => {
   const location = useLocation();
@@ -52,7 +53,7 @@ const ProfilePage = () => {
   }
 
   const user = useContext(UserContext);
-  const { photoURL, displayName } = thisUser;
+  const { displayName } = thisUser;
 
   const addToTrade = (uuid) => {
     console.log(uuid);
@@ -93,8 +94,19 @@ const ProfilePage = () => {
   };
 
   return (
+    <div>
+    <ProfileBanner
+        pageTitle={displayName}
+        avatar={avatar}
+        fbImage={fbImage}
+        email={thisUser.email}
+        userId={thisUser.displayName}
+        handleChat={handleChat}
+        setLocalTrade={setLocalTrade}
+        // updatePicButton={updatePicButton}
+      />
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-      <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
+      {/* <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
         <div
           style={
             fbImage ?
@@ -118,16 +130,8 @@ const ProfilePage = () => {
         <div className="md:pl-4">
           <h2 className="text-2xl font-semibold">{displayName}</h2>
         </div>
-      </div>
+      </div> */}
       <div className="m-3">
-      <CustomLink to="/messages" 
-      children= {<button onClick={handleChat} className="btn btn-primary mr-2">Chat</button>} />
-     
-        <Link to="/trade" className="text-blue-500 hover:text-blue-600">
-        <button className="btn btn-success" onClick={setLocalTrade}>
-          Propose Trade
-          </button>
-        </Link>
       </div>
       <div className="container">
         <div className="row">
@@ -154,6 +158,7 @@ const ProfilePage = () => {
           })}
         </div>
       </div>
+    </div>
     </div>
   );
 };
