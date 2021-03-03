@@ -34,11 +34,11 @@ function Application() {
           switch(data.type) {
             case "msg":
               store.addNotification({
-                title: "New message",
+                title: "New Message!",
                 message: ( 
                   <>
                   <p>You have a new message from {data.sender}</p>
-                  <a style={style} href="/messages">go there now</a>
+                  <a style={style} href="/messages">Go To Messages</a>
                   </>
                  ),
                 type: "warning",
@@ -57,14 +57,60 @@ function Application() {
               break;
             case "newTrade":
               store.addNotification({
-                title: "New Trade",
+                title: "New Trade Offer!",
                 message: ( 
                   <>
                   <p>You've received a trade offer from {data.sender}</p>
-                  <a style={style} href="/">go there now</a>
+                  <a style={style} href="/">Go To Dashboard</a>
                   </>
                  ),
                 type: "info",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  click: false,
+                  showIcon: true
+                }
+              });
+              break;
+            case "accepted":
+              store.addNotification({
+                title: "Trade Accepted!",
+                message: ( 
+                  <>
+                  <p>{data.sender} has accepted your trade offer!</p>
+                  <a style={style} href="/">Go To Dashboard</a>
+                  </>
+                 ),
+                type: "success",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  click: false,
+                  showIcon: true
+                }
+              });
+              break;
+            case "declined":
+              store.addNotification({
+                title: "Trade Declined.",
+                message: ( 
+                  <>
+                  <p>{data.sender} has declined your trade offer.</p>
+                  <a style={style} href="/">Go To Dashboard</a>
+                  </>
+                 ),
+                type: "danger",
                 insert: "top",
                 container: "top-right",
                 animationIn: ["animate__animated", "animate__fadeIn"],
