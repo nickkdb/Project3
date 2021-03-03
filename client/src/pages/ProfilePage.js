@@ -9,7 +9,6 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import RangeSlider from "react-bootstrap-range-slider";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropper";
-import avatar from "../images/avatar.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
@@ -186,7 +185,6 @@ const ProfilePage = () => {
     <div>
       <ProfileBanner
         pageTitle={displayName}
-        avatar={avatar}
         fbImage={profilePic}
         email={email}
         userId={uid}

@@ -5,10 +5,11 @@ import { auth } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import CustomLink from "../components/customLink";
+import avatar from "../images/avatar.png";
 
 function ProfileBanner(props) {
   const location = useLocation();
-  // console.log(location.pathname)
+
   return (
     <div>
       <div className="banner">
@@ -20,14 +21,15 @@ function ProfileBanner(props) {
             <div className="col-md-5">
               <img
                 className="profile"
-                src={props.fbImage ? props.fbImage : props.avatar}
+                src={
+                  props.fbImage && props.fbImage.length ? props.fbImage : avatar
+                }
                 alt="profile"
               ></img>
             </div>
             <div className="col-md-7 profileInfo">
               <div className="row">
-                {location.pathname === "/profile" ||
-                location.pathname === "/" ? (
+                {location.pathname === "/profile" ? (
                   <>
                     <Button
                       className="sign-outBtn mr-2"
@@ -37,6 +39,19 @@ function ProfileBanner(props) {
                     >
                       Update Profile Pic
                     </Button>
+                    <Link to="/">
+                      <Button
+                        className="btn btn-primary sign-outBtn"
+                        onClick={() => {
+                          auth.signOut();
+                        }}
+                      >
+                        Sign Out
+                      </Button>
+                    </Link>
+                  </>
+                ) : location.pathname === "/" ? (
+                  <>
                     <Link to="/">
                       <Button
                         className="btn btn-primary sign-outBtn"

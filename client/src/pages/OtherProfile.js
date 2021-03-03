@@ -97,7 +97,6 @@ const ProfilePage = () => {
     <div>
     <ProfileBanner
         pageTitle={displayName}
-        avatar={avatar}
         fbImage={fbImage}
         email={thisUser.email}
         userId={thisUser.displayName}
@@ -106,31 +105,6 @@ const ProfilePage = () => {
         // updatePicButton={updatePicButton}
       />
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-      {/* <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        <div
-          style={
-            fbImage ?
-            {
-            background: `url(${fbImage})  no-repeat center center`,
-            backgroundSize: "contain",
-            height: "200px",
-            width: "200px",
-          }
-          :
-          {
-            background: `url(${avatar})  no-repeat center center`,
-            backgroundSize: "contain",
-            height: "200px",
-            width: "200px",
-          }
-
-        }
-          className="border border-blue-300"
-        ></div>
-        <div className="md:pl-4">
-          <h2 className="text-2xl font-semibold">{displayName}</h2>
-        </div>
-      </div> */}
       <div className="m-3">
       </div>
       <div className="container">
