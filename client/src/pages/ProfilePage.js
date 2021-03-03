@@ -165,6 +165,13 @@ const ProfilePage = () => {
     setConfirm(true);
   }
 
+  function verifyTrades(id, uuid) {
+    const data= {
+      uuid: uuid
+    }
+    API.verifyTrades(data).then(res => deleteCard(id, uuid))
+  }
+
   function deleteCard(id, uuid) {
     console.log(id, uuid);
     API.deleteCard(id, uuid).then((res) => window.location.reload());
@@ -228,7 +235,7 @@ const ProfilePage = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => deleteCard(user.mongo._id, toDelete)}>
+          <Button variant="primary" onClick={() => verifyTrades(user.mongo._id, toDelete)}>
             Delete Card
           </Button>
         </Modal.Footer>
