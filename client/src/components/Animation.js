@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import pika from "../images/pv-2.png";
 import yugi from "../images/yugi-main.png";
+import mtg from "../images/planeswalker.png"
 
 //============================================
 
@@ -28,16 +29,21 @@ gsap.registerPlugin(CSSRulePlugin, Draggable, EaselPlugin, MotionPathPlugin, Pix
 
 
 function Animation() {
-    gsap.to(".pika", { rotation: 27, duration: 2, x: "200%" });
-    gsap.to(".yugi", { duration: 4, x: 10 });
-    gsap.to(".mtg", { rotation: 27, duration: 2, x: 300 });
+    gsap.from(".pika", { x: -1000 });
+    gsap.to(".pika", { rotation: 27, duration: 2, x: 500 });
+    gsap.from(".yugi", { x: -1000 });
+    gsap.to(".yugi", { duration: 4, x: -100 });
+    gsap.from(".mtg", { x: -1000 });
+    gsap.to(".mtg", { duration: 3, x: 400 });
+
+
 
     return (
         <div className="hero">
-            <div className="row animation-box">
-            <div class="yugi"><img class="yugi-img img-fluid" src={yugi} alt="" /></div>
-                <div class="pika"><img class="pika-img img-fluid" src={pika} alt="" /></div>
-                {/* <div class="mtg"><img src={mtg} alt=""/></div> */}
+            <div className="animation-box">
+                    <div class="yugi"><img class="img-fluid" src={yugi} alt="" /></div>
+                    <div class="pika"><img class="img-fluid" src={pika} alt="" /></div>
+                    <div class="mtg"><img class="img-fluid" src={mtg} alt="" /></div>
             </div>
         </div>
     );

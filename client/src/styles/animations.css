@@ -2,32 +2,38 @@
   margin-left: auto;
   margin-right: auto;
   width: auto;
+  max-width:60%;
   position: relative;
-  top: 16%;
+  min-height: 700px;
+  /* this is just so i can see where the box is */
+  background-color:aqua; 
 }
 .pika {
   z-index: 5;
-  margin-top: 0;
   position: absolute;
+  width: auto;
 }
-.pika-img {
-    border-radius: 0.75rem;
-    width: auto;
-}
+
 .yugi {
   z-index: 10;
-  margin-top: 0;
   position: absolute;
-}
-.yugi-img {
-  max-height: 700px;
+  bottom: 0px;
+  max-width: 650px;
   width: auto;
-  border-radius: 0.75rem;
 }
+
 .mtg {
   z-index: 15;
   position: absolute;
+  bottom: 0px;
+  max-width: 500px;
+  width: auto;
 }
-.myg-img {
-    border-radius: 0.75rem;
+
+
+@media screen and (max-width: 480px) {
+  .animation-box {
+    min-height: 350px;
+  }
+
 }
