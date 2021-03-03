@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Link, useHistory} from "react-router-dom";
 import API from "../utils/API";
 import { auth, signInWithGoogle, generateUserDocument } from "../utils/firebase";
-import Banner from "../components/Banner"
+import Banner from "../components/Banner";
+import "../styles/style.css";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -55,20 +58,22 @@ const SignUp = () => {
 
   return (
     <div>
+      <Nav/>
       <Banner pageTitle="Sign Up" />
       <div className="container">
-        <div className="mt-8">
-          <h1 className="text-3xl mb-2 text-center font-bold">Sign Up</h1>
-          <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+        <br />
+          <div className="card shadow spacing">
             {error !== null && (
               <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
                 {error}
               </div>
             )}
-            <form className="">
+            <form>
+              <div className="row">
+              <div className="col-md-4">
               <label htmlFor="displayName" className="block">
-                Display Name:
-          </label>
+                Display Name: 
+              </label>
               <input
                 type="text"
                 className="my-1 p-1 w-full "
@@ -78,10 +83,11 @@ const SignUp = () => {
                 id="displayName"
                 onChange={event => onChangeHandler(event)}
                 onKeyPress={event => handleSC(event)}
-              />
+              /></div>
+              <div className="col-md-4">
               <label htmlFor="userEmail" className="block">
-                Email:
-          </label>
+                Email: 
+              </label>
               <input
                 type="email"
                 className="my-1 p-1 w-full"
@@ -90,10 +96,11 @@ const SignUp = () => {
                 placeholder="E.g: faruq123@gmail.com"
                 id="userEmail"
                 onChange={event => onChangeHandler(event)}
-              />
+              /></div>
+              <div className="col-md-4">
               <label htmlFor="userPassword" className="block">
-                Password:
-          </label>
+                Password: 
+              </label>
               <input
                 type="password"
                 className="mt-1 mb-3 p-1 w-full"
@@ -102,9 +109,10 @@ const SignUp = () => {
                 placeholder="Your Password"
                 id="userPassword"
                 onChange={event => onChangeHandler(event)}
-              />
+              /></div></div>
+              <div className="row">
               <button
-                className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
+                className="btn btn-primary"
                 onClick={event => {
                   createUserWithEmailAndPasswordHandler(event, email, password);
                   history.push("/")
@@ -113,9 +121,10 @@ const SignUp = () => {
                 
                   Sign up
            
-              </button>
+              </button></div>
             </form>
             <p className="text-center my-3">or</p>
+            <div className="row">
             <button
               onClick={() => {
                 try {
@@ -124,19 +133,20 @@ const SignUp = () => {
                   console.error("Error signing in with Google", error);
                 }
               }}
-              className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
+              className="btn btn-primary"
             >
               Sign In with Google
-        </button>
+            </button></div>
             <p className="text-center my-3">
               Already have an account?{" "}
-              <Link to="/" className="text-blue-500 hover:text-blue-600">
+              <Link to="/">
                 Sign in here
-          </Link>{" "}
+              </Link>{" "}
             </p>
           </div>
+          <br />
         </div>
-      </div>
+      <Footer />
     </div>
   );
 };
