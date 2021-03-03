@@ -46,41 +46,41 @@ function MyCard(props) {
                   Object.entries(props.attributes).map(([key, value]) => {
                     switch (key) {
                       case 'types':
-                        return <div><p class="attList">Types: </p><ul> {value.map(item => {
+                        return <div><p className="attList">Types: </p><ul> {value.map(item => {
                           return (
-                            <li class="attList">{item}</li>
+                            <li className="attList">{item}</li>
                           )
                         })}
                         </ul></div>
                       case 'subtypes':
-                        return <div><p class="attList">Subtypes: </p> <ul> {value.map(item => {
+                        return <div><p className="attList">Subtypes: </p> <ul> {value.map(item => {
 
                           return (
-                            <li class="attList">{item}</li>
+                            <li className="attList">{item}</li>
                           )
                         })}
                         </ul></div>
                       case 'hp':
-                        return <p class="attList">HP: {value}</p>
+                        return <p className="attList">HP: {value}</p>
                       case 'rarity':
-                        return <p class="attList">Rarity: {value}</p>
+                        return <p className="attList">Rarity: {value}</p>
                       case 'manna':
-                        return <p class="attList">Manna: {value}</p>
+                        return <p className="attList">Manna: {value}</p>
                       case 'damage':
-                        return <div><p class="attList">Attacks: </p><ul> {value.map(item => {
+                        return <div><p className="attList">Attacks: </p><ul> {value.map(item => {
                           return (
                             <>
-                              <li class="attList">Name: {item.name} | Damage: {item.damage && (item.damage.length) > 1 ? (item.damage) : "N/A"}</li>
+                              <li className="attList">Name: {item.name} | Damage: {item.damage && (item.damage.length) > 1 ? (item.damage) : "N/A"}</li>
                             </>
                           )
                         })}
                         </ul></div>
                       case 'weakness':
-                        return <div><p class="attList">Threats: </p><ul>{value.map(item => {
+                        return <div><p className="attList">Threats: </p><ul>{value.map(item => {
                           return (
                             <>
-                              <li class="attList">Type: {item.type}</li>
-                              <li class="attList">Value: {item.value && (item.value.length) > 1 ? (item.value) : "N/A"}</li>
+                              <li className="attList">Type: {item.type}</li>
+                              <li className="attList">Value: {item.value && (item.value.length) > 1 ? (item.value) : "N/A"}</li>
                             </>
                           )
                         })}
@@ -88,20 +88,20 @@ function MyCard(props) {
                       case 'colors':
                         return <div> {value.map(item => {
                           return (
-                            <p class="attList">Color: {item}</p>
+                            <p className="attList">Color: {item}</p>
                           )
                         })}
                         </div>
                       case 'set':
-                        return <p class="attList">Set: {value}</p>
+                        return <p className="attList">Set: {value}</p>
                       case 'type':
-                        return <p class="attList"> Type: {value}</p>
+                        return <p className="attList"> Type: {value}</p>
                       case 'level':
-                        return <p class="attList">Level: {value}</p>
+                        return <p className="attList">Level: {value}</p>
                       case 'race':
-                        return <p class="attList">Race: {value}</p>
+                        return <p className="attList">Race: {value}</p>
                       case 'attribute':
-                        return <p class="attList">Attribute: {value}</p>
+                        return <p className="attList">Attribute: {value}</p>
                       default:
                         return null;
                     }
