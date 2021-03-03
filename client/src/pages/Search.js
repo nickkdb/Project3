@@ -168,6 +168,7 @@ function Search() {
           </div>
         </form>
         <div className="renderCards container">
+          <div className="row">
           {yCards &&
             yCards.map((card) => {
               return (
@@ -211,6 +212,7 @@ function Search() {
                 </div>
               );
             })}
+            </div>
 
           <div className="row">
             {pCards &&
