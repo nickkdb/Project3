@@ -1,0 +1,67 @@
+.animation-box {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  position: relative;
+  min-height: 700px;
+  height:100%;
+  z-index: 2;
+  margin-top: 0px;
+}
+.home-box {
+  left: 15%;
+  width: 60%;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  opacity: 0;
+}
+.pika {
+  z-index: 5;
+  position: absolute;
+  width: 40%;
+}
+
+.yugi {
+  z-index: 10;
+  position: absolute;
+  bottom: 0px;
+  width: 70%;
+}
+
+.mtg {
+  z-index: 15;
+  position: absolute;
+  bottom: 0px;
+  width: 60%;
+}
+.card1 {
+  z-index: 20;
+  position: absolute;
+  top: 20%;
+  width: 17%;
+}
+.card2 {
+  z-index: 20;
+  position: absolute;
+  top: 20%;
+  width: 17%;
+}
+.card3 {
+  z-index: 20;
+  position: absolute;
+  top: 20%;
+  width: 17%;
+}
+
+.shadow-png {
+  -webkit-filter: drop-shadow(5px 5px 5px #666666);
+  filter: drop-shadow(5px 5px 5px #666666);
+}
+
+@media screen and (max-width: 480px) {
+  .animation-box {
+    min-height: 350px;
+  }
+
+}
