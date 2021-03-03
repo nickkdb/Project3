@@ -19,34 +19,52 @@ import card3 from "../images/animate3.png"
 
 function Animation() {
 
-    //character animations
-    gsap.from(".pika", { x: -3000 });
-    gsap.to(".pika", { rotation: 387, duration: 1, x: "155%" });
-    gsap.from(".yugi", { x: -3000 });
-    gsap.to(".yugi", { duration: 2, x: "-100" });
-    gsap.from(".mtg", { x: -3000 });
-    gsap.to(".mtg", { duration: 2, x: 400 });
+    if (window.matchMedia('(max-device-width: 480px)').matches)  {
+        //character animations
+        gsap.from(".pika", { x: -3000 });
+        gsap.to(".pika", { rotation: 387, duration: 1, x: "50%" });
+        gsap.from(".yugi", { x: -3000 });
+        gsap.to(".yugi", { duration: 2, x: -100 });
+        gsap.from(".mtg", { x: -3000 });
+        gsap.to(".mtg", { duration: 2, x: "50%" });
 
-    //card animations
-    gsap.from(".card1", { x: 3000 });
-    gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: 300, ease: "bounce" });
-    gsap.from(".card2", { x: 3000 });
-    gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 500, ease: "bounce" });
-    gsap.from(".card3", { x: 3000 });
-    gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 700, ease: "bounce" });
+        //card animations
+        gsap.from(".card1", { delay: 2, x: 3000 });
+        gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: -75 , ease: "bounce" });
+        gsap.from(".card2", { delay: 3, x: 3000 });
+        gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 60, ease: "bounce" });
+        gsap.from(".card3", { delay: 4, x: 3000 });
+        gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 195, ease: "bounce" });
+    } else {
+        //character animations
+        gsap.from(".pika", { x: -3000 });
+        gsap.to(".pika", { rotation: 387, duration: 1, x: "155%" });
+        gsap.from(".yugi", { x: -3000 });
+        gsap.to(".yugi", { duration: 2, x: "-100" });
+        gsap.from(".mtg", { x: -3000 });
+        gsap.to(".mtg", { duration: 2, x: 400 });
 
-    gsap.to(".animation-box", { delay: 8, duration: 1, width: "200%"})
+        //card animations
+        gsap.from(".card1", { delay: 2, x: 3000 });
+        gsap.to(".card1", { delay: 2, rotation: 360, duration: 2, x: 300, ease: "bounce" });
+        gsap.from(".card2", { delay: 3, x: 3000 });
+        gsap.to(".card2", { delay: 3, rotation: 360, duration: 2, x: 500, ease: "bounce" });
+        gsap.from(".card3", { delay: 4, x: 3000 });
+        gsap.to(".card3", { delay: 4, rotation: 360, duration: 2, x: 700, ease: "bounce" });
+    }
+
+    gsap.to(".animation-box", { delay: 8, duration: 1, width: "200%" })
     gsap.to(".animation-box", { delay: 8, duration: 1, opacity: 0 })
 
     return (
-            <div className="animation-box">
-                    <div class="yugi"><img class="img-fluid shadow-png" src={yugi} alt="" /></div>
-                    <div class="pika"><img class="img-fluid shadow-png" src={pika} alt="" /></div>
-                    <div class="mtg"><img class="img-fluid shadow-png" src={mtg} alt="" /></div>
-                    <div class="card1"><img class="img-fluid shadow-png" src={card1} alt="" /></div>
-                    <div class="card2"><img class="img-fluid shadow-png" src={card2} alt="" /></div>
-                    <div class="card3"><img class="img-fluid shadow-png" src={card3} alt="" /></div>
-            </div>
+        <div className="animation-box">
+            <div class="yugi"><img class="img-fluid shadow-png" src={yugi} alt="" /></div>
+            <div class="pika"><img class="img-fluid shadow-png" src={pika} alt="" /></div>
+            <div class="mtg"><img class="img-fluid shadow-png" src={mtg} alt="" /></div>
+            <div class="card1"><img class="img-fluid shadow-png" src={card1} alt="" /></div>
+            <div class="card2"><img class="img-fluid shadow-png" src={card2} alt="" /></div>
+            <div class="card3"><img class="img-fluid shadow-png" src={card3} alt="" /></div>
+        </div>
     );
 }
 
