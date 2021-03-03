@@ -29,28 +29,56 @@ function Application() {
 
   useEffect(() => {
     socket.on("notification", data => {
-      if (data.receiver === user.displayName) {
-          store.addNotification({
-            title: "Alert",
-            message: ( 
-              <>
-              <p>You have a new message from {data.sender}</p>
-              <a style={style} href="/messages">go there now</a>
-              </>
-             ),
-            type: "warning",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true,
-              click: false,
-              showIcon: true
-            }
-          });
+      console.log("noti received!", "logging data: " + data.sender, data.sentTo, data.type);
+      if (data.sentTo === user.displayName) {
+          switch(data.type) {
+            case "msg":
+              store.addNotification({
+                title: "New message",
+                message: ( 
+                  <>
+                  <p>You have a new message from {data.sender}</p>
+                  <a style={style} href="/messages">go there now</a>
+                  </>
+                 ),
+                type: "warning",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  click: false,
+                  showIcon: true
+                }
+              });
+              break;
+            case "newTrade":
+              store.addNotification({
+                title: "New Trade",
+                message: ( 
+                  <>
+                  <p>You've received a trade offer from {data.sender}</p>
+                  <a style={style} href="/">go there now</a>
+                  </>
+                 ),
+                type: "info",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true,
+                  pauseOnHover: true,
+                  click: false,
+                  showIcon: true
+                }
+              });
+              break;
+          }
       }
     });
 
