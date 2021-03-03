@@ -9,8 +9,7 @@ import avatar from "../images/avatar.png";
 
 function ProfileBanner(props) {
   const location = useLocation();
-  // console.log(location.pathname)
-  console.log(avatar);
+
   return (
     <div>
       <div className="banner">
