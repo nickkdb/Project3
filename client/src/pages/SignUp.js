@@ -90,16 +90,18 @@ const SignUp = () => {
                 id="userPassword"
                 onChange={event => onChangeHandler(event)}
               />
+              <Link to="/">
               <button
                 className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
                 onClick={event => {
                   createUserWithEmailAndPasswordHandler(event, email, password);
                 }}
               >
-                <Link to="/">
+                
                   Sign up
-            </Link>
+           
               </button>
+              </Link>
             </form>
             <p className="text-center my-3">or</p>
             <button

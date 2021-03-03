@@ -39,16 +39,17 @@ function ProfileBanner(props) {
                   ""
                 }
                 </>
-                <Button
-                  className="btn btn-primary sign-outBtn"
-                  onClick={() => {
-                    auth.signOut();
-                  }}
-                >
-                  <Link to="/">
-                  Sign Out
-                  </Link>
-                </Button>
+                <Link to="/">
+                  <Button
+                    className="btn btn-primary sign-outBtn"
+                    onClick={() => {
+                      auth.signOut();
+                    }}
+                  >
+                    Sign Out
+                  </Button>
+
+                </Link>
               </div>
               <div className="row">
                 <h5>{props.email}</h5>

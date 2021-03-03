@@ -115,16 +115,17 @@ function Trade(props) {
               }}
             >
             Re-Pick Cards You Want</button>
+            <Link to="/">
             <button 
             className="btn btn-success"
             onClick={() => {
                 submitTrade()
               }}
             >
-              <Link to="/">
+              
               Submit
-              </Link>
             </button>
+            </Link>
 
           </div>
           <div className="container">
