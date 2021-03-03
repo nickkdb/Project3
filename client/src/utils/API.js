@@ -35,7 +35,7 @@ export default {
  accept: function(id, body) {
    return axios.put(`api/trades/` + id, body)
  },
- decline: function (id, body) {
+ updateStatus: function (id, body) {
    return axios.put(`api/trades/` + id, body)
  },
  delete: function (id) {
