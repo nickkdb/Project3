@@ -16,7 +16,7 @@ function NavTabs() {
 
   return (
     <div>
-      <Navbar bg="#2f4f4f" expand="lg">
+      <Navbar style={{zIndex: "20"}} bg="#2f4f4f" expand="lg">
         <Navbar.Brand><img src={logo} alt="ner herred logo" className="logo-small"/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
