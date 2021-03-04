@@ -3,7 +3,6 @@
 https://nerdherd-group5.herokuapp.com/
     
 ## Table of Contents
-- [License](#License)
 - [Description](#Description)
 - [Installation](#Installation)
 - [Usage](#Usage)
@@ -11,9 +10,6 @@ https://nerdherd-group5.herokuapp.com/
 - [Questions](#Questions)
 
 <img src= "./utils/screenshot.png" alt= "screenshot">
-    
-## License
-> [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) - this project is protected through the MIT license
 
 ## Description
 > Welcome to Nerd Herrd! Our website creates a niche market for trading card fans to connect with and trade cards with others. Our selection of card tyoes currently features Pokemon, Yu-Gi-Oh!, and Magic: The Gathering, three of the most popular trading card games in the world. Users can add cards to their profile, find others who are in possession of a card they wish to trade for, and negogiate terms using our built in chat room. This project was built using a full MERN stack (mongo, express, react, node), along with APIs for authentication, card data, and real time messaging.
