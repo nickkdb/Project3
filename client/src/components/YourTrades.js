@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { propTypes } from "react-bootstrap/esm/Image";
 import UserContext from "../utils/UserContext";
 import "./style.css";
@@ -25,8 +25,6 @@ function YourTrades(props) {
                 style={{float: "right", cursor: "pointer"}}
                 className="m-2"
                 onClick={() => {
-                //    console.log("ALERT")
-                //    console.log(props.tradeObj)
                     props.setChart(props.tradeObj);
                   }}>
                 Analyze It!
@@ -62,8 +60,6 @@ function YourTrades(props) {
                                 <button
                                     className="btn btn-primary ml-1"
                                     onClick={() => {
-                                        // props.makeTrade(props.tradeObj)
-                                        // props.acceptTrade(props.id, props.proposedBy)
                                         props.confirmTrade(props.tradeObj, props.id, props.proposedBy)
                                     }}>
                                     Accept Trade</button>&nbsp;&nbsp;
