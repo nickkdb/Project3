@@ -1,5 +1,15 @@
 /* ================= All Pages =================== */
 
+
+/* This forces the forces the page to fill the screen, 
+pushing the footer to the bottom no matter how much content on the page */
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
 h1, h3, h5 {
   color: #fff;
 }
