@@ -3,8 +3,8 @@
 h1, h3, h5 {
   color: #fff;
 }
-h1, h3, h4, h5, h6, p, a, li, .btn, .catAttTitle {
-  font-family: "Reem Kufi", sans-serif;
+body, h1, h3, h4, h5, h6, p, a, li, .btn, .catAttTitle {
+  font-family: "Reem Kufi", sans-serif!important;
 }
 h2 {
   font-family: "Freckle Face", cursive;
@@ -15,11 +15,11 @@ h2 {
 p {
   font-size: 12px;
 }
-a {
+.link {
   color: #242582 !important;
   font-size: 12px;
 }
-a:hover {
+.link:hover {
   color: #b5072d !important;
   text-decoration: none !important;
 }
@@ -55,6 +55,13 @@ a:hover {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.btn-other {
+  background-color: #f64c71!important;
+  border-color: black!important;
+  color: white!important;
+  margin-left: auto;
+  margin-right: auto;
+}
 .pageTitle {
   margin: 30px;
 }
@@ -87,6 +94,12 @@ cite {
 }
 .sign-outBtn {
   margin: 40px 0px 20px 0px !important;
+}
+.sent {
+  color:#242682;
+}
+.border {
+  border-radius: 9.5px;
 }
 
 /* ================= Card Renderings =================== */
@@ -141,6 +154,11 @@ select {
 .margin-top {
   margin-top: 32px;
 }
+/* ================= Dashboard Page =================== */
+.trade {
+  width:100%;
+  padding: 10px;
+}
 
 /* ================= Reset Password Page =================== */
 .pika {
@@ -150,9 +168,10 @@ select {
 label {
   margin-top: 9px;
   margin-right: 8px;
+
 }
 .spacing {
-  padding: 10px;
+  padding: 20px 20px 10px 20px;
   max-width:600px;
   margin-left: auto;
   margin-right:auto;
@@ -161,6 +180,9 @@ label {
 /* ================= Chat =================== */
 .rcw-conversation-container .rcw-header {
   background-color: #4f519d!important;
+}
+.rcw-response .rcw-message-text {
+  background-color: #35cce6!important;
 }
 .rcw-launcher {
     background-color: #4f519d!important;
