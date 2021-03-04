@@ -54,11 +54,6 @@ function Dashboard() {
       });
   }, [user.mongo._id, imageAsUrl]);
 
-
-  // useEffect(() => {
-  //   console.log(selectedTrade)
-  // }, [selectedTrade]);
-
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
@@ -105,10 +100,6 @@ function Dashboard() {
         });
     });
   }
-
-  // if (list) {
-  //   getFirebaseImages();
-  // }
 
   function acceptTrade(id, otherUser) {
 
@@ -163,17 +154,7 @@ function makeTrade (trade) {
   .then((res) => {
     console.log(res)
   });
-}
-
-// function verifyAccept(trade) {
-//   const uuids = []
-//   trade.proposedByProducts.map(item => uuids.push(item.uuid))
-//   trade.proposedToProducts.map(item => uuids.push(item.uuid))
-//   API.verifyAccept(trade).then(res => {
-//     console.log("YOU DID IT, YAYAYAYAY")
-//   })
-// }
- 
+} 
 
   return (
     <div>

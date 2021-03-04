@@ -7,9 +7,6 @@ router.route("/")
 
 router.route("/verify")
 .put(tradeController.cancelTrades)
-
-// router.route("/accept")
-// .put(tradeController.verifyAccept)
   
 // Matches with "/api/books/:id"
 router.route("/:id")

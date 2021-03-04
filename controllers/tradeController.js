@@ -50,16 +50,6 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
-  // remove: function (req, res) {
-  //     db.Trade.findOneAndRemove(
-  //         {
-  //             _id: mongojs.ObjectID(req.params.id)
-  //         }
-  //             .then(dbModel => { res.json(dbModel) })
-  //             .catch(err => { res.status(422).json(err) })
-  //     )
-  // }
   remove: function (req, res) {
     db.Trade.remove(
       {
