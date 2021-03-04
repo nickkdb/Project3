@@ -35,6 +35,28 @@ const pullToProducts = (data) => {
   .catch(err => console.error(err));
 }
 
+const verifyAccept = (data) => {
+  const uuids = []
+  data.proposedByProducts.map(item => uuids.push(item.uuid))
+  data.proposedToProducts.map(item => uuids.push(item.uuid))
+  db.Trade.updateMany(
+    {
+      status: "pending",
+      $or: [
+        { "proposedByProducts.uuid": { $in: uuids } },
+        { "proposedToProducts.uuid": { $in: uuids } },
+      ],
+    },
+    {
+      $set: {
+        status: "canceled",
+      },
+    }
+  )
+    .then((data) => res.json(data))
+    .catch((err) => console.error(err));
+}
+
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {
@@ -79,6 +101,7 @@ module.exports = {
             pushToProducts(req.body);
             pullByProducts(req.body);
             pullToProducts(req.body);
+            verifyAccept(req.body);
       })
   }
 }
