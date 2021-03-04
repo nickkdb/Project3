@@ -114,6 +114,7 @@ function Chat() {
                 </Col>
             </Row>
             {results}
+            <br/>
             <Widget
                 title={otherUser || "Welcome"}
                 subtitle={subtitle || "Select a User to begin messaging"}
