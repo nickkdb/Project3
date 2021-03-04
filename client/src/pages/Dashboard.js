@@ -132,7 +132,7 @@ function deleteTrade(id) {
 
 function cancelTrade(id) {
 API.updateStatus(id, {status: "canceled" })
-.then((res) => window.location.reload());
+.then((res) => console.log(res.data));
 }
 
 function confirmTrade(trade, id, otherUser) {
@@ -180,17 +180,14 @@ function makeTrade (trade) {
         {yourTrades && yourTrades.map((trade) => {
             let proposedBy= ""
             let proposedTo= ""
-          // console.log(trade.proposedByProducts)
         trade.proposedByProducts.map((name) => {
           (proposedBy === "" ? proposedBy += name.name : proposedBy += ", " + name.name)
         })
 
         trade.proposedToProducts.map((name) => {
-          // proposedTo += name.name + " "
           (proposedTo === "" ? proposedTo += name.name : proposedTo += ", " + name.name)
         })
 
-        // console.log(trade)
           return (
             <div className="col-md-8">
             
@@ -203,8 +200,6 @@ function makeTrade (trade) {
                 proposedByName={proposedBy.name}
                 proposedToName={proposedTo.name}
                 currentUser={user.mongo.displayName}
-                // makeTrade={makeTrade}
-                // acceptTrade={acceptTrade}
                 confirmTrade={confirmTrade}
                 selectedTrade={selectedTrade}
                 declineTrade={declineTrade}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { addResponseMessage, addUserMessage, Widget, dropMessages } from 'react-chat-widget';
 import Thread from '../components/thread';
 import { socketContext } from '../utils/socketContext';
@@ -102,16 +102,8 @@ function Chat() {
                 pageTitle="Inbox"
                 desc="Click someone's username below to start a chat!"
              />
-            <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    {/* <h1 style={{ textAlign: "center", color: "black" }}>Inbox</h1>
-                    <hr color={"black"} /> */}
-                </Col>
-            </Row>
-            <Row style={{ marginTop: "5rem" }}>
-                <Col md={12}>
-                    <h3 style={{ textAlign: "center", color: "black" }}>Message Threads</h3>
-                </Col>
+            <Row style={{ marginTop: "2rem" }}>
+                
             </Row>
             {results}
             <br/>
