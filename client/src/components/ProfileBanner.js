@@ -82,7 +82,7 @@ function ProfileBanner(props) {
                       className="text-blue-500 hover:text-blue-600"
                     >
                       <button
-                        className="btn btn-success"
+                        className="btn btn-other"
                         onClick={props.setLocalTrade}
                       >
                         Propose Trade

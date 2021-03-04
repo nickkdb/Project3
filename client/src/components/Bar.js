@@ -72,6 +72,7 @@ function Bar (props) {
 
     return (
         <>
+        <br/>
         <h2 style={{textAlign: "center"}}>Card Comparison</h2>
         <HorizontalBar options={options} data={chartState} />
         </>

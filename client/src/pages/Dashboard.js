@@ -170,17 +170,17 @@ function makeTrade (trade) {
     userId={uid}
     // updatePicButton={updatePicButton}
   />
-    <div className="container mt-5">
+    <div className="container">
       <div className="row">
-        <div className="col-7">
+        <div className="col-md-8">
           {!yourTrades.length >= 1 ? "" :
             <Bar  
               trade={yourTrades[0]}
               selectedTrade={selectedTrade}
             />   
-          }    
-          <div className= "col-2" />  
-          <h2> Your Trades </h2>
+          }  
+          <br />  
+          <h2 className="text-center"> Your Trades </h2>
         {yourTrades && yourTrades.map((trade) => {
             let proposedBy= ""
             let proposedTo= ""
@@ -196,7 +196,7 @@ function makeTrade (trade) {
 
         // console.log(trade)
           return (
-            <div className="col-8">
+            <div className="col-md-8">
             
               <YourTrades
                 tradeObj={trade}
@@ -239,14 +239,13 @@ function makeTrade (trade) {
           </Button>
         </Modal.Footer>
       </Modal>
+              <br />
             </div>
           )
         })}
         </div>
-          <div className="col-1">
-
-          </div>
-          <div className="col-4">
+          <div className="col-md-4">
+            <br />
             <form className="search">
               <div className="form-group">
                 <label htmlFor="language">Search for values in any column:</label>
@@ -289,7 +288,7 @@ function makeTrade (trade) {
                       </div>
                       <div className="col">
                         <p>
-                          <Link to={link}>{item.displayName}</Link>
+                          <Link className="link" to={link}>{item.displayName}</Link>
                         </p>
                       </div>
                     </div>
