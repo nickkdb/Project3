@@ -9,10 +9,10 @@ import { gsap } from "gsap";
 
 import pika from "../images/pv-2.png";
 import yugi from "../images/yugi-main.png";
-import mtg from "../images/planeswalker.png"
-import card1 from "../images/animate1.png"
-import card2 from "../images/animate2.png"
-import card3 from "../images/animate3.png"
+import mtg from "../images/planeswalker.png";
+import card1 from "../images/animate1.png";
+import card2 from "../images/animate2.png";
+import card3 from "../images/animate3.png";
 
 //============================================
 
@@ -58,12 +58,12 @@ function Animation() {
 
     return (
         <div className="animation-box">
-            <div class="yugi"><img class="img-fluid shadow-png" src={yugi} alt="" /></div>
-            <div class="pika"><img class="img-fluid shadow-png" src={pika} alt="" /></div>
-            <div class="mtg"><img class="img-fluid shadow-png" src={mtg} alt="" /></div>
-            <div class="card1"><img class="img-fluid shadow-png" src={card1} alt="" /></div>
-            <div class="card2"><img class="img-fluid shadow-png" src={card2} alt="" /></div>
-            <div class="card3"><img class="img-fluid shadow-png" src={card3} alt="" /></div>
+            <div className="yugi"><img className="img-fluid shadow-png" src={yugi} alt="" /></div>
+            <div className="pika"><img className="img-fluid shadow-png" src={pika} alt="" /></div>
+            <div className="mtg"><img className="img-fluid shadow-png" src={mtg} alt="" /></div>
+            <div className="card1"><img className="img-fluid shadow-png" src={card1} alt="" /></div>
+            <div className="card2"><img className="img-fluid shadow-png" src={card2} alt="" /></div>
+            <div className="card3"><img className="img-fluid shadow-png" src={card3} alt="" /></div>
         </div>
     );
 }

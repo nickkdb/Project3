@@ -18,10 +18,9 @@ function YourTrades(props) {
                 :
                 {border: "1px solid lightgrey"}
             }
-            className="card"
-        >
+            className="card shadow center trade">
             <div>
-            <Badge 
+                <Badge 
                 pill variant="success"
                 style={{float: "right", cursor: "pointer"}}
                 className="m-2"
@@ -29,12 +28,11 @@ function YourTrades(props) {
                 //    console.log("ALERT")
                 //    console.log(props.tradeObj)
                     props.setChart(props.tradeObj);
-                  }}
-            >
+                  }}>
                 Analyze It!
                 <span className={"ml-2"}></span>
                 <FontAwesomeIcon icon={faChartBar} />
-            </Badge>
+                </Badge>
             </div>
 
             <ul>
@@ -54,11 +52,13 @@ function YourTrades(props) {
                 <li>
                     {props.proposedTo}'s products: {props.proposedToProducts}
                 </li>
+                <br/>
                 {props.status === "pending" ?
                     <>
 
                         {props.currentUser === props.proposedTo ?
                             <div>
+                                <br/>
                                 <button
                                     className="btn btn-primary ml-1"
                                     onClick={() => {
@@ -73,7 +73,7 @@ function YourTrades(props) {
                                     }}>
                                     Decline Trade
                                 </button>
-                            </div> : <><div style={{ color: "blue", float: "left" }}> Sent</div>
+                            </div> : <><div className="sent"> Sent!</div>
                             <button className="btn btn-primary ml-1" style={{float: "right"}}
                             onClick={() => {
                                 props.cancelTrade(props.id)
@@ -91,10 +91,6 @@ function YourTrades(props) {
 
 
             </ul>
-            <
-                >
-
-            </>
         </div>
     )
 }
