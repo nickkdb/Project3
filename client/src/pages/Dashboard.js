@@ -3,13 +3,17 @@ import UserContext from "../utils/UserContext";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { storage } from "../utils/firebase";
+import { socketContext } from '../utils/socketContext';
 import ProfileBanner from "../components/ProfileBanner";
 import avatar from "../images/avatar.png";
 import Bar from "../components/Bar";
 import YourTrades from "../components/YourTrades";
 
 function Dashboard() {
+
+  const socket = useContext(socketContext);
   const user = useContext(UserContext);
+  
   const { displayName, email, uid } = user;
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
@@ -94,7 +98,7 @@ function Dashboard() {
   //   getFirebaseImages();
   // }
 
-  function acceptTrade(id) {
+  function acceptTrade(id, otherUser) {
 
     API.accept(id, { status: "accepted" })
       .then((res) => 
@@ -103,9 +107,10 @@ function Dashboard() {
           setYourTrades(res.data);
         })
       );
+      socket.emit("event", {user: user.displayName, otherUser, type: "accepted"});
   }
 
-  function declineTrade(id) {
+  function declineTrade(id, otherUser) {
     API.updateStatus(id, { status: "declined" })
       .then((res) => 
       API.getTrade(user.mongo.displayName)
@@ -113,6 +118,7 @@ function Dashboard() {
         setYourTrades(res.data);
       })
     );
+    socket.emit("event", {user: user.displayName, otherUser, type: "declined"});
   }
 
 

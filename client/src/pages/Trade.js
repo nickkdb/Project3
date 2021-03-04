@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
+import { socketContext } from '../utils/socketContext';
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
 
 function Trade(props) {
   const user = useContext(UserContext);
+  const socket= useContext(socketContext);
+
   console.log(user)
   const [trade, setTrade] = useState(
     localStorage.getItem("trade")
@@ -47,8 +50,8 @@ function Trade(props) {
     }
 
     API.createTrade(trade)
-      .then(res => console.log(res))
-
+    .then(res => console.log(res))
+    socket.emit("event", {user: user.displayName, otherUser: tradeUser.displayName, type: "newTrade"});
   }
 
   return (

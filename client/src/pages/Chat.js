@@ -60,7 +60,7 @@ function Chat() {
     const handleNewUserMessage = (newMessage) => {
         console.log(`New message incoming! ${newMessage}`);
         if (room) {
-            socket.emit("sendmsg", { newMessage, room, user, otherUser });
+            socket.emit("event", { newMessage, room, user, otherUser, type: "msg" });
         }
     };
 

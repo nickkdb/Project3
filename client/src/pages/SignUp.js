@@ -83,6 +83,7 @@ const SignUp = () => {
                 id="displayName"
                 onChange={event => onChangeHandler(event)}
                 onKeyPress={event => handleSC(event)}
+
               /></div>
               <div className="col-md-4">
               <label htmlFor="userEmail" className="block">
@@ -111,6 +112,7 @@ const SignUp = () => {
                 onChange={event => onChangeHandler(event)}
               /></div></div>
               <div className="row">
+
               <button
                 className="btn btn-primary"
                 onClick={event => {
@@ -121,6 +123,7 @@ const SignUp = () => {
                 
                   Sign up
            
+
               </button></div>
             </form>
             <p className="text-center my-3">or</p>
