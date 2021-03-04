@@ -32,7 +32,16 @@ function Dashboard() {
       .then((res) => {
         setYourTrades(res.data);
       })
+
+    refreshUsers()
   }, [yourTrades]);
+
+  const refreshUsers = () => {
+    API.getUser(user.email).then(res => {
+      user.mongo = res.data[0]
+    })
+
+  }
 
   useEffect(() => {
     storage
@@ -44,11 +53,6 @@ function Dashboard() {
         setProfilePic(fireBaseUrl);
       });
   }, [user.mongo._id, imageAsUrl]);
-
-
-  // useEffect(() => {
-  //   console.log(selectedTrade)
-  // }, [selectedTrade]);
 
   function handleSearch(event) {
     // Getting the value and name of the input which triggered the change
@@ -96,10 +100,6 @@ function Dashboard() {
         });
     });
   }
-
-  // if (list) {
-  //   getFirebaseImages();
-  // }
 
   function acceptTrade(id, otherUser) {
 
@@ -153,12 +153,8 @@ function makeTrade (trade) {
   API.executeTrade(trade)
   .then((res) => {
     console.log(res)
-    // acceptTrade(yourTrades[2]._id)
   });
-
-  // window.location.reload();
-}
- 
+} 
 
   return (
     <div>
