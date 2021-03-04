@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext";
 import API from "../utils/API";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import Banner from "../components/Banner";
 
 function Trade(props) {
   const user = useContext(UserContext);
@@ -28,7 +29,7 @@ function Trade(props) {
   };
 
   const manageWhoseCards = (x) => {
-      setWhoseCards(x)
+    setWhoseCards(x)
   }
 
   const submitTrade = () => {
@@ -37,32 +38,34 @@ function Trade(props) {
     // console.log(theirProducts)
     // console.log(myProducts)
     const trade = {
-        proposedBy: user.mongo.displayName,
-        proposedTo: tradeUser.displayName,
-        proposedByProducts: myProducts,
-        proposedToProducts: theirProducts,
-        status: "pending"
-        
+      proposedBy: user.mongo.displayName,
+      proposedTo: tradeUser.displayName,
+      proposedByProducts: myProducts,
+      proposedToProducts: theirProducts,
+      status: "pending"
+
     }
 
     API.createTrade(trade)
-    .then(res => console.log(res))
+      .then(res => console.log(res))
 
   }
 
   return (
     <div>
-      {whoseCards && whoseCards === "YourCards" ? 
+      <Banner pageTitle="Make a Trade" />
+      {whoseCards && whoseCards === "YourCards" ?
         <div>
           <div className="container">
-          <h2>Confirm the Cards you want to Trade</h2>
-            <button 
-            className="btn btn-primary"
-            onClick={() => {
+            <br />
+            <h2>Confirm the Cards you want to Trade</h2>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
                 manageWhoseCards("MyCards")
               }}
             >
-            Continue</button>
+              Continue</button>
           </div>
           <div className="container">
             {trade.user.products &&
@@ -72,17 +75,17 @@ function Trade(props) {
                     className="row border mt-3 mb-3 p-3"
                     style={
                       tradeItems.includes(item.uuid)
-                        ? { backgroundColor: "lightblue" }
+                        ? { backgroundColor: "#24258242" }
                         : { backgroundColor: "white" }
                     }
                   >
                     <div className="col">
                       <img width={"75px"} alt={item.name} src={item.image} />
                     </div>
-                    <div className="col">{item.name}</div>
+                    <h6 className="col">{item.name}</h6>
                     <div className="col">
                       {tradeItems && tradeItems.includes(item.uuid) ? (
-                        <button
+                        <button className="btn btn-primary"
                           onClick={() => {
                             removeFromTrade(item.uuid);
                           }}
@@ -90,41 +93,42 @@ function Trade(props) {
                           Remove
                         </button>
                       ) : (
-                        <button
-                          onClick={() => {
-                            addToTrade(item.uuid);
-                          }}
-                        >
-                          Add
-                        </button>
-                      )}
+                          <button className="btn btn-other"
+                            onClick={() => {
+                              addToTrade(item.uuid);
+                            }}
+                          >
+                            Add
+                          </button>
+                        )}
                     </div>
                   </div>
                 );
               })}
           </div>
         </div>
-       : 
+        :
         <div>
           <div className="container">
-          <h2>Which of Your Cards Will you Offer?</h2>
-          <button 
-            className="btn btn-primary"
-            onClick={() => {
+            <br />
+            <h2>Which of Your Cards Will you Offer?</h2>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
                 manageWhoseCards("YourCards")
               }}
             >
-            Re-Pick Cards You Want</button>
+              Re-Pick Cards You Want</button>&nbsp;&nbsp;
             <Link to="/">
-            <button 
-            className="btn btn-success"
-            onClick={() => {
-                submitTrade()
-              }}
-            >
-              
-              Submit
-            </button>
+              <button
+                className="btn btn-other"
+                onClick={() => {
+                  submitTrade()
+                }}
+              >
+
+                Submit
+                </button>
             </Link>
 
           </div>
@@ -136,7 +140,7 @@ function Trade(props) {
                     className="row border mt-3 mb-3 p-3"
                     style={
                       tradeItems.includes(item.uuid)
-                        ? { backgroundColor: "lightblue" }
+                        ? { backgroundColor: "#24258242" }
                         : { backgroundColor: "white" }
                     }
                   >
@@ -146,7 +150,7 @@ function Trade(props) {
                     <div className="col">{item.name}</div>
                     <div className="col">
                       {tradeItems && tradeItems.includes(item.uuid) ? (
-                        <button
+                        <button className="btn btn-primary"
                           onClick={() => {
                             removeFromTrade(item.uuid);
                           }}
@@ -154,14 +158,14 @@ function Trade(props) {
                           Remove
                         </button>
                       ) : (
-                        <button
-                          onClick={() => {
-                            addToTrade(item.uuid);
-                          }}
-                        >
-                          Add
-                        </button>
-                      )}
+                          <button className="btn btn-other"
+                            onClick={() => {
+                              addToTrade(item.uuid);
+                            }}
+                          >
+                            Add
+                          </button>
+                        )}
                     </div>
                   </div>
                 );

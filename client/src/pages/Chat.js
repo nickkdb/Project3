@@ -109,7 +109,7 @@ function Chat() {
                 </Col>
             </Row>
             <Row style={{ marginTop: "5rem" }}>
-                <Col md={4}>
+                <Col md={12}>
                     <h3 style={{ textAlign: "center", color: "black" }}>Message Threads</h3>
                 </Col>
             </Row>
