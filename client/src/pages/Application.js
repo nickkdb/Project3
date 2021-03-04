@@ -22,11 +22,6 @@ function Application() {
   const user = useContext(UserContext);
   const socket= useContext(socketContext);
 
-  const style= {
-    color: "white !important",
-    textDecoration: "underline"
-  }
-
   useEffect(() => {
     socket.on("notification", data => {
       console.log("noti received!", "logging data: " + data.sender, data.sentTo, data.type);
@@ -38,7 +33,7 @@ function Application() {
                 message: ( 
                   <>
                   <p>You have a new message from {data.sender}</p>
-                  <a style={style} href="/messages">Go To Messages</a>
+                  <a className="noti-link" href="/messages">Go To Messages</a>
                   </>
                  ),
                 type: "warning",
@@ -61,7 +56,7 @@ function Application() {
                 message: ( 
                   <>
                   <p>You've received a trade offer from {data.sender}</p>
-                  <a style={style} href="/">Go To Dashboard</a>
+                  <a className="noti-link" href="/">Go To Dashboard</a>
                   </>
                  ),
                 type: "info",
@@ -84,7 +79,7 @@ function Application() {
                 message: ( 
                   <>
                   <p>{data.sender} has accepted your trade offer!</p>
-                  <a style={style} href="/">Go To Dashboard</a>
+                  <a className="noti-link" href="/">Go To Dashboard</a>
                   </>
                  ),
                 type: "success",
@@ -107,7 +102,7 @@ function Application() {
                 message: ( 
                   <>
                   <p>{data.sender} has declined your trade offer.</p>
-                  <a style={style} href="/">Go To Dashboard</a>
+                  <a className="noti-link" href="/">Go To Dashboard</a>
                   </>
                  ),
                 type: "danger",
