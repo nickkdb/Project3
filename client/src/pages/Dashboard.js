@@ -29,7 +29,16 @@ function Dashboard() {
       .then((res) => {
         setYourTrades(res.data);
       })
+
+    refreshUsers()
   }, [yourTrades]);
+
+  const refreshUsers = () => {
+    API.getUser(user.email).then(res => {
+      user.mongo = res.data[0]
+    })
+
+  }
 
   useEffect(() => {
     storage
@@ -139,11 +148,17 @@ function makeTrade (trade) {
   API.executeTrade(trade)
   .then((res) => {
     console.log(res)
-    // acceptTrade(yourTrades[2]._id)
   });
-
-  // window.location.reload();
 }
+
+// function verifyAccept(trade) {
+//   const uuids = []
+//   trade.proposedByProducts.map(item => uuids.push(item.uuid))
+//   trade.proposedToProducts.map(item => uuids.push(item.uuid))
+//   API.verifyAccept(trade).then(res => {
+//     console.log("YOU DID IT, YAYAYAYAY")
+//   })
+// }
  
 
   return (

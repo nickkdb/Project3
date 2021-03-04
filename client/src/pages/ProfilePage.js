@@ -42,14 +42,6 @@ const ProfilePage = () => {
   const user = useContext(UserContext);
   const { displayName, email, uid } = user;
 
-  useEffect(() => {
-    API.getUser(user.email).then(res => {
-      user.mongo = res.data[0]
-    })
-  }, [user])
-
-
-
   const handleFile = (e) => {
     // console.log(e);
     const img = e.target.files[0];

@@ -29,6 +29,9 @@ export default {
   verifyTrades: function(uuid) {
     return axios.put("/api/trades/verify", uuid);
   },
+  // verifyAccept: function(products) {
+  //   return axios.put("/api/trades/accept", products)
+  // },
   createTrade: function(trade) {
     return axios.post("/api/trades", trade)
   },
